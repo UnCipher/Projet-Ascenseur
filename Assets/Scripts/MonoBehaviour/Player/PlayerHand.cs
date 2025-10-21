@@ -15,8 +15,15 @@ public class PlayerHand : MonoBehaviour
     [SerializeField] Material defaultMat;
 
     // ---------------------------
-    // Values
+    // Functions
     // ---------------------------
+
+    void FixedUpdate()
+    {
+        Vector2 t;
+        if(currentWall)
+        t = currentWall.GetWallPoint(transform.position);
+    }
 
     void UpdateWallChange()
     {
@@ -24,6 +31,7 @@ public class PlayerHand : MonoBehaviour
         {
             currentWall = selectedWalls[0];
             mesh.material = currentWall.material;
+            
         }
 
         else
