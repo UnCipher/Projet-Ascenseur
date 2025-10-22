@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(OSC))]
@@ -10,45 +11,10 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector]
     public static LevelManager instance;
-    public PlayerHandInfo player1 = new PlayerHandInfo();
+    public List<Player> players = new List<Player>();
 
     [Header("OSC Messages")]
     OSC osc;
-
-    // Events
-    // ---------------------------
-
-    public EventHandler<PlayerHandInfoArgs> player1HandInfo;
-
-    public class PlayerHandInfoArgs : EventArgs
-    {
-        public float leftHandPosX;
-        public float leftHandPosY;
-        public float leftHandPosZ;
-        public bool leftHandClosed;
-
-        public float rightHandPosX;
-        public float rightHandPosY;
-        public float rightHandPosZ;
-        public bool rightHandClosed;
-    }
-
-    // Classes
-    // ---------------------------
-
-    [Serializable]
-    public class PlayerHandInfo
-    {
-        public float leftHandPosX;
-        public float leftHandPosY;
-        public float leftHandPosZ;
-        public bool leftHandClosed;
-
-        public float rightHandPosX;
-        public float rightHandPosY;
-        public float rightHandPosZ;
-        public bool rightHandClosed;
-    }
 
     // ---------------------------
     // Functions
@@ -75,16 +41,9 @@ public class LevelManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Call Events
-        player1HandInfo?.Invoke(this, new PlayerHandInfoArgs{
-            leftHandPosX = player1.leftHandPosX,
-            leftHandPosY = player1.leftHandPosY,
-            leftHandPosZ = player1.leftHandPosZ,
-
-            rightHandPosX = player1.rightHandPosX,
-            rightHandPosY = player1.rightHandPosY,
-            rightHandPosZ = player1.rightHandPosZ,
-        });
+        // Call Players' Functions
+        for (int i = 0; i < players.Count; i++)
+            players[i].ChangeHandsPositions();
     }
 
     // OSC Functions
@@ -93,6 +52,7 @@ public class LevelManager : MonoBehaviour
     void InitiateOSCMessages()
     {
         // Receive Messages
+        osc.SetAddressHandler("/p1-active", P1Active);
         osc.SetAddressHandler("/p1-lHx", P1LHandX);
         osc.SetAddressHandler("/p1-lHy", P1LHandY);
         osc.SetAddressHandler("/p1-lHz", P1LHandZ);
@@ -117,34 +77,51 @@ public class LevelManager : MonoBehaviour
     // Player 1
     // ---------------------------
 
+    void P1Active(OscMessage osc)
+    {
+        Debug.Log("sum sum");
+        int value = osc.GetInt(0);
+        if (value == 1)
+            players[0].ActivatePlayer();
+
+        else
+            players[0].DesactivatePlayer();
+    }
+    
     void P1LHandX(OscMessage osc)
     {
-        player1.leftHandPosX = osc.GetFloat(0);
+        if(players[0])
+        players[0].handsInfo.leftHandPosX = osc.GetFloat(0);
     }
 
     void P1LHandY(OscMessage osc)
     {
-        player1.leftHandPosY = osc.GetFloat(0);
+        if(players[0])
+        players[0].handsInfo.leftHandPosY = osc.GetFloat(0);
     }
 
     void P1LHandZ(OscMessage osc)
     {
-        player1.leftHandPosZ = osc.GetFloat(0);
+        if(players[0])
+        players[0].handsInfo.leftHandPosZ = osc.GetFloat(0);
     }
 
     void P1RHandX(OscMessage osc)
     {
-        player1.rightHandPosX = osc.GetFloat(0);
+        if(players[0])
+        players[0].handsInfo.rightHandPosX = osc.GetFloat(0);
     }
 
     void P1RHandY(OscMessage osc)
     {
-        player1.rightHandPosY = osc.GetFloat(0);
+        if(players[0])
+        players[0].handsInfo.rightHandPosY = osc.GetFloat(0);
     }
     
     void P1RHandZ(OscMessage osc)
     {
-        player1.rightHandPosZ = osc.GetFloat(0);
+        if(players[0])
+        players[0].handsInfo.rightHandPosZ = osc.GetFloat(0);
     }
 
 }

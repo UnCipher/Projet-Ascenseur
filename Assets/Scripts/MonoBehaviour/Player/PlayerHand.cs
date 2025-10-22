@@ -11,6 +11,7 @@ public class PlayerHand : MonoBehaviour
     Wall currentWall;
 
     [Header("References")]
+    [SerializeField] Player player;
     [SerializeField] MeshRenderer mesh;
     [SerializeField] Material defaultMat;
 
@@ -21,7 +22,7 @@ public class PlayerHand : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 t;
-        if(currentWall)
+        if (currentWall && player.GetPlayerActive())
         {
             t = currentWall.GetWallPoint(transform.position);
 

@@ -165,8 +165,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d1cd3760cbfc144874c12abb7980f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNumber: 0
+  isActive: 1
+  desactivateTime: 0
+  desactivating: 0
   leftHand: {fileID: 500319889}
   rightHand: {fileID: 1622695581}
+  handsInfo:
+    leftHandPosX: 0
+    leftHandPosY: 0
+    leftHandPosZ: 0
+    leftHandClosed: 0
+    rightHandPosX: 0
+    rightHandPosY: 0
+    rightHandPosZ: 0
+    rightHandClosed: 0
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29bb1515c556bb4f8680059c7018054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   mesh: {fileID: 500319886}
   defaultMat: {fileID: 2100000, guid: 93bc99357378fae45abeb3f7b2643580, type: 2}
 --- !u!54 &500319890
@@ -721,6 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29bb1515c556bb4f8680059c7018054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   mesh: {fileID: 1622695578}
   defaultMat: {fileID: 2100000, guid: 93bc99357378fae45abeb3f7b2643580, type: 2}
 --- !u!54 &1622695582
@@ -949,15 +964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66647ecc699a8b4e95107a74da9d223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1:
-    leftHandPosX: 0
-    leftHandPosY: 0
-    leftHandPosZ: 0
-    leftHandClosed: 0
-    rightHandPosX: 0
-    rightHandPosY: 0
-    rightHandPosZ: 0
-    rightHandClosed: 0
+  players:
+  - {fileID: 328023494}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
