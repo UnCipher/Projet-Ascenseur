@@ -22,7 +22,12 @@ public class PlayerHand : MonoBehaviour
     {
         Vector2 t;
         if(currentWall)
-        t = currentWall.GetWallPoint(transform.position);
+        {
+            t = currentWall.GetWallPoint(transform.position);
+
+            LevelManager.instance.SendMessage("handPosX", t.x);
+            LevelManager.instance.SendMessage("handPosY", t.y);
+        }
     }
 
     void UpdateWallChange()

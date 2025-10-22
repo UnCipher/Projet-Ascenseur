@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
@@ -34,37 +35,72 @@ public class Wall : MonoBehaviour
     // Functions
     // ---------------------------
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public Vector3 GetWallPoint(Vector3 handPos)
     {
         // Set Values
+        Vector2 pointPos = Vector2.down;
         Vector2 point = Vector2.zero;
+
+        float minX;
+        float maxX;
+
+        float minY;
+        float maxY;
 
         // Get Correct Axis
         if (vector2Axis == Vector2Axis.XY)
-            point = new Vector2(handPos.x, handPos.y);
+        {
+            pointPos = new Vector2(handPos.x, handPos.y);
+
+            minX = wallCoordinates.minPoint.x;
+            minY = wallCoordinates.minPoint.y;
+
+            maxX = wallCoordinates.maxPoint.x;
+            maxY = wallCoordinates.maxPoint.y;
+        }
 
         else
-            point = new Vector2(handPos.x, handPos.y);
+        {
+            pointPos = new Vector2(handPos.z, handPos.y);
+
+            minX = wallCoordinates.minPoint.z;
+            minY = wallCoordinates.minPoint.y;
+
+            maxX = wallCoordinates.maxPoint.z;
+            maxY = wallCoordinates.maxPoint.y;
+        }
+
+        // Normalize Value
+        point.x = (pointPos.x - minX) / (maxX - minX);
+        point.y = (pointPos.y - minY) / (maxY - minY);
+
+        // Clamp Value
+        point.x = ClampValue(point.x, 0, 1);
+        point.y = ClampValue(point.y, 0, 1);
 
         // Reverse if Necessary
         if (reverseAxis)
             point.x = -point.x;
 
         // Normalize
-        Vector2 normalizedPoint = point.normalized;
+        Debug.Log("Default : " + pointPos + " / Normalized : " + point);
 
-        Debug.Log("Default : " + point + " / Normalized : " + normalizedPoint);
+        return point;
+    }
 
-        return normalizedPoint;
+    float ClampValue(float value, float minValue, float maxValue)
+    {
+        // Set Values
+        float newValue = value;
+
+        // If Bigger than Max Value, or Smaller than Min Value
+        if (value > maxValue)
+            newValue = maxValue;
+
+        if (value < minValue)
+            newValue = minValue;
+
+        // Return Value
+        return newValue;
     }
 }

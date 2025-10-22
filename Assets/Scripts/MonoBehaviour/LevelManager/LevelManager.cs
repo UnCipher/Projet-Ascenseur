@@ -12,9 +12,9 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
     public PlayerHandInfo player1 = new PlayerHandInfo();
 
-    [Header("References")]
+    [Header("OSC Messages")]
     OSC osc;
-    public float test;
+
     // Events
     // ---------------------------
 
@@ -100,6 +100,18 @@ public class LevelManager : MonoBehaviour
         osc.SetAddressHandler("/p1-rHx", P1RHandX);
         osc.SetAddressHandler("/p1-rHy", P1RHandY);
         osc.SetAddressHandler("/p1-rHz", P1RHandZ);
+    }
+
+    public void SendMessage(string address, float value)
+    {
+        // Set Values
+        OscMessage message = new OscMessage();
+
+        message.address = "/" + address;
+        message.values.Add(value);
+
+        // Send Message
+        osc.Send(message);
     }
 
     // Player 1
