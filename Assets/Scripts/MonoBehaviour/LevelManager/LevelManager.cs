@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +10,33 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector]
     public static LevelManager instance;
+    public MicrophoneInfo microphone = new MicrophoneInfo();
     public List<Player> players = new List<Player>();
 
     [Header("OSC Messages")]
     OSC osc;
+
+    // Classes
+    // ---------------------------
+
+    [System.Serializable]
+    public class MicrophoneInfo
+    {
+        public float average;
+        [Space(5)]
+
+        public float lowpass;
+        public float medium;
+        public float highpass;
+    }
+
+    public enum MicrophoneAudioType
+    {
+        Average,
+        Lowpass,
+        Medium,
+        Highpass,
+    }
 
     // ---------------------------
     // Functions
@@ -74,18 +96,44 @@ public class LevelManager : MonoBehaviour
         osc.Send(message);
     }
 
+    // Audio
+    // ---------------------------
+
+    void MicAverageVolume(OscMessage osc)
+    {
+        microphone.average = osc.GetFloat(0);
+    }
+
+    void MicLowpassVolume(OscMessage osc)
+    {
+        microphone.lowpass = osc.GetFloat(0);
+    }
+
+    void MicMediumVolume(OscMessage osc)
+    {
+        microphone.medium = osc.GetFloat(0);
+    }
+
+    void MicHighpassVolume(OscMessage osc)
+    {
+        microphone.highpass = osc.GetFloat(0);
+    }
+
+
     // Player 1
     // ---------------------------
 
     void P1Active(OscMessage osc)
     {
-        Debug.Log("sum sum");
-        int value = osc.GetInt(0);
-        if (value == 1)
-            players[0].ActivatePlayer();
+        if(players[0])
+        {
+            int value = osc.GetInt(0);
+            if (value == 1)
+                players[0].ActivatePlayer();
 
-        else
-            players[0].DesactivatePlayer();
+            else
+                players[0].DesactivatePlayer();
+        }
     }
     
     void P1LHandX(OscMessage osc)
