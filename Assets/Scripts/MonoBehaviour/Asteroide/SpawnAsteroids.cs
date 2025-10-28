@@ -16,7 +16,7 @@ public class SpawnAsteroids : MonoBehaviour
         InvokeRepeating("AddGameObject", 0f, repeatTime);
     }
 
-    void AddGameObject()
+    private void AddGameObject()
     {
         GameObject instantiated = Instantiate(asteroidPrefab);
 
@@ -25,6 +25,13 @@ public class SpawnAsteroids : MonoBehaviour
             Random.Range(transform.position.y - zoneSize.y / 2, transform.position.y + zoneSize.y / 2),
             Random.Range(transform.position.z - zoneSize.z / 2, transform.position.z + zoneSize.z / 2)
         );
+
+        Destroy(instantiated, 10f);
+    }
+
+    private void DestroyGameObject()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

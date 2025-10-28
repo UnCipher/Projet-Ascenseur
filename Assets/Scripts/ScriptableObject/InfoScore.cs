@@ -6,7 +6,4 @@ using UnityEngine;
 public class InfoScore : ScriptableObject
 {
     public int score;
-    public int vague;
-
-    public int ennemisRestants;
 }

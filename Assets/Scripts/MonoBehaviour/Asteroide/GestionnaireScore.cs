@@ -9,15 +9,23 @@ public class GestionnaireScore : MonoBehaviour
     [SerializeField]
     private TMP_Text champScore;
 
-    void Start(){
+    public static GestionnaireScore instance;
+
+    void Start()
+    {
         UpdateText();
+    }
+    
+    void Awake()
+    {
+        instance = this;
     }
 
     public void ResetScore(){
         so_infoScore.score = 0;
     }
 
-    public void EnemyScore(int nombreScore)
+    public void AsteroideScore(int nombreScore)
     {
         so_infoScore.score += nombreScore;
         UpdateText();
