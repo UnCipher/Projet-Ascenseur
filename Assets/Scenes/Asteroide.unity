@@ -486,8 +486,9 @@ MonoBehaviour:
   gestionnaireScore: {fileID: 544106645}
   infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
   pistolet: {fileID: 2002309193}
-  distancePistolet: 1.02
+  distancePistolet: 1
   mainCamera: {fileID: 113095505}
+  player: {fileID: 576941845}
 --- !u!114 &289569077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1493,7 +1494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29bb1515c556bb4f8680059c7018054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 576941845}
   mesh: {fileID: 1859198183}
   defaultMat: {fileID: 2100000, guid: 93bc99357378fae45abeb3f7b2643580, type: 2}
 --- !u!23 &1859198183
@@ -1714,7 +1715,7 @@ Transform:
   m_GameObject: {fileID: 2002309193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.92891, y: 0, z: 1.52398}
+  m_LocalPosition: {x: 0, y: 1, z: 1}
   m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
   m_ConstrainProportionsScale: 1
   m_Children: []
