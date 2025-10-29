@@ -15,7 +15,13 @@ public class Player : MonoBehaviour
     [Space(5)]
 
     [SerializeField] private PlayerHand leftHand;
+    Wall.SelectedWall leftSelectedWall;
+    Vector2 leftUVOnWall;
+    [Space(5)]
+
     [SerializeField] private PlayerHand rightHand;
+    Wall.SelectedWall rightSelectedWall;
+    Vector2 rightUVOnWall;
     [Space(10)]
 
     public PlayerHandInfo handsInfo;
@@ -41,9 +47,15 @@ public class Player : MonoBehaviour
     // Functions
     // ---------------------------
 
+    void FixedUpdate()
+    {
+        // Call Functions
+        ChangeHandsPositions();
+    }
+    
     public void ChangeHandsPositions()
     {
-        if(isActive)
+        if (isActive)
         {
             // Set Values
             Vector3 leftPos = new Vector3(handsInfo.leftHandPosX, handsInfo.leftHandPosY, handsInfo.leftHandPosZ);
@@ -108,10 +120,28 @@ public class Player : MonoBehaviour
         // Set Value
         isActive = value;
     }
-    
+
     public bool GetPlayerActive()
     {
         // Return Value
         return isActive;
+    }
+
+    public void SetLeftWallInfo(Vector2 uv, Wall.SelectedWall selected)
+    {
+        // Set Values
+        leftUVOnWall = uv;
+        leftSelectedWall = selected;
+
+        Debug.Log("Player " + playerNumber + "'s left Hand is on the " + leftSelectedWall + " which coordinates are " + leftUVOnWall);
+    }
+    
+    public void SetRightWallInfo(Vector2 uv, Wall.SelectedWall selected)
+    {
+        // Set Values
+        rightUVOnWall = uv;
+        rightSelectedWall = selected;
+
+        Debug.Log("Player " + playerNumber + "'s right Hand is on the " + rightSelectedWall + " which coordinates are " + rightUVOnWall);
     }
 }

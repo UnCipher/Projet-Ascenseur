@@ -8,43 +8,73 @@ public class PlayerHand : MonoBehaviour
     // ---------------------------
 
     List<Wall> selectedWalls = new List<Wall>();
-    Wall currentWall;
+    Wall.SelectedWall currentWall;
+    Vector2 wallPoint;
 
     [Header("References")]
     [SerializeField] Player player;
+    [SerializeField] Hand hand;
+    [Space(5)]
+
     [SerializeField] MeshRenderer mesh;
     [SerializeField] Material defaultMat;
+
+    // Classes
+    // ---------------------------
+
+    public enum Hand
+    {
+        IDK,
+        Left,
+        Right,
+    }
 
     // ---------------------------
     // Functions
     // ---------------------------
 
-    void FixedUpdate()
+    void Start()
     {
-        Vector2 t;
-        if (currentWall && player.GetPlayerActive())
-        {
-            t = currentWall.GetWallPoint(transform.position);
-
-            LevelManager.instance.SendMessage("handPosX", t.x);
-            LevelManager.instance.SendMessage("handPosY", t.y);
-        }
+        if (!player)
+            player = transform.parent.GetComponent<Player>();
     }
 
-    void UpdateWallChange()
+    void FixedUpdate()
     {
-        if(selectedWalls.Count > 0)
+        if (player.GetPlayerActive())
         {
-            currentWall = selectedWalls[0];
-            mesh.material = currentWall.material;
-            
-        }
+            // Set Values
+            if (GetCurrentWall())
+            {
+                Wall wall = GetCurrentWall();
+                wallPoint = wall.GetWallPoint(transform.position);
+                currentWall = wall.GetSelectedWall();
+            }
 
-        else
-        {
-            currentWall = null;
-            mesh.material = defaultMat;
+            else
+                currentWall = Wall.SelectedWall.None;
+
+            // Call Function
+            if (hand == Hand.Left)
+                player.SetLeftWallInfo(wallPoint, currentWall);
+
+            else
+                player.SetRightWallInfo(wallPoint, currentWall);
         }
+    }
+    
+    Wall GetCurrentWall()
+    {
+        // Set Values
+        Wall wall = null;
+        float shortestDistance = 0;
+
+        for (int i = 0; i < selectedWalls.Count; i++)
+            if (Vector3.Distance(transform.position, selectedWalls[i].transform.position) < shortestDistance)
+                wall = selectedWalls[i];
+
+        // Return Value
+        return wall;
     }
 
     // Collision Detections
@@ -57,9 +87,6 @@ public class PlayerHand : MonoBehaviour
             // Set Values
             Wall collidingWall = other.GetComponent<Wall>();
             selectedWalls.Insert(0, collidingWall);
-
-            // Call Function
-            UpdateWallChange();
         }
     }
 
@@ -70,9 +97,6 @@ public class PlayerHand : MonoBehaviour
             // Set Values
             Wall collidingWall = other.GetComponent<Wall>();
             selectedWalls.Remove(collidingWall);
-
-            // Call Function
-            UpdateWallChange();
         }
     }
 }
