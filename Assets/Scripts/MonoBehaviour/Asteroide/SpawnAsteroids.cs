@@ -3,13 +3,14 @@ using UnityEngine;
 public class SpawnAsteroids : MonoBehaviour
 {
 
-    [SerializeField]
-    private GameObject asteroidPrefab;
+    [SerializeField] private GameObject[] asteroidPrefabs;
 
     [SerializeField]
     private Vector3 zoneSize;
 
     [SerializeField] private float repeatTime = 0.5f;
+
+    [SerializeField] private float asteroidLifetime = 10f;
     
     void Start()
     {
@@ -18,6 +19,10 @@ public class SpawnAsteroids : MonoBehaviour
 
     private void AddGameObject()
     {
+
+        int randomIndex = Random.Range(0, asteroidPrefabs.Length);
+        GameObject asteroidPrefab = asteroidPrefabs[randomIndex];
+
         GameObject instantiated = Instantiate(asteroidPrefab);
 
         instantiated.transform.position = new Vector3(
@@ -26,12 +31,7 @@ public class SpawnAsteroids : MonoBehaviour
             Random.Range(transform.position.z - zoneSize.z / 2, transform.position.z + zoneSize.z / 2)
         );
 
-        Destroy(instantiated, 10f);
-    }
-
-    private void DestroyGameObject()
-    {
-        Destroy(gameObject);
+        Destroy(instantiated, asteroidLifetime);
     }
 
     private void OnDrawGizmos()

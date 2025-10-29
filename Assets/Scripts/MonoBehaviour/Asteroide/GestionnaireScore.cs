@@ -13,6 +13,7 @@ public class GestionnaireScore : MonoBehaviour
 
     void Start()
     {
+        ResetScore();
         UpdateText();
     }
     

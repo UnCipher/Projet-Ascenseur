@@ -1096,9 +1096,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4d39c5c20806c488e6e3d163635111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asteroidPrefab: {fileID: 2804855703814482365, guid: 1021e0d1b6a60d04aa8dba9eb626f058, type: 3}
+  asteroidPrefabs:
+  - {fileID: 2804855703814482365, guid: 1021e0d1b6a60d04aa8dba9eb626f058, type: 3}
   zoneSize: {x: 1, y: 1.25, z: 0}
   repeatTime: 1
+  asteroidLifetime: 10
 --- !u!1 &1279620376
 GameObject:
   m_ObjectHideFlags: 0
