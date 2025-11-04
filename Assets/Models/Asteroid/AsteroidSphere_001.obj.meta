@@ -3,7 +3,12 @@ guid: 50a3abb8af2054a4db3d360bafab94ac
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: meteor
+    second: {fileID: 2100000, guid: 352e4d767e9163a499593ef54abe00a6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

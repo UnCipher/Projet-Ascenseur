@@ -3,7 +3,12 @@ guid: 3e87ff603ee391d4b8fa97d516a0c1c6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: meteorFracture
+    second: {fileID: 2100000, guid: e59e6b8419b040344a28fcf64deb4046, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

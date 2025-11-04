@@ -1078,7 +1078,7 @@ Transform:
   m_GameObject: {fileID: 1046963370}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.55, y: -0.1, z: 5}
+  m_LocalPosition: {x: -0.55, y: -0.1, z: 11.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1097,7 +1097,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidPrefabs:
-  - {fileID: 2804855703814482365, guid: 1021e0d1b6a60d04aa8dba9eb626f058, type: 3}
+  - {fileID: 7444381155933357135, guid: c5c6ab1833aec0e479d71370dbf54dea, type: 3}
+  - {fileID: 7193015015763975721, guid: 7ed58f9171af63640ab84541cba980eb, type: 3}
+  - {fileID: 7942706056846435281, guid: c32379ce0c8778746a7157f3714d75c2, type: 3}
+  - {fileID: 2029526235598654422, guid: 229fe157ff17d584e8906d8350ab4565, type: 3}
   zoneSize: {x: 1, y: 1.25, z: 0}
   repeatTime: 1
   asteroidLifetime: 10
