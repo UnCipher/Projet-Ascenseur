@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "ElevatorPad",
+    "maps": [
+        {
+            "name": "Pad",
+            "id": "9b04393c-e3c8-47c1-b9f7-88c63065be0c",
+            "actions": [
+                {
+                    "name": "Campfire",
+                    "type": "Button",
+                    "id": "b1e27e5c-fc0c-4af3-bd59-42b26ad2d3dd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Elevator",
+                    "type": "Button",
+                    "id": "e8fa2e08-00fb-4391-9043-6cd0f721ed4f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ed4978f7-5371-48a5-9c08-43106b96f340",
+                    "path": "<Keyboard>/semicolon",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Campfire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a0ca0d6-d07e-4cc1-bb6b-eccbb6abc8be",
+                    "path": "<Keyboard>/backslash",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Elevator",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

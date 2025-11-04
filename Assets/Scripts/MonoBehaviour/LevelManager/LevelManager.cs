@@ -1,4 +1,6 @@
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(OSC))]
@@ -13,12 +15,35 @@ public class LevelManager : MonoBehaviour
     public MicrophoneInfo microphone = new MicrophoneInfo();
     public List<Player> players = new List<Player>();
 
-    [Header("OSC Messages")]
     OSC osc;
+    [Header("Scene Manager")]
+    [SerializeField] float sceneChangeStartup;
+    [SerializeField] float sceneChangeCooldown;
+    [Space(5)]
+
+    public GameScenes scenes;
+    string currentScene;
+    bool changingScene;
 
     // Classes
     // ---------------------------
 
+    [System.Serializable]
+    public class GameScenes
+    {
+        public SceneSettings elevator;
+        [Space(5)]
+
+        public SceneSettings campfire;
+    }
+    
+    [System.Serializable]
+    public class SceneSettings
+    {
+        public string name;
+        public float duration;
+    }
+    
     [System.Serializable]
     public class MicrophoneInfo
     {
@@ -59,6 +84,59 @@ public class LevelManager : MonoBehaviour
 
         // Call Functions
         InitiateOSCMessages();
+    }
+
+    // Scene Functions
+    // ---------------------------
+
+    IEnumerator ChangeScene(SceneSettings scene)
+    {
+        if (SceneManager.GetActiveScene().name != scene.name && !changingScene)
+        {
+            // Set Values
+            currentScene = scene.name;
+            changingScene = true;
+
+            // Cancel Invoke
+            CancelInvoke("OnSceneCompleted");
+
+            // Play Animation
+            yield return new WaitForSeconds(sceneChangeStartup);
+
+            // Load Scene
+            SceneManager.LoadScene(scene.name);
+
+            // Start CountDown to Elevator
+            if (scene.duration > sceneChangeStartup)
+                Invoke("OnSceneCompleted", scene.duration - sceneChangeStartup);
+
+            // Play Animation
+            yield return new WaitForSeconds(sceneChangeCooldown);
+
+            Debug.Log("Done Changing scene");
+            changingScene = false;
+        }
+
+        else
+            Debug.Log("Already Changing Scene");
+    }
+    
+    public void OnSceneCompleted()
+    {
+        // Call Elevator Scene
+        StartCoroutine(ChangeScene(scenes.elevator));
+    }
+
+    public void OnElevator()
+    {
+        // Call Elevator Scene
+        StartCoroutine(ChangeScene(scenes.elevator));
+    }
+
+    public void OnCampfire()
+    {
+        // Call Campfire Scene
+        StartCoroutine(ChangeScene(scenes.campfire));
     }
 
     // OSC Functions
