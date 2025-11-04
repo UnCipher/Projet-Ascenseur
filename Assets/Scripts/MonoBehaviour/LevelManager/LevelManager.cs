@@ -139,6 +139,11 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(ChangeScene(scenes.campfire));
     }
 
+    public void OnDebugleave()
+    {
+        Application.Quit();
+    }
+
     // OSC Functions
     // ---------------------------
 
