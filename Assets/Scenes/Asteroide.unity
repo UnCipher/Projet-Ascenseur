@@ -484,9 +484,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gestionnaireScore: {fileID: 544106645}
+  mouvementAsteroide: {fileID: 0}
   infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
   pistolet: {fileID: 2002309193}
   distancePistolet: 1
+  fractureAsteroidPrefabs:
+  - {fileID: 7191996476721294421, guid: 1a4146be47d5eff47af071189b075166, type: 3}
+  - {fileID: 3605499684260332989, guid: 32988b539757b7c41806093291c7c600, type: 3}
+  - {fileID: 6093360297764311676, guid: fb63dc99632c73c40a6758f03f54e737, type: 3}
+  - {fileID: 3046478895231280031, guid: 45cfca524fa9b764583b3c8afd02d802, type: 3}
+  - {fileID: 8989012588701456792, guid: fff15ed705ba24b47a0e94079eb3c827, type: 3}
+  - {fileID: 6497562696448096557, guid: b97aaf995ba19bf4d90e3e3ca7bcede1, type: 3}
+  - {fileID: 7492372454684532250, guid: e927a065223777a45b4e0901208fbdf9, type: 3}
+  - {fileID: 8417198976633888608, guid: 40f96198648fd0d409d5a6a22a523ef1, type: 3}
+  zoneSize: {x: 1, y: 1, z: 1}
+  fractureAsteroidLifetime: 10
   mainCamera: {fileID: 113095505}
   player: {fileID: 576941845}
 --- !u!114 &289569077
@@ -1636,7 +1648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &2002309194
 SphereCollider:
   m_ObjectHideFlags: 0

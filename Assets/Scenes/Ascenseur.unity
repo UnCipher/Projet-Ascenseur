@@ -440,6 +440,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+  hand: 0
+>>>>>>> Stashed changes
   mesh: {fileID: 500319886}
   defaultMat: {fileID: 2100000, guid: 93bc99357378fae45abeb3f7b2643580, type: 2}
 --- !u!54 &500319890
@@ -500,6 +504,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: a30f0ee04e1548f48a83cc2579daa480, type: 2}
+<<<<<<< Updated upstream
+=======
+  selectedWall: 0
+>>>>>>> Stashed changes
   vector2Axis: 1
   reverseAxis: 0
   wallCoordinates:
@@ -572,6 +580,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: a30f0ee04e1548f48a83cc2579daa480, type: 2}
+<<<<<<< Updated upstream
+=======
+  selectedWall: 0
+>>>>>>> Stashed changes
   vector2Axis: 1
   reverseAxis: 0
   wallCoordinates:
@@ -736,6 +748,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+  hand: 0
+>>>>>>> Stashed changes
   mesh: {fileID: 1622695578}
   defaultMat: {fileID: 2100000, guid: 93bc99357378fae45abeb3f7b2643580, type: 2}
 --- !u!54 &1622695582
@@ -964,8 +980,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66647ecc699a8b4e95107a74da9d223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   players:
   - {fileID: 328023494}
+=======
+  microphone:
+    average: 0
+    lowpass: 0
+    medium: 0
+    highpass: 0
+  players:
+  - {fileID: 328023494}
+  sceneChangeStartup: 0
+  sceneChangeCooldown: 0
+  scenes:
+    elevator:
+      name: 
+      duration: 0
+    campfire:
+      name: 
+      duration: 0
+>>>>>>> Stashed changes
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
