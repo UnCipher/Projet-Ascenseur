@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
@@ -9,6 +8,7 @@ public class Wall : MonoBehaviour
 
     public Material material;
     [Header("Wall Properties")]
+    [SerializeField] SelectedWall selectedWall;
     [SerializeField] Vector2Axis vector2Axis;
     [SerializeField] bool reverseAxis;
     [Space(5)]
@@ -24,6 +24,14 @@ public class Wall : MonoBehaviour
     // Classes
     // ---------------------------
 
+    public enum SelectedWall
+    {
+        None,
+        First,
+        Second,
+        Third,
+    }
+    
     [System.Serializable]
     public class WallCoordinates
     {
@@ -102,5 +110,14 @@ public class Wall : MonoBehaviour
 
         // Return Value
         return newValue;
+    }
+
+    // Get Functions
+
+
+    public SelectedWall GetSelectedWall()
+    {
+        // Return This Wall ID
+        return selectedWall;
     }
 }
