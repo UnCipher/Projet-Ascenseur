@@ -397,6 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: a30f0ee04e1548f48a83cc2579daa480, type: 2}
+  selectedWall: 0
   vector2Axis: 1
   reverseAxis: 0
   wallCoordinates:
@@ -438,6 +439,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!1 &212693199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 212693200}
+  - component: {fileID: 212693201}
+  m_Layer: 0
+  m_Name: GestionnaireScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &212693200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212693199}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 914827505}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &212693201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212693199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b42ee6e09d8a54a9c0b2a92a0664e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &289569074
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,6 +529,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gestionnaireCompteur: {fileID: 544106645}
+  so_infoCompteur: {fileID: 11400000, guid: fe0f5c9a5bfc33c42b0e2c945b24bbfc, type: 2}
+  gestionnaireScene: {fileID: 212693201}
   infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
   pistolet: {fileID: 2002309193}
   distancePistolet: 1
@@ -891,6 +938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: a30f0ee04e1548f48a83cc2579daa480, type: 2}
+  selectedWall: 0
   vector2Axis: 1
   reverseAxis: 0
   wallCoordinates:
@@ -962,8 +1010,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66647ecc699a8b4e95107a74da9d223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  microphone:
+    average: 0
+    lowpass: 0
+    medium: 0
+    highpass: 0
   players:
   - {fileID: 576941845}
+  sceneChangeStartup: 0
+  sceneChangeCooldown: 0
+  scenes:
+    elevator:
+      name: 
+      duration: 0
+    campfire:
+      name: 
+      duration: 0
 --- !u!114 &862782241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1027,6 +1089,7 @@ Transform:
   - {fileID: 1046963371}
   - {fileID: 544106644}
   - {fileID: 289569075}
+  - {fileID: 212693200}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &979138577
@@ -1387,6 +1450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 576941845}
+  hand: 0
   mesh: {fileID: 1463238236}
   defaultMat: {fileID: 2100000, guid: 93bc99357378fae45abeb3f7b2643580, type: 2}
 --- !u!23 &1463238236
@@ -1647,6 +1711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 576941845}
+  hand: 0
   mesh: {fileID: 1859198183}
   defaultMat: {fileID: 2100000, guid: 93bc99357378fae45abeb3f7b2643580, type: 2}
 --- !u!23 &1859198183

@@ -16,14 +16,6 @@ public class GestionnaireCompteur : MonoBehaviour
         ResetCompteur();
         UpdateText();
     }
-
-    void Update()
-    {
-        if (so_infoCompteur.compteur == 0)
-        {
-            // Lancer scène Ascenseur
-        }
-    }
     
     void Awake()
     {

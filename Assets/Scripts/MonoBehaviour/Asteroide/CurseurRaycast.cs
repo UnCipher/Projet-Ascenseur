@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class CurseurRaycast : MonoBehaviour
 {    
     [SerializeField] private GestionnaireCompteur gestionnaireCompteur;
+    [SerializeField] private InfoCompteur so_infoCompteur;
+    [SerializeField] private GestionnaireScene gestionnaireScene;
     [SerializeField] private InfoAsteroide infoAsteroide;
     [SerializeField] private GameObject pistolet;
     [SerializeField] private float distancePistolet;
@@ -22,7 +24,6 @@ public class CurseurRaycast : MonoBehaviour
     {
 
         Vector2 mousePass = context.ReadValue<Vector2>();
-        // Debug.Log(mousePass);
         
         Ray ray = Camera.main.ScreenPointToRay(mousePass);
         RaycastHit hit;
@@ -35,7 +36,6 @@ public class CurseurRaycast : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            // Debug.Log(hit.transform.name);
             Destroy(hit.transform.gameObject);
 
             int randomIndex = Random.Range(0, fractureAsteroidPrefabs.Length);
@@ -48,6 +48,11 @@ public class CurseurRaycast : MonoBehaviour
             Destroy(instantiated, fractureAsteroidLifetime);
 
             gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);
+
+             if (so_infoCompteur.compteur == 0)
+            {
+                gestionnaireScene.ChangeScene("Elevator");
+            }
         }
     }
     
