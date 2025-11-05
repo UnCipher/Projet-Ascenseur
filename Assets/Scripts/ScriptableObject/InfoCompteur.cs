@@ -6,4 +6,6 @@ using UnityEngine;
 public class InfoCompteur : ScriptableObject
 {
     public int compteur;
+
+    public int nbVie = 3;
 }
