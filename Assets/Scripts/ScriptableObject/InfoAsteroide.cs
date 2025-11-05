@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "InfoAsteroide", menuName = "ScriptableObject/InfoAsteroide")]
 public class InfoAsteroide : ScriptableObject
 {
-    public int scoreAsteroide;
+    public int nbAsteroide = -1;
 }

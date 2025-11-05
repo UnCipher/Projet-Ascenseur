@@ -3,7 +3,7 @@ using UnityEngine;
 public class MouvementAsteroide : MonoBehaviour
 {
 
-    [SerializeField] private GestionnaireScore gestionnaireScore;
+    [SerializeField] private GestionnaireCompteur gestionnaireCompteur;
     [SerializeField] private InfoAsteroide infoAsteroide;
     
     [SerializeField] private float vitesse = 5f;
@@ -11,7 +11,7 @@ public class MouvementAsteroide : MonoBehaviour
 
     void Start()
     {
-        gestionnaireScore = GestionnaireScore.instance;
+        gestionnaireCompteur = GestionnaireCompteur.instance;
     }
 
     void Update()
@@ -21,7 +21,7 @@ public class MouvementAsteroide : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        gestionnaireScore.AsteroideScore(infoAsteroide.scoreAsteroide);
+        gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);
         Invoke("DestroyAsteroid", 3f);
     }
 

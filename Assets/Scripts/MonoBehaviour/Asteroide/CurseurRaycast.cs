@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class CurseurRaycast : MonoBehaviour
 {    
-    [SerializeField] private GestionnaireScore gestionnaireScore;
+    [SerializeField] private GestionnaireCompteur gestionnaireCompteur;
     [SerializeField] private InfoAsteroide infoAsteroide;
     [SerializeField] private GameObject pistolet;
     [SerializeField] private float distancePistolet;
@@ -47,7 +47,7 @@ public class CurseurRaycast : MonoBehaviour
 
             Destroy(instantiated, fractureAsteroidLifetime);
 
-            gestionnaireScore.AsteroideScore(infoAsteroide.scoreAsteroide);
+            gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);
         }
     }
     
