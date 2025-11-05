@@ -285,6 +285,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1682753683901869979, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682753683901869979, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 30.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682753683901869979, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682753683901869979, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682753683901869979, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682753683901869979, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682753683901869979, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682753683901869979, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682753683901869979, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6766944957942923205, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
       propertyPath: m_Name
       value: ScanParticle
@@ -334,6 +370,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+--- !u!1 &1660607215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1660607217}
+  - component: {fileID: 1660607216}
+  m_Layer: 0
+  m_Name: oop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1660607216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660607215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0fd51cc70b50c14293241ee7f040610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tickBetweenCheck: 3
+  currentTick: 0
+  scanCooldown: 4
+  minToActivateScan: 0.3
+  scanSizeAudioType: 3
+  highestSizeVolumeBetweenTick: 0
+  minSizeVolumeIn: 0.15
+  maxSizeVolumeIn: 0.9
+  scanMinSize: 5
+  scanMaxSize: 20
+  scanDurationAudioType: 0
+  highestDurationVolumeBetweenTick: 0
+  minDurationVolumeIn: 0.3
+  maxDurationVolumeIn: 0.9
+  scanMinDuration: 0.3
+  scanMaxDuration: 1.2
+  particleScanPrefab: {fileID: 6766944957942923205, guid: f3f3441605ec11d47bd5d8039ce8ae58, type: 3}
+--- !u!4 &1660607217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660607215}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.53957, y: 1.73512, z: -1.525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8640892161464107503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -342,20 +439,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1383186744459192157, guid: a8b9217093b7e6448ae210353473154b, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2748979278158256564, guid: a8b9217093b7e6448ae210353473154b, type: 3}
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4196323206431399387, guid: a8b9217093b7e6448ae210353473154b, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4227317147800583134, guid: a8b9217093b7e6448ae210353473154b, type: 3}
-      propertyPath: m_RenderPostProcessing
+    - target: {fileID: 7060195210956718210, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7614724473167366709, guid: a8b9217093b7e6448ae210353473154b, type: 3}
@@ -411,3 +500,4 @@ SceneRoots:
   - {fileID: 353507081}
   - {fileID: 492687964}
   - {fileID: 1395424984}
+  - {fileID: 1660607217}

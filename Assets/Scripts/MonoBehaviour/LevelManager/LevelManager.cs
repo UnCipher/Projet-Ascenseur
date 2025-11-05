@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector]
     public static LevelManager instance;
+    
+    public HandsOnWall handsOnWall;
     public MicrophoneInfo microphone = new MicrophoneInfo();
     public List<Player> players = new List<Player>();
 
@@ -43,7 +45,7 @@ public class LevelManager : MonoBehaviour
         public string name;
         public float duration;
     }
-    
+
     [System.Serializable]
     public class MicrophoneInfo
     {
@@ -53,6 +55,14 @@ public class LevelManager : MonoBehaviour
         public float lowpass;
         public float medium;
         public float highpass;
+    }
+    
+    [System.Serializable]
+    public class HandsOnWall
+    {
+        public List<PlayerHand> leftWall;
+        public List<PlayerHand> centerWall;
+        public List<PlayerHand> rightWall;
     }
 
     public enum MicrophoneAudioType
@@ -150,7 +160,7 @@ public class LevelManager : MonoBehaviour
     void InitiateOSCMessages()
     {
         // Receive Messages
-
+        
         // Microphone
         osc.SetAddressHandler("/micAverage", MicAverageVolume);
         osc.SetAddressHandler("/micLowpass", MicLowpassVolume);
@@ -437,10 +447,50 @@ public class LevelManager : MonoBehaviour
         if(players[3])
         players[3].handsInfo.rightHandPosY = osc.GetFloat(0);
     }
-    
+
     void P4RHandZ(OscMessage osc)
     {
-        if(players[3])
-        players[3].handsInfo.rightHandPosZ = osc.GetFloat(0);
+        if (players[3])
+            players[3].handsInfo.rightHandPosZ = osc.GetFloat(0);
+    }
+
+    // Get Functions
+    // ---------------------------
+
+    public static MicrophoneInfo GetMicrophoneInfo()
+    {
+        // Set Values
+        MicrophoneInfo microphoneInfo = instance.microphone;
+
+        // Return Value
+        return microphoneInfo;
+    }
+
+    public static int GetActivePlayersNumber()
+    {
+        // Set Value
+        int number = 0;
+
+        // Incremate if Player is Active
+        for (int i = 0; i < instance.players.Count; i++)
+            if (instance.players[i].GetPlayerActive())
+                number++;
+
+        // Return the number calculated
+        return number;
+    }
+    
+    public static Player[] GetActivePlayers()
+    {
+        // Set Value
+        List<Player> activePlayers = new List<Player>();
+
+        // Incremate if Player is Active
+        for (int i = 0; i < instance.players.Count; i++)
+            if (instance.players[i].GetPlayerActive())
+                activePlayers.Add(instance.players[i]);
+
+        // Return Active Players
+        return activePlayers.ToArray();
     }
 }

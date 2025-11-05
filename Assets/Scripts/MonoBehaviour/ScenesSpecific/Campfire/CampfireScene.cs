@@ -65,16 +65,16 @@ public class CampfireScene : MonoBehaviour
 
         // Set Correct Volume Type
         if (type == LevelManager.MicrophoneAudioType.Average)
-            newVolume = GetMicrophoneInfo().average;
+            newVolume = LevelManager.GetMicrophoneInfo().average;
 
         else if (type == LevelManager.MicrophoneAudioType.Lowpass)
-            newVolume = GetMicrophoneInfo().lowpass;
+            newVolume = LevelManager.GetMicrophoneInfo().lowpass;
 
         else if (type == LevelManager.MicrophoneAudioType.Medium)
-            newVolume = GetMicrophoneInfo().medium;
+            newVolume = LevelManager.GetMicrophoneInfo().medium;
 
         else
-            newVolume = GetMicrophoneInfo().average;
+            newVolume = LevelManager.GetMicrophoneInfo().average;
 
         // Check if Value is Bigger than current Highest Volume
         if (newVolume > highestVolumeBetweenTick)
@@ -108,33 +108,7 @@ public class CampfireScene : MonoBehaviour
         canBeActivated = true;
         Debug.Log("Interaction Reactivated for Event #" + currentEventIndex);
     }
-    
-    public void Test1()
-    {
-        Debug.Log("lele, it works #1");
-    }
-    public void Test2()
-    {
-        Debug.Log("lele, it works #2");
-    }
-    public void Test3()
-    {
-        Debug.Log("lele, it works #3");
-    }
-    public void Test4()
-    {
-        Debug.Log("lele, it works #4");
-    }
-    
+
     // Get Functions
     // ---------------------------
-
-    LevelManager.MicrophoneInfo GetMicrophoneInfo()
-    {
-        // Set Values
-        LevelManager.MicrophoneInfo microphoneInfo = LevelManager.instance.microphone;
-
-        // Return Value
-        return microphoneInfo;
-    }
 }
