@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 62502825}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 113095505}
   - component: {fileID: 113095504}
   - component: {fileID: 113095507}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 177733740}
   - component: {fileID: 177733739}
   - component: {fileID: 177733738}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 197300746}
   - component: {fileID: 197300745}
   - component: {fileID: 197300744}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +449,7 @@ GameObject:
   m_Component:
   - component: {fileID: 212693200}
   - component: {fileID: 212693201}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GestionnaireScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 289569075}
   - component: {fileID: 289569076}
   - component: {fileID: 289569077}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CurseurRaycast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,6 +544,9 @@ MonoBehaviour:
   - {fileID: 7492372454684532250, guid: e927a065223777a45b4e0901208fbdf9, type: 3}
   - {fileID: 8417198976633888608, guid: 40f96198648fd0d409d5a6a22a523ef1, type: 3}
   fractureAsteroidLifetime: 10
+  nombreDeFractures: 3
+  effetExplosionPrefab: {fileID: 3601390917339185547, guid: 18fa98e67da0f754a82a3c6e4a5e6c99, type: 3}
+  effetExplosionLifetime: 3
   mainCamera: {fileID: 113095505}
   player: {fileID: 576941845}
 --- !u!114 &289569077
@@ -675,7 +678,7 @@ GameObject:
   - component: {fileID: 544106644}
   - component: {fileID: 544106645}
   - component: {fileID: 544106646}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GestionnaireCompteurPV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,7 +739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 576941846}
   - component: {fileID: 576941845}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -798,7 +801,7 @@ GameObject:
   - component: {fileID: 637400363}
   - component: {fileID: 637400365}
   - component: {fileID: 637400364}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: TexteCompteur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -934,7 +937,7 @@ GameObject:
   - component: {fileID: 853557379}
   - component: {fileID: 853557378}
   - component: {fileID: 853557377}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1007,7 +1010,7 @@ GameObject:
   - component: {fileID: 862782242}
   - component: {fileID: 862782241}
   - component: {fileID: 862782240}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1081,7 +1084,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 914827505}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: --Scripts--
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1117,7 +1120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 979138578}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: --UI--
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1151,7 +1154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1046963371}
   - component: {fileID: 1046963372}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SpawnAsteroids
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1204,7 +1207,7 @@ GameObject:
   - component: {fileID: 1059555161}
   - component: {fileID: 1059555163}
   - component: {fileID: 1059555162}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: TextePV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1343,7 +1346,7 @@ GameObject:
   - component: {fileID: 1140068982}
   - component: {fileID: 1140068981}
   - component: {fileID: 1140068986}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ZoneRetirerPV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1492,7 +1495,7 @@ GameObject:
   - component: {fileID: 1279620379}
   - component: {fileID: 1279620378}
   - component: {fileID: 1279620377}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1597,7 +1600,7 @@ GameObject:
   - component: {fileID: 1463238238}
   - component: {fileID: 1463238235}
   - component: {fileID: 1463238237}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1748,7 +1751,7 @@ GameObject:
   - component: {fileID: 1838322097}
   - component: {fileID: 1838322096}
   - component: {fileID: 1838322095}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1858,7 +1861,7 @@ GameObject:
   - component: {fileID: 1859198185}
   - component: {fileID: 1859198182}
   - component: {fileID: 1859198184}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

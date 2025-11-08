@@ -13,6 +13,7 @@ public class CurseurRaycast : MonoBehaviour
     [Header("Fracture")]
     [SerializeField] private GameObject[] fractureAsteroidPrefabs;
     [SerializeField] private float fractureAsteroidLifetime = 10f;
+    [SerializeField] private int nombreDeFractures = 2;
 
     [Header("Effet visuel")]
     [SerializeField] private GameObject effetExplosionPrefab;
@@ -42,7 +43,7 @@ public class CurseurRaycast : MonoBehaviour
         }
     }
 
-    // Contrôle Kinect Azure
+    // Contrôle Kinect Azure 
     void Update()
     {
         if (player == null)
@@ -76,29 +77,34 @@ public class CurseurRaycast : MonoBehaviour
     {
         Destroy(hit.transform.gameObject);
 
-        int randomIndex = Random.Range(0, fractureAsteroidPrefabs.Length);
-        GameObject fractureAsteroidPrefab = fractureAsteroidPrefabs[randomIndex];
-        GameObject instantiated = Instantiate(fractureAsteroidPrefab, hit.point, Quaternion.identity);
-
-        instantiated.transform.rotation = Random.rotation;
-
-        MouvementAsteroide[] mouvements = instantiated.GetComponentsInChildren<MouvementAsteroide>();
-        foreach (MouvementAsteroide mouvement in mouvements)
-        {
-            Vector3 randomDirection = (instantiated.transform.position - hit.point).normalized + Random.insideUnitSphere * 0.3f;
-            mouvement.directionAsteroides = randomDirection;
-        }
-
-        Destroy(instantiated, fractureAsteroidLifetime);
-
-        // Condition  pour l'explosion
         if (effetExplosionPrefab != null)
         {
             GameObject explosion = Instantiate(effetExplosionPrefab, hit.point, Quaternion.identity);
-
             explosion.transform.forward = hit.normal;
-
             Destroy(explosion, effetExplosionLifetime);
+        }
+
+        for (int i = 0; i < nombreDeFractures; i++)
+        {
+            int randomIndex = Random.Range(0, fractureAsteroidPrefabs.Length);
+            GameObject fractureAsteroidPrefab = fractureAsteroidPrefabs[randomIndex];
+
+            Vector3 spawnPosition = hit.point + Random.insideUnitSphere * 0.3f;
+
+            GameObject instantiated = Instantiate(
+                fractureAsteroidPrefab,
+                spawnPosition,
+                Random.rotation
+            );
+
+            MouvementAsteroide[] mouvements = instantiated.GetComponentsInChildren<MouvementAsteroide>();
+            foreach (MouvementAsteroide mouvement in mouvements)
+            {
+                Vector3 randomDirection = (instantiated.transform.position - hit.point).normalized + Random.insideUnitSphere * 0.4f;
+                mouvement.directionAsteroides = randomDirection.normalized;
+            }
+
+            Destroy(instantiated, fractureAsteroidLifetime);
         }
 
         gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);

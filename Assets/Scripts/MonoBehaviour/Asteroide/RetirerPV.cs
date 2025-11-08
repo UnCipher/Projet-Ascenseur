@@ -7,7 +7,10 @@ public class RetirerPV : MonoBehaviour
     [SerializeField] private TMP_Text champPV;
     private void OnTriggerEnter(Collider other)
     {
-        so_infoCompteur.nbVie -= 1;
-        champPV.text = "Points de vie : " + so_infoCompteur.nbVie;
+        if (other.CompareTag("Asteroide"))
+        {
+            so_infoCompteur.nbVie -= 1;
+            champPV.text = "Points de vie : " + so_infoCompteur.nbVie;
+        }
     }
 }
