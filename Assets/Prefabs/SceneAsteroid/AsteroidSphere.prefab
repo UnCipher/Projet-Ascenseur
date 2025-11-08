@@ -95,8 +95,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5131407035811081035}
-  - component: {fileID: -2831848671017091222}
   - component: {fileID: -5356751324481030653}
+  - component: {fileID: 5667603026614632804}
   m_Layer: 0
   m_Name: AsteroidSphere
   m_TagString: Asteroide
@@ -120,8 +120,24 @@ Transform:
   - {fileID: 2170656765222483880}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &-2831848671017091222
-SphereCollider:
+--- !u!114 &-5356751324481030653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7444381155933357135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8d002b604424e47a8c4cd64b83d0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gestionnaireCompteur: {fileID: 0}
+  infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
+  vitesse: 5
+  directionAsteroides: {x: 0, y: 0, z: -1}
+--- !u!65 &5667603026614632804
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -139,21 +155,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-5356751324481030653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7444381155933357135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8d002b604424e47a8c4cd64b83d0c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gestionnaireCompteur: {fileID: 0}
-  infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
-  vitesse: 5
-  directionAsteroides: {x: 0, y: 0, z: -1}
+  m_Size: {x: 2.3049688, y: 2.1265528, z: 1.9481654}
+  m_Center: {x: -0.08064747, y: 0.058572173, z: -0.09235406}

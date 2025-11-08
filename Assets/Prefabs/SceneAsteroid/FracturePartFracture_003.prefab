@@ -95,8 +95,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4161005995186140512}
-  - component: {fileID: 7099770796838983204}
   - component: {fileID: 178902054632858314}
+  - component: {fileID: 7341134055669676653}
   m_Layer: 2
   m_Name: FracturePartFracture_003
   m_TagString: Untagged
@@ -120,8 +120,24 @@ Transform:
   - {fileID: 2934558900066150791}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7099770796838983204
-SphereCollider:
+--- !u!114 &178902054632858314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046478895231280031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8d002b604424e47a8c4cd64b83d0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gestionnaireCompteur: {fileID: 0}
+  infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
+  vitesse: 1
+  directionAsteroides: {x: -1, y: 0, z: 0}
+--- !u!65 &7341134055669676653
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -139,21 +155,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &178902054632858314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3046478895231280031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8d002b604424e47a8c4cd64b83d0c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gestionnaireScore: {fileID: 0}
-  infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
-  vitesse: 1
-  directionAsteroides: {x: -1, y: 0, z: 0}
+  m_Size: {x: 1.3407993, y: 1.3808931, z: 1.506187}
+  m_Center: {x: 0.17039913, y: -0.14534049, z: 0.15285842}

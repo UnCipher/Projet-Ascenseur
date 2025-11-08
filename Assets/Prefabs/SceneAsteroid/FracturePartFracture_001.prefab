@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8754509177487326621}
-  - component: {fileID: -2102163559667974347}
   - component: {fileID: 3243329559280724594}
+  - component: {fileID: 9008999362839508476}
   m_Layer: 2
   m_Name: FracturePartFracture_001
   m_TagString: Untagged
@@ -34,8 +34,24 @@ Transform:
   - {fileID: 36921907835589215}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &-2102163559667974347
-SphereCollider:
+--- !u!114 &3243329559280724594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3605499684260332989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8d002b604424e47a8c4cd64b83d0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gestionnaireCompteur: {fileID: 0}
+  infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
+  vitesse: 1
+  directionAsteroides: {x: -1, y: 0, z: 0}
+--- !u!65 &9008999362839508476
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -53,24 +69,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3243329559280724594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3605499684260332989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8d002b604424e47a8c4cd64b83d0c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gestionnaireScore: {fileID: 0}
-  infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
-  vitesse: 1
-  directionAsteroides: {x: -1, y: 0, z: 0}
+  m_Size: {x: 1.1659534, y: 1.3775437, z: 1}
+  m_Center: {x: -0.020743981, y: 0.060158, z: 0}
 --- !u!1 &6017013128337534319
 GameObject:
   m_ObjectHideFlags: 0
