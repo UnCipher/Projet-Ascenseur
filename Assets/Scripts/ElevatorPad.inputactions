@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Echolocation",
+                    "type": "Button",
+                    "id": "4708965b-5cf4-405f-9c6d-261e387cd21a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -65,6 +74,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DebugLeave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18d6640c-08e0-416c-9ece-b105bbe2cfe8",
+                    "path": "<Keyboard>/minus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Echolocation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

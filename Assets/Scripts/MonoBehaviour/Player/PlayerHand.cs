@@ -7,7 +7,7 @@ public class PlayerHand : MonoBehaviour
     // Values
     // ---------------------------
 
-    List<Wall> selectedWalls = new List<Wall>();
+    [SerializeField] List<Wall> selectedWalls = new List<Wall>();
     Wall.SelectedWall currentWall;
     Vector2 wallPoint;
 
@@ -62,19 +62,31 @@ public class PlayerHand : MonoBehaviour
                 player.SetRightWallInfo(wallPoint, currentWall);
         }
     }
-    
+
     Wall GetCurrentWall()
     {
-        // Set Values
-        Wall wall = null;
-        float shortestDistance = 0;
+        if (selectedWalls.Count > 0)
+        {
+            // Set Values
+            Wall wall = selectedWalls[0];
+            float shortestDistance = Vector3.Distance(transform.position, selectedWalls[0].transform.position);
 
-        for (int i = 0; i < selectedWalls.Count; i++)
-            if (Vector3.Distance(transform.position, selectedWalls[i].transform.position) < shortestDistance)
-                wall = selectedWalls[i];
+            for (int i = 0; i < selectedWalls.Count; i++)
+                if (Vector3.Distance(transform.position, selectedWalls[i].transform.position) < shortestDistance)
+                    wall = selectedWalls[i];
 
+            // Return Value
+            return wall;
+        }
+
+        // Else
+        return null;
+    }
+    
+    public Wall.SelectedWall GetSelectedWall()
+    {
         // Return Value
-        return wall;
+        return currentWall;
     }
 
     // Collision Detections
@@ -86,7 +98,8 @@ public class PlayerHand : MonoBehaviour
         {
             // Set Values
             Wall collidingWall = other.GetComponent<Wall>();
-            selectedWalls.Insert(0, collidingWall);
+            Debug.Log("works?");
+            selectedWalls.Add(collidingWall);
         }
     }
 

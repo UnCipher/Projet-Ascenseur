@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CampFire/Campfire.unity
     guid: d77d6323f80a13543ab1babc23b2be81
+  - enabled: 1
+    path: Assets/Scenes/Echolocation/Echolocation.unity
+    guid: c359eff31b7c7ed42b73472779a74e5c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

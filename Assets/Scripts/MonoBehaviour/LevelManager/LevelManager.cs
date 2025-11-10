@@ -23,9 +23,15 @@ public class LevelManager : MonoBehaviour
     [SerializeField] float sceneChangeCooldown;
     [Space(5)]
 
+    [SerializeField] string animationEnterTrigger;
+    [SerializeField] string animationLeaveTrigger;
+
     public GameScenes scenes;
     string currentScene;
     bool changingScene;
+
+    [Header("References")]
+    [SerializeField] Animator animator;
 
     // Classes
     // ---------------------------
@@ -37,6 +43,9 @@ public class LevelManager : MonoBehaviour
         [Space(5)]
 
         public SceneSettings campfire;
+        [Space(5)]
+
+        public SceneSettings echolocation;
     }
     
     [System.Serializable]
@@ -81,7 +90,13 @@ public class LevelManager : MonoBehaviour
     {
         // Set Values
         if (instance != null)
+            {
+            Debug.LogError("Destroy This one");
             Destroy(gameObject);
+            }
+
+        if (!animator)
+            animator = GetComponent<Animator>();
 
         DontDestroyOnLoad(this);
         instance = this;
@@ -111,7 +126,14 @@ public class LevelManager : MonoBehaviour
             CancelInvoke("OnSceneCompleted");
 
             // Play Animation
-            yield return new WaitForSeconds(sceneChangeStartup);
+            if(SceneManager.GetActiveScene().name != scenes.elevator.name)
+            {
+                animator.SetTrigger(animationLeaveTrigger);
+                yield return new WaitForSeconds(sceneChangeStartup);
+            }
+
+            // Clear Parent
+            transform.SetParent(null, false);
 
             // Load Scene
             SceneManager.LoadScene(scene.name);
@@ -121,7 +143,11 @@ public class LevelManager : MonoBehaviour
                 Invoke("OnSceneCompleted", scene.duration - sceneChangeStartup);
 
             // Play Animation
-            yield return new WaitForSeconds(sceneChangeCooldown);
+            if(scene.name != scenes.elevator.name)
+            {
+                animator.SetTrigger(animationEnterTrigger);
+                yield return new WaitForSeconds(sceneChangeCooldown);
+            }
 
             Debug.Log("Done Changing scene");
             changingScene = false;
@@ -149,6 +175,12 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(ChangeScene(scenes.campfire));
     }
 
+    public void OnEcholocation()
+    {
+        // Call Campfire Scene
+        StartCoroutine(ChangeScene(scenes.echolocation));
+    }
+
     public void OnDebugleave()
     {
         Application.Quit();
@@ -162,52 +194,29 @@ public class LevelManager : MonoBehaviour
         // Receive Messages
         
         // Microphone
-        osc.SetAddressHandler("/micAverage", MicAverageVolume);
-        osc.SetAddressHandler("/micLowpass", MicLowpassVolume);
-        osc.SetAddressHandler("/micMedium", MicMediumVolume);
-        osc.SetAddressHandler("/micHighpass", MicHighpassVolume);
+        osc.SetAddressHandler("/micVolume", MicVolume);
 
         // Players
 
         // Player 1 
-        osc.SetAddressHandler("/p1-active", P1Active);
-        osc.SetAddressHandler("/p1-lHx", P1LHandX);
-        osc.SetAddressHandler("/p1-lHy", P1LHandY);
-        osc.SetAddressHandler("/p1-lHz", P1LHandZ);
-
-        osc.SetAddressHandler("/p1-rHx", P1RHandX);
-        osc.SetAddressHandler("/p1-rHy", P1RHandY);
-        osc.SetAddressHandler("/p1-rHz", P1RHandZ);
+        osc.SetAddressHandler("/p1Left", P1Left);
+        osc.SetAddressHandler("/p1Right", P1Right);
+        osc.SetAddressHandler("/p1Active", P1Active);
 
         // Player 2
-        osc.SetAddressHandler("/p2-active", P2Active);
-        osc.SetAddressHandler("/p2-lHx", P2LHandX);
-        osc.SetAddressHandler("/p2-lHy", P2LHandY);
-        osc.SetAddressHandler("/p2-lHz", P2LHandZ);
-
-        osc.SetAddressHandler("/p2-rHx", P2RHandX);
-        osc.SetAddressHandler("/p2-rHy", P2RHandY);
-        osc.SetAddressHandler("/p2-rHz", P2RHandZ);
+        osc.SetAddressHandler("/p2Left", P2Left);
+        osc.SetAddressHandler("/p2Right", P2Right);
+        osc.SetAddressHandler("/p2Active", P2Active);
 
         // Player 3
-        osc.SetAddressHandler("/p3-active", P3Active);
-        osc.SetAddressHandler("/p3-lHx", P3LHandX);
-        osc.SetAddressHandler("/p3-lHy", P3LHandY);
-        osc.SetAddressHandler("/p3-lHz", P3LHandZ);
-
-        osc.SetAddressHandler("/p3-rHx", P3RHandX);
-        osc.SetAddressHandler("/p3-rHy", P3RHandY);
-        osc.SetAddressHandler("/p3-rHz", P3RHandZ);
+        osc.SetAddressHandler("/p3Left", P3Left);
+        osc.SetAddressHandler("/p3Right", P3Right);
+        osc.SetAddressHandler("/p3Active", P3Active);
 
         // Player 4
-        osc.SetAddressHandler("/p4-active", P4Active);
-        osc.SetAddressHandler("/p4-lHx", P4LHandX);
-        osc.SetAddressHandler("/p4-lHy", P4LHandY);
-        osc.SetAddressHandler("/p4-lHz", P4LHandZ);
-
-        osc.SetAddressHandler("/p4-rHx", P4RHandX);
-        osc.SetAddressHandler("/p4-rHy", P4RHandY);
-        osc.SetAddressHandler("/p4-rHz", P4RHandZ);
+        osc.SetAddressHandler("/p4Left", P4Left);
+        osc.SetAddressHandler("/p4Right", P4Right);
+        osc.SetAddressHandler("/p4Active", P4Active);
     }
 
     public void SendMessage(string address, float value)
@@ -225,24 +234,12 @@ public class LevelManager : MonoBehaviour
     // Audio
     // ---------------------------
 
-    void MicAverageVolume(OscMessage osc)
+    void MicVolume(OscMessage osc)
     {
         microphone.average = osc.GetFloat(0);
-    }
-
-    void MicLowpassVolume(OscMessage osc)
-    {
-        microphone.lowpass = osc.GetFloat(0);
-    }
-
-    void MicMediumVolume(OscMessage osc)
-    {
-        microphone.medium = osc.GetFloat(0);
-    }
-
-    void MicHighpassVolume(OscMessage osc)
-    {
-        microphone.highpass = osc.GetFloat(0);
+        microphone.lowpass = osc.GetFloat(1);
+        microphone.medium = osc.GetFloat(2);
+        microphone.highpass = osc.GetFloat(3);
     }
 
 
@@ -261,41 +258,29 @@ public class LevelManager : MonoBehaviour
                 players[0].DesactivatePlayer();
         }
     }
-    
-    void P1LHandX(OscMessage osc)
-    {
-        if(players[0])
-        players[0].handsInfo.leftHandPosX = osc.GetFloat(0);
-    }
 
-    void P1LHandY(OscMessage osc)
-    {
-        if(players[0])
-        players[0].handsInfo.leftHandPosY = osc.GetFloat(0);
-    }
-
-    void P1LHandZ(OscMessage osc)
-    {
-        if(players[0])
-        players[0].handsInfo.leftHandPosZ = osc.GetFloat(0);
-    }
-
-    void P1RHandX(OscMessage osc)
-    {
-        if(players[0])
-        players[0].handsInfo.rightHandPosX = osc.GetFloat(0);
-    }
-
-    void P1RHandY(OscMessage osc)
-    {
-        if(players[0])
-        players[0].handsInfo.rightHandPosY = osc.GetFloat(0);
-    }
-
-    void P1RHandZ(OscMessage osc)
+    void P1Left(OscMessage osc)
     {
         if (players[0])
-            players[0].handsInfo.rightHandPosZ = osc.GetFloat(0);
+        {
+            Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
+            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
+
+            players[0].handsInfo.leftHandPos = handPos;
+            players[0].handsInfo.leftHandPos = fingerPos;
+        }
+    }
+    
+    void P1Right(OscMessage osc)
+    {
+        if(players[0])
+        {
+            Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
+            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
+
+            players[0].handsInfo.rightHandPos = handPos;
+            players[0].handsInfo.rightHandPos = fingerPos;
+        }
     }
     
     // Player 2
@@ -313,41 +298,29 @@ public class LevelManager : MonoBehaviour
                 players[1].DesactivatePlayer();
         }
     }
-    
-    void P2LHandX(OscMessage osc)
-    {
-        if(players[1])
-        players[1].handsInfo.leftHandPosX = osc.GetFloat(0);
-    }
 
-    void P2LHandY(OscMessage osc)
-    {
-        if(players[1])
-        players[1].handsInfo.leftHandPosY = osc.GetFloat(0);
-    }
-
-    void P2LHandZ(OscMessage osc)
-    {
-        if(players[1])
-        players[1].handsInfo.leftHandPosZ = osc.GetFloat(0);
-    }
-
-    void P2RHandX(OscMessage osc)
-    {
-        if(players[1])
-        players[1].handsInfo.rightHandPosX = osc.GetFloat(0);
-    }
-
-    void P2RHandY(OscMessage osc)
-    {
-        if(players[1])
-        players[1].handsInfo.rightHandPosY = osc.GetFloat(0);
-    }
-
-    void P2RHandZ(OscMessage osc)
+    void P2Left(OscMessage osc)
     {
         if (players[1])
-            players[1].handsInfo.rightHandPosZ = osc.GetFloat(0);
+        {
+            Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
+            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
+
+            players[1].handsInfo.leftHandPos = handPos;
+            players[1].handsInfo.leftHandPos = fingerPos;
+        }
+    }
+    
+    void P2Right(OscMessage osc)
+    {
+        if(players[1])
+        {
+            Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
+            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
+
+            players[1].handsInfo.rightHandPos = handPos;
+            players[1].handsInfo.rightHandPos = fingerPos;
+        }
     }
     
     // Player 3
@@ -365,41 +338,29 @@ public class LevelManager : MonoBehaviour
                 players[2].DesactivatePlayer();
         }
     }
-    
-    void P3LHandX(OscMessage osc)
-    {
-        if(players[2])
-        players[2].handsInfo.leftHandPosX = osc.GetFloat(0);
-    }
 
-    void P3LHandY(OscMessage osc)
-    {
-        if(players[2])
-        players[2].handsInfo.leftHandPosY = osc.GetFloat(0);
-    }
-
-    void P3LHandZ(OscMessage osc)
-    {
-        if(players[2])
-        players[2].handsInfo.leftHandPosZ = osc.GetFloat(0);
-    }
-
-    void P3RHandX(OscMessage osc)
-    {
-        if(players[2])
-        players[2].handsInfo.rightHandPosX = osc.GetFloat(0);
-    }
-
-    void P3RHandY(OscMessage osc)
-    {
-        if(players[2])
-        players[2].handsInfo.rightHandPosY = osc.GetFloat(0);
-    }
-
-    void P3RHandZ(OscMessage osc)
+    void P3Left(OscMessage osc)
     {
         if (players[2])
-            players[2].handsInfo.rightHandPosZ = osc.GetFloat(0);
+        {
+            Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
+            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
+
+            players[2].handsInfo.leftHandPos = handPos;
+            players[2].handsInfo.leftHandPos = fingerPos;
+        }
+    }
+    
+    void P3Right(OscMessage osc)
+    {
+        if(players[2])
+        {
+            Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
+            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
+
+            players[2].handsInfo.rightHandPos = handPos;
+            players[2].handsInfo.rightHandPos = fingerPos;
+        }
     }
     
     // Player 4
@@ -417,41 +378,29 @@ public class LevelManager : MonoBehaviour
                 players[3].DesactivatePlayer();
         }
     }
-    
-    void P4LHandX(OscMessage osc)
-    {
-        if(players[3])
-        players[3].handsInfo.leftHandPosX = osc.GetFloat(0);
-    }
 
-    void P4LHandY(OscMessage osc)
-    {
-        if(players[3])
-        players[3].handsInfo.leftHandPosY = osc.GetFloat(0);
-    }
-
-    void P4LHandZ(OscMessage osc)
-    {
-        if(players[3])
-        players[3].handsInfo.leftHandPosZ = osc.GetFloat(0);
-    }
-
-    void P4RHandX(OscMessage osc)
-    {
-        if(players[3])
-        players[3].handsInfo.rightHandPosX = osc.GetFloat(0);
-    }
-
-    void P4RHandY(OscMessage osc)
-    {
-        if(players[3])
-        players[3].handsInfo.rightHandPosY = osc.GetFloat(0);
-    }
-
-    void P4RHandZ(OscMessage osc)
+    void P4Left(OscMessage osc)
     {
         if (players[3])
-            players[3].handsInfo.rightHandPosZ = osc.GetFloat(0);
+        {
+            Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
+            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
+
+            players[3].handsInfo.leftHandPos = handPos;
+            players[3].handsInfo.leftHandPos = fingerPos;
+        }
+    }
+    
+    void P4Right(OscMessage osc)
+    {
+        if(players[3])
+        {
+            Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
+            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
+
+            players[3].handsInfo.rightHandPos = handPos;
+            players[3].handsInfo.rightHandPos = fingerPos;
+        }
     }
 
     // Get Functions
@@ -478,6 +427,24 @@ public class LevelManager : MonoBehaviour
 
         // Return the number calculated
         return number;
+    }
+
+    public static PlayerHand[] GetAllHandOnWall(Wall.SelectedWall wall)
+    {
+        // Set Values
+        List<PlayerHand> hands = new List<PlayerHand>();
+        Player[] activePlayers = GetActivePlayers();
+
+        for(int i = 0;i<activePlayers.Length;i++)
+        {
+            if (activePlayers[i].GetLeftHand().GetSelectedWall() == wall)
+                hands.Add(activePlayers[i].GetLeftHand());
+
+            if (activePlayers[i].GetRightHand().GetSelectedWall() == wall)
+                hands.Add(activePlayers[i].GetRightHand());
+        }
+
+        return hands.ToArray();
     }
     
     public static Player[] GetActivePlayers()
