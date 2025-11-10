@@ -27,9 +27,9 @@ public class Wall : MonoBehaviour
     public enum SelectedWall
     {
         None,
-        First,
-        Second,
-        Third,
+        Right,
+        Center,
+        Left,
     }
     
     [System.Serializable]
@@ -90,9 +90,6 @@ public class Wall : MonoBehaviour
         if (reverseAxis)
             point.x = -point.x;
 
-        // Normalize
-        Debug.Log("Default : " + pointPos + " / Normalized : " + point);
-
         return point;
     }
 
@@ -113,7 +110,7 @@ public class Wall : MonoBehaviour
     }
 
     // Get Functions
-
+    // ---------------------------
 
     public SelectedWall GetSelectedWall()
     {

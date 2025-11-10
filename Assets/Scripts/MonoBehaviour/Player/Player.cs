@@ -36,11 +36,15 @@ public class Player : MonoBehaviour
         public float leftHandPosY;
         public float leftHandPosZ;
         public bool leftHandClosed;
+        public Vector3 leftHandPos;
+        public Vector3 leftFingerPos;
 
         public float rightHandPosX;
         public float rightHandPosY;
         public float rightHandPosZ;
         public bool rightHandClosed;
+        public Vector3 rightHandPos;
+        public Vector3 rightFingerPos;
     }
 
     // ---------------------------
@@ -57,12 +61,8 @@ public class Player : MonoBehaviour
     {
         if (isActive)
         {
-            // Set Values
-            Vector3 leftPos = new Vector3(handsInfo.leftHandPosX, handsInfo.leftHandPosY, handsInfo.leftHandPosZ);
-            Vector3 rightPos = new Vector3(handsInfo.rightHandPosX, handsInfo.rightHandPosY, handsInfo.rightHandPosZ);
-
-            leftHand.transform.localPosition = leftPos;
-            rightHand.transform.localPosition = rightPos;
+            leftHand.transform.localPosition = handsInfo.leftHandPos;
+            rightHand.transform.localPosition = handsInfo.rightHandPos;
         }
     }
 
@@ -113,6 +113,18 @@ public class Player : MonoBehaviour
     {
         // Return Value
         return playerNumber;
+    }
+
+    public PlayerHand GetLeftHand()
+    {
+        // Return Value
+        return leftHand;
+    }
+
+    public PlayerHand GetRightHand()
+    {
+        // Return Value
+        return rightHand;
     }
     
     public void SetPlayerActive(bool value)
