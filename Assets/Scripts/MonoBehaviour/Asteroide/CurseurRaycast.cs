@@ -12,7 +12,7 @@ public class CurseurRaycast : MonoBehaviour
 
     [Header("Fracture")]
     [SerializeField] private GameObject[] fractureAsteroidPrefabs;
-    [SerializeField] private float fractureAsteroidLifetime = 10f;
+    [SerializeField] private float fractureAsteroidLifetime = 5f;
     [SerializeField] private int nombreDeFractures = 2;
 
     [Header("Effet visuel")]
