@@ -9,6 +9,8 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private InfoAsteroide infoAsteroide;
     [SerializeField] private GameObject pistolet;
     [SerializeField] private float distancePistolet = 10f;
+    [SerializeField] private Animator pistoletAnimator;
+    [SerializeField] private Animator pistoletAnimator2;
 
     [Header("Fracture")]
     [SerializeField] private GameObject[] fractureAsteroidPrefabs;
@@ -69,6 +71,7 @@ public class CurseurRaycast : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             GérerImpact(hit);
+            
         }
     }
 
@@ -106,6 +109,10 @@ public class CurseurRaycast : MonoBehaviour
 
             Destroy(instantiated, fractureAsteroidLifetime);
         }
+        
+        pistoletAnimator.SetTrigger("Fire");
+        pistoletAnimator2.SetTrigger("Fire");
+        Debug.Log(pistoletAnimator);
 
         gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);
 

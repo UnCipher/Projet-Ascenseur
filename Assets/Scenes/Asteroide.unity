@@ -534,6 +534,8 @@ MonoBehaviour:
   infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
   pistolet: {fileID: 2002309193}
   distancePistolet: 1
+  pistoletAnimator: {fileID: 334008763}
+  pistoletAnimator2: {fileID: 777812643}
   fractureAsteroidPrefabs:
   - {fileID: 7191996476721294421, guid: 1a4146be47d5eff47af071189b075166, type: 3}
   - {fileID: 3605499684260332989, guid: 32988b539757b7c41806093291c7c600, type: 3}
@@ -667,6 +669,11 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &334008763 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6477681850928115384, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
+  m_PrefabInstance: {fileID: 1745927728}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &377404558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1104,6 +1111,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637400362}
   m_CullTransparentMesh: 1
+--- !u!95 &777812643 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6477681850928115384, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
+  m_PrefabInstance: {fileID: 377404558}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &853557376
 GameObject:
   m_ObjectHideFlags: 0
