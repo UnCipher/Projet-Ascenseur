@@ -35,7 +35,7 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0.125
+  m_ReflectionIntensity: 0.2
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_UseRadianceAmbientProbe: 0
@@ -274,8 +274,8 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.89411765, g: 0.7206094, b: 0.6039216, a: 1}
-  m_Intensity: 0.1
-  m_Range: 6
+  m_Intensity: 0.35
+  m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -390,6 +390,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2514764757037137659, guid: a8b9217093b7e6448ae210353473154b, type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2514764757037137659, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2561004541147852486, guid: a8b9217093b7e6448ae210353473154b, type: 3}
@@ -827,16 +831,16 @@ MonoBehaviour:
   moveSpeed: 5
   turnSpeed: 10
   scanCooldown: 0.65
-  minToActivateScan: 0.3
+  minToActivateScan: 0.1
   scanSizeAudioType: 3
   highestSizeVolumeBetweenTick: 0
-  minSizeVolumeIn: 0.15
+  minSizeVolumeIn: 0.1
   maxSizeVolumeIn: 0.9
   scanMinSize: 2
   scanMaxSize: 50
   scanDurationAudioType: 0
   highestDurationVolumeBetweenTick: 0
-  minDurationVolumeIn: 0.3
+  minDurationVolumeIn: 0.15
   maxDurationVolumeIn: 0.9
   scanMinDuration: 0.3
   scanMaxDuration: 1.7

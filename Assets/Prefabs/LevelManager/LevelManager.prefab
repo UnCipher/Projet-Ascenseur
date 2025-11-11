@@ -983,7 +983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2415800504641606080}
   - component: {fileID: 8954183997586138866}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: ElevatorModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1373,7 +1373,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 2
@@ -1566,7 +1566,7 @@ Transform:
   m_GameObject: {fileID: 4247470522331715740}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.225, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.075, y: 0.075, z: 0.075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1993,7 +1993,7 @@ GameObject:
   - component: {fileID: 4579833802642200036}
   - component: {fileID: 3680656025541509967}
   - component: {fileID: 3980830725826747586}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2063,8 +2063,8 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
-  m_RenderingLayerMask: 1
+    m_Bits: 192
+  m_RenderingLayerMask: 128
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -2096,7 +2096,7 @@ MonoBehaviour:
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
-  m_RenderingLayers: 1
+  m_RenderingLayers: 128
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
   m_ShadowRenderingLayers: 1
@@ -2625,7 +2625,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 1
@@ -2772,7 +2772,7 @@ Transform:
   m_GameObject: {fileID: 8059228710828663054}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2883,7 +2883,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2993,15 +2993,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204793477537370947, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 129
       objectReference: {fileID: 0}
     - target: {fileID: 3346667532247046783, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494659886970537693, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 129
       objectReference: {fileID: 0}
     - target: {fileID: 8913082053635059393, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3062,6 +3070,10 @@ PrefabInstance:
       value: -180
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 39aef6650b9fa7949bfa29b13bccebc9, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 129
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 39aef6650b9fa7949bfa29b13bccebc9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: bda01ee5c95efc54c87a137c00df8cc5, type: 2}
@@ -3083,7 +3095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 39aef6650b9fa7949bfa29b13bccebc9, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3144,6 +3156,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 39aef6650b9fa7949bfa29b13bccebc9, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 129
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 39aef6650b9fa7949bfa29b13bccebc9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: bda01ee5c95efc54c87a137c00df8cc5, type: 2}
@@ -3165,7 +3181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 39aef6650b9fa7949bfa29b13bccebc9, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3231,15 +3247,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204793477537370947, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 129
       objectReference: {fileID: 0}
     - target: {fileID: 3346667532247046783, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494659886970537693, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 129
       objectReference: {fileID: 0}
     - target: {fileID: 8913082053635059393, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
