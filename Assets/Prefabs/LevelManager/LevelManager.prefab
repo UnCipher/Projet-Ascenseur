@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 916706024257876504}
   - component: {fileID: 5706543652229499440}
   - component: {fileID: 1383186744459192157}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: CameraLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 4450088817726873165}
   - component: {fileID: 49112461149590758}
   - component: {fileID: 4796147453347501720}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 6073058539746059584}
   - component: {fileID: 6783348472297740572}
   - component: {fileID: 4196323206431399387}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: CameraRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7030702870837302530}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 3115340956319071274}
   - component: {fileID: 3540865119187583080}
   - component: {fileID: 4476604477153774863}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 558848877875425626}
   - component: {fileID: 5791408060499064424}
   - component: {fileID: 8024321368027449429}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -764,7 +764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 972760286766476674}
   - component: {fileID: 3464865052001575850}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Player3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,20 +805,20 @@ MonoBehaviour:
   desactivateTime: 5
   desactivating: 0
   leftHand: {fileID: 291372399864656637}
+  leftUVOnWall: {x: 0, y: 0}
   rightHand: {fileID: 5791408060499064424}
+  rightUVOnWall: {x: 0, y: 0}
   handsInfo:
-    leftHandPosX: 0
-    leftHandPosY: 0
-    leftHandPosZ: 0
     leftHandClosed: 0
+    leftHandClosedOnLastFrame: 0
     leftHandPos: {x: 0, y: 0, z: 0}
     leftFingerPos: {x: 0, y: 0, z: 0}
-    rightHandPosX: 0
-    rightHandPosY: 0
-    rightHandPosZ: 0
+    leftDistanceToBeClosed: 0.005
     rightHandClosed: 0
+    rightHandClosedOnLastFrame: 0
     rightHandPos: {x: 0, y: 0, z: 0}
     rightFingerPos: {x: 0, y: 0, z: 0}
+    rightDistanceToBeClosed: 0.005
 --- !u!1 &2278238920652387325
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,7 +833,7 @@ GameObject:
   - component: {fileID: 4246413044675973667}
   - component: {fileID: 225130614863229058}
   - component: {fileID: 4506778786589878421}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -983,7 +983,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2415800504641606080}
   - component: {fileID: 8954183997586138866}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: ElevatorModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,7 +1043,7 @@ GameObject:
   - component: {fileID: 5097143694165411711}
   - component: {fileID: 7784281705614733359}
   - component: {fileID: 4983813661056304699}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1075,10 +1075,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1114,11 +1114,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7614724473167366709}
-  - component: {fileID: 4692522623238767640}
   - component: {fileID: 3818820158685447419}
   - component: {fileID: 7060195210956718210}
   - component: {fileID: 3223620352124865369}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: LevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1145,21 +1144,6 @@ Transform:
   - {fileID: 6600650947617553129}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4692522623238767640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2748979278158256564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a065e273f9c6cb7478c7460c21ef0f64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inPort: 52764
-  outIP: 127.0.0.1
-  outPort: 14256
 --- !u!114 &3818820158685447419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1186,6 +1170,9 @@ MonoBehaviour:
   - {fileID: 3468299910559748363}
   - {fileID: 3464865052001575850}
   - {fileID: 7893956458198908826}
+  inPort: 52764
+  outIp: 127.0.0.1
+  outPort: 14256
   sceneChangeStartup: 3
   sceneChangeCooldown: 3
   animationEnterTrigger: Open
@@ -1197,10 +1184,16 @@ MonoBehaviour:
     campfire:
       name: Campfire
       duration: 20
+    asteroid:
+      name: Asteroide
+      duration: 60
     echolocation:
       name: Echolocation
       duration: 60
   animator: {fileID: 8954183997586138866}
+  leftCamera: {fileID: 5706543652229499440}
+  centerCamera: {fileID: 1390761128347103144}
+  rightCamera: {fileID: 6783348472297740572}
 --- !u!114 &7060195210956718210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1253,7 +1246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5628488686218123733}
   - component: {fileID: 7893956458198908826}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Player4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1294,20 +1287,20 @@ MonoBehaviour:
   desactivateTime: 5
   desactivating: 0
   leftHand: {fileID: 3540865119187583080}
+  leftUVOnWall: {x: 0, y: 0}
   rightHand: {fileID: 338948879499598484}
+  rightUVOnWall: {x: 0, y: 0}
   handsInfo:
-    leftHandPosX: 0
-    leftHandPosY: 0
-    leftHandPosZ: 0
     leftHandClosed: 0
+    leftHandClosedOnLastFrame: 0
     leftHandPos: {x: 0, y: 0, z: 0}
     leftFingerPos: {x: 0, y: 0, z: 0}
-    rightHandPosX: 0
-    rightHandPosY: 0
-    rightHandPosZ: 0
+    leftDistanceToBeClosed: 0.005
     rightHandClosed: 0
+    rightHandClosedOnLastFrame: 0
     rightHandPos: {x: 0, y: 0, z: 0}
     rightFingerPos: {x: 0, y: 0, z: 0}
+    rightDistanceToBeClosed: 0.005
 --- !u!1 &3456539382378387667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,7 +1312,7 @@ GameObject:
   - component: {fileID: 2033865283276692557}
   - component: {fileID: 7881851623333470837}
   - component: {fileID: 8369173856309979962}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: CameraRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1445,7 +1438,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6765972681348096921}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Cameras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1481,7 +1474,7 @@ GameObject:
   - component: {fileID: 6258463467132687335}
   - component: {fileID: 1197473675066134746}
   - component: {fileID: 346864232216518520}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1513,10 +1506,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1557,7 +1550,7 @@ GameObject:
   - component: {fileID: 3834043849493078573}
   - component: {fileID: 2591817896993224518}
   - component: {fileID: 3456822798206585565}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1573,7 +1566,7 @@ Transform:
   m_GameObject: {fileID: 4247470522331715740}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.225, z: 0}
   m_LocalScale: {x: 0.075, y: 0.075, z: 0.075}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1709,7 +1702,7 @@ GameObject:
   - component: {fileID: 1390761128347103144}
   - component: {fileID: 8089119796473172318}
   - component: {fileID: 4227317147800583134}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: CameraFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1849,7 +1842,7 @@ GameObject:
   - component: {fileID: 3124117947393127941}
   - component: {fileID: 291372399864656637}
   - component: {fileID: 1487446220023865083}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2000,7 +1993,7 @@ GameObject:
   - component: {fileID: 4579833802642200036}
   - component: {fileID: 3680656025541509967}
   - component: {fileID: 3980830725826747586}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2124,7 +2117,7 @@ GameObject:
   - component: {fileID: 6708949759736947041}
   - component: {fileID: 924848589788958090}
   - component: {fileID: 8873886831615233058}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2275,7 +2268,7 @@ GameObject:
   - component: {fileID: 5495960102931948789}
   - component: {fileID: 3006319952842417780}
   - component: {fileID: 5073007514407856257}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2307,10 +2300,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -2351,7 +2344,7 @@ GameObject:
   - component: {fileID: 442131669479449958}
   - component: {fileID: 338948879499598484}
   - component: {fileID: 6270857325429931728}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2500,7 +2493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6600650947617553129}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: OverlayCameras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2534,7 +2527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8343410477029566298}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Players
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2570,9 +2563,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4608906020668372053}
   - component: {fileID: 450627058479919411}
-  - component: {fileID: 2151100167497112454}
   - component: {fileID: 1055125472454619528}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: CameraFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2645,14 +2637,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2151100167497112454
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7563636822766215183}
-  m_Enabled: 1
 --- !u!114 &1055125472454619528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2707,7 +2691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5389477321443639814}
   - component: {fileID: 3468299910559748363}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2748,20 +2732,20 @@ MonoBehaviour:
   desactivateTime: 0
   desactivating: 0
   leftHand: {fileID: 225130614863229058}
+  leftUVOnWall: {x: 0, y: 0}
   rightHand: {fileID: 924848589788958090}
+  rightUVOnWall: {x: 0, y: 0}
   handsInfo:
-    leftHandPosX: 0
-    leftHandPosY: 0
-    leftHandPosZ: 0
     leftHandClosed: 0
+    leftHandClosedOnLastFrame: 0
     leftHandPos: {x: 0, y: 0, z: 0}
     leftFingerPos: {x: 0, y: 0, z: 0}
-    rightHandPosX: 0
-    rightHandPosY: 0
-    rightHandPosZ: 0
+    leftDistanceToBeClosed: 0.005
     rightHandClosed: 0
+    rightHandClosedOnLastFrame: 0
     rightHandPos: {x: 0, y: 0, z: 0}
     rightFingerPos: {x: 0, y: 0, z: 0}
+    rightDistanceToBeClosed: 0.005
 --- !u!1 &8059228710828663054
 GameObject:
   m_ObjectHideFlags: 0
@@ -2772,7 +2756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2781272680780449594}
   - component: {fileID: 6850747329889382043}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2787,7 +2771,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8059228710828663054}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.324421, y: -0, z: -0, w: 0.9459129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2795,7 +2779,7 @@ Transform:
   - {fileID: 6281717482069147468}
   - {fileID: 7935676410266670365}
   m_Father: {fileID: 8343410477029566298}
-  m_LocalEulerAnglesHint: {x: 37.861, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6850747329889382043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2813,20 +2797,20 @@ MonoBehaviour:
   desactivateTime: 0
   desactivating: 0
   leftHand: {fileID: 2591817896993224518}
+  leftUVOnWall: {x: 0, y: 0}
   rightHand: {fileID: 49112461149590758}
+  rightUVOnWall: {x: 0, y: 0}
   handsInfo:
-    leftHandPosX: 0
-    leftHandPosY: 0
-    leftHandPosZ: 0
     leftHandClosed: 0
+    leftHandClosedOnLastFrame: 0
     leftHandPos: {x: 0, y: 0, z: 0}
     leftFingerPos: {x: 0, y: 0, z: 0}
-    rightHandPosX: 0
-    rightHandPosY: 0
-    rightHandPosZ: 0
+    leftDistanceToBeClosed: 0.005
     rightHandClosed: 0
+    rightHandClosedOnLastFrame: 0
     rightHandPos: {x: 0, y: 0, z: 0}
     rightFingerPos: {x: 0, y: 0, z: 0}
+    rightDistanceToBeClosed: 0.005
 --- !u!1 &8732172268095017421
 GameObject:
   m_ObjectHideFlags: 0
@@ -2838,7 +2822,7 @@ GameObject:
   - component: {fileID: 2813324588440062068}
   - component: {fileID: 3833780197599343061}
   - component: {fileID: 8669741127374649544}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: CameraLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3009,15 +2993,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3346667532247046783, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8913082053635059393, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3099,7 +3083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 39aef6650b9fa7949bfa29b13bccebc9, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3181,7 +3165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 39aef6650b9fa7949bfa29b13bccebc9, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3247,15 +3231,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3346667532247046783, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8913082053635059393, guid: 3d1db560aa3bea248bd6a91188f56f99, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

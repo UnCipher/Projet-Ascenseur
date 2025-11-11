@@ -65,6 +65,11 @@ public class PlayerHand : MonoBehaviour
 
     Wall GetCurrentWall()
     {
+        // Clear Null Walls
+        for (int i = 0; i < selectedWalls.Count; i++)
+            if (selectedWalls[i] == null)
+                selectedWalls.Remove(selectedWalls[i]);
+
         if (selectedWalls.Count > 0)
         {
             // Set Values
@@ -98,7 +103,6 @@ public class PlayerHand : MonoBehaviour
         {
             // Set Values
             Wall collidingWall = other.GetComponent<Wall>();
-            Debug.Log("works?");
             selectedWalls.Add(collidingWall);
         }
     }

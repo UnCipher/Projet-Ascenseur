@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(OSC))]
 public class LevelManager : MonoBehaviour
 {
     // ---------------------------
@@ -17,7 +16,15 @@ public class LevelManager : MonoBehaviour
     public MicrophoneInfo microphone = new MicrophoneInfo();
     public List<Player> players = new List<Player>();
 
+    [Header("OSC Properties")]
+    [SerializeField][Range(1, 65535)] int inPort;
+    [Space(5)]
+
+    [SerializeField] string outIp;
+    [SerializeField] [Range(1, 65535)] int outPort;
     OSC osc;
+
+
     [Header("Scene Manager")]
     [SerializeField] float sceneChangeStartup;
     [SerializeField] float sceneChangeCooldown;
@@ -33,6 +40,10 @@ public class LevelManager : MonoBehaviour
     [Header("References")]
     [SerializeField] Animator animator;
 
+    public Camera leftCamera;
+    public Camera centerCamera;
+    public Camera rightCamera;
+
     // Classes
     // ---------------------------
 
@@ -43,6 +54,9 @@ public class LevelManager : MonoBehaviour
         [Space(5)]
 
         public SceneSettings campfire;
+        [Space(5)]
+
+        public SceneSettings asteroid;
         [Space(5)]
 
         public SceneSettings echolocation;
@@ -90,22 +104,26 @@ public class LevelManager : MonoBehaviour
     {
         // Set Values
         if (instance != null)
-            {
-            Debug.LogError("Destroy This one");
             Destroy(gameObject);
-            }
 
-        if (!animator)
-            animator = GetComponent<Animator>();
-
-        DontDestroyOnLoad(this);
-        instance = this;
+        else
+        {
+            DontDestroyOnLoad(this);
+            instance = this;
+        }
     }
 
     void Start()
     {
         // Set Values
-        osc = GetComponent<OSC>();
+        osc = gameObject.AddComponent<OSC>();
+
+        osc.inPort = inPort;
+        osc.outPort = outPort;
+        osc.outIP = outIp;
+
+        if (!animator)
+            animator = GetComponent<Animator>();
 
         // Call Functions
         InitiateOSCMessages();
@@ -134,6 +152,7 @@ public class LevelManager : MonoBehaviour
 
             // Clear Parent
             transform.SetParent(null, false);
+            transform.eulerAngles = Vector3.zero;
 
             // Load Scene
             SceneManager.LoadScene(scene.name);
@@ -148,13 +167,8 @@ public class LevelManager : MonoBehaviour
                 animator.SetTrigger(animationEnterTrigger);
                 yield return new WaitForSeconds(sceneChangeCooldown);
             }
-
-            Debug.Log("Done Changing scene");
             changingScene = false;
         }
-
-        else
-            Debug.Log("Already Changing Scene");
     }
     
     public void OnSceneCompleted()
@@ -169,6 +183,12 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(ChangeScene(scenes.elevator));
     }
 
+    public void OnAsteroid()
+    {
+        // Call Asteroid Scene
+        StartCoroutine(ChangeScene(scenes.asteroid));
+    }
+
     public void OnCampfire()
     {
         // Call Campfire Scene
@@ -177,7 +197,7 @@ public class LevelManager : MonoBehaviour
 
     public void OnEcholocation()
     {
-        // Call Campfire Scene
+        // Call Echolocation Scene
         StartCoroutine(ChangeScene(scenes.echolocation));
     }
 

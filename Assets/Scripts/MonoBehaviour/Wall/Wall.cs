@@ -31,6 +31,13 @@ public class Wall : MonoBehaviour
         Center,
         Left,
     }
+
+    [System.Serializable]
+    public class WallInfo
+    {
+        public Vector2 uv;
+        public SelectedWall selectedWall;
+    }
     
     [System.Serializable]
     public class WallCoordinates

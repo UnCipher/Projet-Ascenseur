@@ -6,7 +6,6 @@ public class GestionnairePV : MonoBehaviour
 
     [SerializeField] private InfoCompteur so_infoCompteur;
     [SerializeField] private TMP_Text champPV;
-    [SerializeField] private GestionnaireScene gestionnaireScene;
 
     void Start()
     {
@@ -16,9 +15,7 @@ public class GestionnairePV : MonoBehaviour
 
     void Update()
     {
-        if(so_infoCompteur.nbVie == 0)
-        {
-            gestionnaireScene.ChangeScene("Elevator");
-        }
+        if (so_infoCompteur.nbVie == 0)
+            LevelManager.instance.OnElevator();
     }
 }

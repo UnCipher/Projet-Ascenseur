@@ -16,14 +16,14 @@ public class Player : MonoBehaviour
 
     [SerializeField] private PlayerHand leftHand;
     Wall.SelectedWall leftSelectedWall;
-    Vector2 leftUVOnWall;
+    [SerializeField] Vector2 leftUVOnWall;
     [Space(5)]
 
     [SerializeField] private PlayerHand rightHand;
     Wall.SelectedWall rightSelectedWall;
-    Vector2 rightUVOnWall;
+    [SerializeField] Vector2 rightUVOnWall;
     [Space(10)]
-
+    
     public PlayerHandInfo handsInfo;
 
     // Classes
@@ -32,19 +32,22 @@ public class Player : MonoBehaviour
     [System.Serializable]
     public class PlayerHandInfo
     {
-        public float leftHandPosX;
-        public float leftHandPosY;
-        public float leftHandPosZ;
         public bool leftHandClosed;
+        public bool leftHandClosedOnLastFrame;
+        [Space(5)]
+
         public Vector3 leftHandPos;
         public Vector3 leftFingerPos;
+        public float leftDistanceToBeClosed;
+        [Space(10)]
 
-        public float rightHandPosX;
-        public float rightHandPosY;
-        public float rightHandPosZ;
         public bool rightHandClosed;
+        public bool rightHandClosedOnLastFrame;
+        [Space(5)]
+
         public Vector3 rightHandPos;
         public Vector3 rightFingerPos;
+        public float rightDistanceToBeClosed;
     }
 
     // ---------------------------
@@ -61,8 +64,28 @@ public class Player : MonoBehaviour
     {
         if (isActive)
         {
+            // Change Hands Positions
             leftHand.transform.localPosition = handsInfo.leftHandPos;
             rightHand.transform.localPosition = handsInfo.rightHandPos;
+
+            // Change Closed State
+            // Left
+            if (handsInfo.leftHandClosed)
+                handsInfo.leftHandClosedOnLastFrame = true;
+
+            else
+                handsInfo.leftHandClosedOnLastFrame = false;
+
+            handsInfo.leftHandClosed = Vector3.Distance(handsInfo.leftFingerPos, handsInfo.leftHandPos) <= handsInfo.leftDistanceToBeClosed;
+
+            // Right
+            if (handsInfo.rightHandClosed)
+                handsInfo.rightHandClosedOnLastFrame = true;
+
+            else
+                handsInfo.rightHandClosedOnLastFrame = false;
+
+            handsInfo.rightHandClosed = Vector3.Distance(handsInfo.rightFingerPos, handsInfo.rightHandPos) <= handsInfo.rightDistanceToBeClosed;
         }
     }
 
@@ -145,7 +168,31 @@ public class Player : MonoBehaviour
         leftUVOnWall = uv;
         leftSelectedWall = selected;
 
-        Debug.Log("Player " + playerNumber + "'s left Hand is on the " + leftSelectedWall + " which coordinates are " + leftUVOnWall);
+        //  Debug.Log("Player " + playerNumber + "'s left Hand is on the " + leftSelectedWall + " which coordinates are " + leftUVOnWall);
+    }
+
+    public Wall.WallInfo GetLeftWallInfo()
+    {
+        // Set Value
+        Wall.WallInfo wallInfo = new Wall.WallInfo();
+
+        wallInfo.uv = leftUVOnWall;
+        wallInfo.selectedWall = leftSelectedWall;
+
+        // Return Value
+        return wallInfo;
+    }
+    
+    public Wall.WallInfo GetRightWallInfo()
+    {
+        // Set Value
+        Wall.WallInfo wallInfo = new Wall.WallInfo();
+
+        wallInfo.uv = rightUVOnWall;
+        wallInfo.selectedWall = rightSelectedWall;
+
+        // Return Value
+        return wallInfo;
     }
     
     public void SetRightWallInfo(Vector2 uv, Wall.SelectedWall selected)
@@ -154,6 +201,6 @@ public class Player : MonoBehaviour
         rightUVOnWall = uv;
         rightSelectedWall = selected;
 
-        Debug.Log("Player " + playerNumber + "'s right Hand is on the " + rightSelectedWall + " which coordinates are " + rightUVOnWall);
+       // Debug.Log("Player " + playerNumber + "'s right Hand is on the " + rightSelectedWall + " which coordinates are " + rightUVOnWall);
     }
 }

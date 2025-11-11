@@ -5,7 +5,6 @@ public class CurseurRaycast : MonoBehaviour
 {    
     [SerializeField] private GestionnaireCompteur gestionnaireCompteur;
     [SerializeField] private InfoCompteur so_infoCompteur;
-    [SerializeField] private GestionnaireScene gestionnaireScene;
     [SerializeField] private InfoAsteroide infoAsteroide;
     [SerializeField] private GameObject pistolet;
     [SerializeField] private float distancePistolet = 10f;
@@ -21,19 +20,19 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private GameObject effetExplosionPrefab;
     [SerializeField] private float effetExplosionLifetime = 3f;
 
-    public Camera mainCamera;
-    public Player player;
+    [SerializeField] Transform sym;
 
     // Contrôle souris (debug)
+    /*
     public void OnLook(InputAction.CallbackContext context)
     {
         Vector2 mousePass = context.ReadValue<Vector2>();
-        
+
         Ray ray = Camera.main.ScreenPointToRay(mousePass);
         RaycastHit hit;
 
-        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(
-            new Vector3(mousePass.x, mousePass.y, mainCamera.nearClipPlane)
+        Vector3 mouseWorldPosition = LevelManager.instance.centerCamera.ScreenToWorldPoint(
+            new Vector3(mousePass.x, mousePass.y, LevelManager.instance.centerCamera.nearClipPlane)
         );
 
         mouseWorldPosition.z = distancePistolet;
@@ -44,34 +43,57 @@ public class CurseurRaycast : MonoBehaviour
             GérerImpact(hit);
         }
     }
+    */
+    
+    void Start()
+    {
+        LevelManager.instance.transform.eulerAngles = new Vector3(0, 180, 0);
+    }
 
     // Contrôle Kinect Azure 
-    void Update()
+    void FixedUpdate()
     {
-        if (player == null)
+        // Set Values
+        Player[] players = LevelManager.GetActivePlayers();
+
+        for(int i = 0;i<players.Length;i++)
         {
-            Debug.LogWarning("No Player reference assigned in CurseurRaycast!");
-            return;
-        }
+            // Set Values
+            Wall.WallInfo leftWallInfo = players[i].GetLeftWallInfo();
+            Wall.WallInfo rightWallInfo = players[i].GetRightWallInfo();
 
-        float x = player.handsInfo.rightHandPosX;
-        float y = player.handsInfo.rightHandPosY;
-        float z = player.handsInfo.rightHandPosZ;
+            // Check Left
+            if (leftWallInfo.selectedWall == Wall.SelectedWall.Center)
+            {
+                Vector2 screenPos = new Vector3(leftWallInfo.uv.x * Screen.width, leftWallInfo.uv.y * Screen.height, distancePistolet);
+                Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
 
-        Vector3 screenPos = new Vector3(x * Screen.width, y * Screen.height, distancePistolet);
-        Vector3 worldPos = mainCamera.ScreenToWorldPoint(screenPos);
+                Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    GérerImpact(hit);
+                    Debug.Log("do sum 1");
+                }
 
-        pistolet.transform.position = Vector3.Lerp(
-            pistolet.transform.position,
-            worldPos,
-            Time.deltaTime * 10f
-        );
+                Debug.Log("left lele / " + screenPos);
+            }
 
-        Ray ray = mainCamera.ScreenPointToRay(screenPos);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            GérerImpact(hit);
-            
+            // Check Right
+            if (rightWallInfo.selectedWall == Wall.SelectedWall.Center)
+            {
+                Vector3 screenPos = new Vector3(rightWallInfo.uv.x * Screen.width, rightWallInfo.uv.y * Screen.height, distancePistolet);
+                Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
+                Debug.Log("right Lel / " + screenPos);
+
+                sym.localPosition = screenPos;
+
+                Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    Debug.Log("do sum 1");
+                    GérerImpact(hit);
+                }
+            }
         }
     }
 
@@ -117,8 +139,6 @@ public class CurseurRaycast : MonoBehaviour
         gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);
 
         if (so_infoCompteur.compteur == 0)
-        {
-            gestionnaireScene.ChangeScene("Elevator");
-        }
+            LevelManager.instance.OnElevator();
     }
 }
