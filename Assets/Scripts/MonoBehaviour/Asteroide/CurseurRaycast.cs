@@ -19,31 +19,32 @@ public class CurseurRaycast : MonoBehaviour
     [Header("Effet visuel")]
     [SerializeField] private GameObject effetExplosionPrefab;
     [SerializeField] private float effetExplosionLifetime = 3f;
+    [SerializeField] private GameObject laserPrefab;
+    [SerializeField] private float laserDuration = 0.1f;
 
     [SerializeField] Transform sym;
 
     // Contrôle souris (debug)
-    /*
+    
     public void OnLook(InputAction.CallbackContext context)
     {
-        Vector2 mousePass = context.ReadValue<Vector2>();
+        Vector2 mousePos = Mouse.current.position.ReadValue();
 
-        Ray ray = Camera.main.ScreenPointToRay(mousePass);
+        Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(mousePos);
         RaycastHit hit;
 
-        Vector3 mouseWorldPosition = LevelManager.instance.centerCamera.ScreenToWorldPoint(
-            new Vector3(mousePass.x, mousePass.y, LevelManager.instance.centerCamera.nearClipPlane)
-        );
-
-        mouseWorldPosition.z = distancePistolet;
-        pistolet.transform.position = mouseWorldPosition;
+        Debug.Log(ray);
 
         if (Physics.Raycast(ray, out hit))
         {
             GérerImpact(hit);
         }
+        else
+        {
+            Debug.Log("Aucun objet touché par le raycast !");
+        }
     }
-    */
+    
     
     void Start()
     {
@@ -100,45 +101,64 @@ public class CurseurRaycast : MonoBehaviour
     // Fonction commune d'impact (Kinect & souris)
     private void GérerImpact(RaycastHit hit)
     {
-        Destroy(hit.transform.gameObject);
-
-        if (effetExplosionPrefab != null)
+        if (hit.transform.gameObject.GetComponent<MouvementAsteroide>())
         {
-            GameObject explosion = Instantiate(effetExplosionPrefab, hit.point, Quaternion.identity);
-            explosion.transform.forward = hit.normal;
-            Destroy(explosion, effetExplosionLifetime);
-        }
+            TirerLaser(pistolet.transform.position, hit.point);
 
-        for (int i = 0; i < nombreDeFractures; i++)
-        {
-            int randomIndex = Random.Range(0, fractureAsteroidPrefabs.Length);
-            GameObject fractureAsteroidPrefab = fractureAsteroidPrefabs[randomIndex];
+            Destroy(hit.transform.gameObject);
 
-            Vector3 spawnPosition = hit.point + Random.insideUnitSphere * 0.3f;
-
-            GameObject instantiated = Instantiate(
-                fractureAsteroidPrefab,
-                spawnPosition,
-                Random.rotation
-            );
-
-            MouvementAsteroide[] mouvements = instantiated.GetComponentsInChildren<MouvementAsteroide>();
-            foreach (MouvementAsteroide mouvement in mouvements)
+            if (effetExplosionPrefab != null)
             {
-                Vector3 randomDirection = (instantiated.transform.position - hit.point).normalized + Random.insideUnitSphere * 0.4f;
-                mouvement.directionAsteroides = randomDirection.normalized;
+                GameObject explosion = Instantiate(effetExplosionPrefab, hit.point, Quaternion.identity);
+                explosion.transform.forward = hit.normal;
+                Destroy(explosion, effetExplosionLifetime);
             }
 
-            Destroy(instantiated, fractureAsteroidLifetime);
+            for (int i = 0; i < nombreDeFractures; i++)
+            {
+                int randomIndex = Random.Range(0, fractureAsteroidPrefabs.Length);
+                GameObject fractureAsteroidPrefab = fractureAsteroidPrefabs[randomIndex];
+
+                Vector3 spawnPosition = hit.point + Random.insideUnitSphere * 0.3f;
+
+                GameObject instantiated = Instantiate(
+                    fractureAsteroidPrefab,
+                    spawnPosition,
+                    Random.rotation
+                );
+
+                MouvementAsteroide[] mouvements = instantiated.GetComponentsInChildren<MouvementAsteroide>();
+                foreach (MouvementAsteroide mouvement in mouvements)
+                {
+                    Vector3 randomDirection = (instantiated.transform.position - hit.point).normalized + Random.insideUnitSphere * 0.4f;
+                    mouvement.directionAsteroides = randomDirection.normalized;
+                }
+
+                Destroy(instantiated, fractureAsteroidLifetime);
+            }
+
+            pistoletAnimator.SetTrigger("Fire");
+            pistoletAnimator2.SetTrigger("Fire");
+            Debug.Log(pistoletAnimator);
+
+            gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);
+
+            if (so_infoCompteur.compteur == 0)
+                LevelManager.instance.OnElevator();
+
+            
         }
+    }
         
-        pistoletAnimator.SetTrigger("Fire");
-        pistoletAnimator2.SetTrigger("Fire");
-        Debug.Log(pistoletAnimator);
+    private void TirerLaser(Vector3 start, Vector3 end)
+    {
+        if (laserPrefab == null) return;
 
-        gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);
+        GameObject laser = Instantiate(laserPrefab);
+        LineRenderer lr = laser.GetComponent<LineRenderer>();
+        lr.SetPosition(0, start);
+        lr.SetPosition(1, end);
 
-        if (so_infoCompteur.compteur == 0)
-            LevelManager.instance.OnElevator();
+        Destroy(laser, laserDuration);
     }
 }

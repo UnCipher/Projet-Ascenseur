@@ -132,7 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8d002b604424e47a8c4cd64b83d0c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gestionnaireCompteur: {fileID: 0}
   infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
   vitesse: 5
   directionAsteroides: {x: 0, y: 0, z: -1}
@@ -149,7 +148,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
