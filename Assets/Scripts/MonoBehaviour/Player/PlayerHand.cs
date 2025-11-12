@@ -41,26 +41,23 @@ public class PlayerHand : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player.GetPlayerActive())
+        // Set Values
+        if (GetCurrentWall() && player.GetPlayerActive())
         {
-            // Set Values
-            if (GetCurrentWall())
-            {
-                Wall wall = GetCurrentWall();
-                wallPoint = wall.GetWallPoint(transform.position);
-                currentWall = wall.GetSelectedWall();
-            }
-
-            else
-                currentWall = Wall.SelectedWall.None;
-
-            // Call Function
-            if (hand == Hand.Left)
-                player.SetLeftWallInfo(wallPoint, currentWall);
-
-            else
-                player.SetRightWallInfo(wallPoint, currentWall);
+            Wall wall = GetCurrentWall();
+            wallPoint = wall.GetWallPoint(transform.position);
+            currentWall = wall.GetSelectedWall();
         }
+
+        else
+            currentWall = Wall.SelectedWall.None;
+
+        // Call Function
+        if (hand == Hand.Left)
+            player.SetLeftWallInfo(wallPoint, currentWall);
+
+        else
+            player.SetRightWallInfo(wallPoint, currentWall);
     }
 
     Wall GetCurrentWall()

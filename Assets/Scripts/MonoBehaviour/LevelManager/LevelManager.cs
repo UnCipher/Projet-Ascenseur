@@ -129,6 +129,12 @@ public class LevelManager : MonoBehaviour
         InitiateOSCMessages();
     }
 
+    void FixedUpdate()
+    {
+        // Send Wall Messages
+        SendPlayersWallInfo();
+    }
+
     // Scene Functions
     // ---------------------------
 
@@ -239,12 +245,48 @@ public class LevelManager : MonoBehaviour
         osc.SetAddressHandler("/p4Active", P4Active);
     }
 
-    public void SendMessage(string address, float value)
+    public void SendOSCMessage(string name, int value)
     {
         // Set Values
         OscMessage message = new OscMessage();
 
-        message.address = "/" + address;
+        message.address = "/" + name;
+        message.values.Add(value);
+
+        // Send Message
+        osc.Send(message);
+    }
+
+    public void SendOSCMessage(string name, float value)
+    {
+        // Set Values
+        OscMessage message = new OscMessage();
+
+        message.address = "/" + name;
+        message.values.Add(value);
+
+        // Send Message
+        osc.Send(message);
+    }
+
+    public void SendOSCMessage(string name, Vector2 value)
+    {
+        // Set Values
+        OscMessage message = new OscMessage();
+
+        message.address = "/" + name;
+        message.values.Add(value);
+
+        // Send Message
+        osc.Send(message);
+    }
+
+    public void SendOSCMessage(string name, Vector3 value)
+    {
+        // Set Values
+        OscMessage message = new OscMessage();
+
+        message.address = "/" + name;
         message.values.Add(value);
 
         // Send Message
@@ -262,6 +304,33 @@ public class LevelManager : MonoBehaviour
         microphone.highpass = osc.GetFloat(3);
     }
 
+    // Players
+    // ---------------------------
+
+    void SendPlayersWallInfo()
+    {
+        // Loop through all Players
+        for(int i = 0;i<players.Count;i++)
+        {
+            // Set Values
+            int number = i + 1;
+
+            string leftAddress = "p" + number + "-lh-info";
+            string rightAddress = "p" + number + "-rh-info";
+
+            Wall.WallInfo leftWall = players[i].GetLeftWallInfo();
+            Wall.WallInfo rightWall = players[i].GetRightWallInfo();
+
+            // Send Messages
+            instance.SendOSCMessage(leftAddress + "-x", leftWall.uv.x);
+            instance.SendOSCMessage(leftAddress + "-y", leftWall.uv.y);
+            instance.SendOSCMessage(leftAddress, (int)leftWall.selectedWall);
+
+            instance.SendOSCMessage(rightAddress + "-x", rightWall.uv.x);
+            instance.SendOSCMessage(rightAddress + "-y", rightWall.uv.y);
+            instance.SendOSCMessage(rightAddress, (int)rightWall.selectedWall);
+        }
+    }
 
     // Player 1
     // ---------------------------

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 916706024257876504}
   - component: {fileID: 5706543652229499440}
   - component: {fileID: 1383186744459192157}
+  - component: {fileID: 3344941702887633820}
   m_Layer: 2
   m_Name: CameraLeft
   m_TagString: Untagged
@@ -65,8 +66,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 58.69
+  far clip plane: 350
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -129,6 +130,24 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &3344941702887633820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66599724292944395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45099d624c1e6c14e9514f4e5ea1ed9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spoutName: ElevatorCam1
+  _keepAlpha: 0
+  _captureMethod: 1
+  _sourceCamera: {fileID: 5706543652229499440}
+  _sourceTexture: {fileID: 0}
+  _resources: {fileID: 11400000, guid: f449ebbe2051c2e4d993eaa773a410de, type: 2}
 --- !u!1 &476695456822277548
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +313,7 @@ GameObject:
   - component: {fileID: 6073058539746059584}
   - component: {fileID: 6783348472297740572}
   - component: {fileID: 4196323206431399387}
+  - component: {fileID: 7849689622477414413}
   m_Layer: 2
   m_Name: CameraRight
   m_TagString: Untagged
@@ -348,8 +368,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 58.69
+  far clip plane: 350
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -412,6 +432,24 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &7849689622477414413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838396538921116754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45099d624c1e6c14e9514f4e5ea1ed9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spoutName: ElevatorCam3
+  _keepAlpha: 0
+  _captureMethod: 1
+  _sourceCamera: {fileID: 6783348472297740572}
+  _sourceTexture: {fileID: 0}
+  _resources: {fileID: 11400000, guid: f449ebbe2051c2e4d993eaa773a410de, type: 2}
 --- !u!1 &1021642898630184911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,8 +1038,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.24, z: -3}
-  m_LocalScale: {x: 1.24, y: 1.24, z: 1.24}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1.24, y: 2.15, z: 1.24}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7688182085962956688}
   - {fileID: 6999104260654490350}
@@ -1116,7 +1154,6 @@ GameObject:
   - component: {fileID: 7614724473167366709}
   - component: {fileID: 3818820158685447419}
   - component: {fileID: 7060195210956718210}
-  - component: {fileID: 3223620352124865369}
   m_Layer: 2
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1224,18 +1261,6 @@ MonoBehaviour:
   m_DefaultActionMap: Pad
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3223620352124865369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2748979278158256564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b938bb99ac172c458df0f4fe4c9b8b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2961967889766279015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,8 +1391,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 58.69
+  far clip plane: 100
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1702,6 +1727,7 @@ GameObject:
   - component: {fileID: 1390761128347103144}
   - component: {fileID: 8089119796473172318}
   - component: {fileID: 4227317147800583134}
+  - component: {fileID: 4385787399347682200}
   m_Layer: 2
   m_Name: CameraFront
   m_TagString: Untagged
@@ -1756,8 +1782,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 58.69
+  far clip plane: 350
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1828,6 +1854,24 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &4385787399347682200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5225377742051551560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45099d624c1e6c14e9514f4e5ea1ed9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spoutName: ElevatorCam2
+  _keepAlpha: 0
+  _captureMethod: 1
+  _sourceCamera: {fileID: 1390761128347103144}
+  _sourceTexture: {fileID: 0}
+  _resources: {fileID: 11400000, guid: f449ebbe2051c2e4d993eaa773a410de, type: 2}
 --- !u!1 &5311909957450087423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,8 +2662,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 58.69
+  far clip plane: 100
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2876,8 +2920,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 58.69
+  far clip plane: 100
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
