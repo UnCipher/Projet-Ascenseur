@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1588508178531632027}
   - component: {fileID: 597213990222115938}
   - component: {fileID: 1519149752056521279}
+  - component: {fileID: -5430860073724228106}
   m_Layer: 0
   m_Name: AsteroidSphere_003
   m_TagString: Asteroide
@@ -71,6 +72,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.0294914, y: 3.3892035, z: 2.6510751}
   m_Center: {x: -0.11654663, y: 0.39820004, z: -0.038848758}
+--- !u!54 &-5430860073724228106
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029526235598654422}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7372512773207242089
 GameObject:
   m_ObjectHideFlags: 0

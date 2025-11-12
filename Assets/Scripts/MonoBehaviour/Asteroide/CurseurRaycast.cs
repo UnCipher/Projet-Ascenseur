@@ -23,12 +23,12 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] Transform sym;
 
     // Contrôle souris (debug)
-    /*
+
     public void OnLook(InputAction.CallbackContext context)
     {
         Vector2 mousePass = context.ReadValue<Vector2>();
 
-        Ray ray = Camera.main.ScreenPointToRay(mousePass);
+        Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(mousePass);
         RaycastHit hit;
 
         Vector3 mouseWorldPosition = LevelManager.instance.centerCamera.ScreenToWorldPoint(
@@ -38,12 +38,15 @@ public class CurseurRaycast : MonoBehaviour
         mouseWorldPosition.z = distancePistolet;
         pistolet.transform.position = mouseWorldPosition;
 
+        Debug.Log(mousePass);
+
         if (Physics.Raycast(ray, out hit))
         {
+            Debug.Log(hit.transform.name);
             GérerImpact(hit);
         }
     }
-    */
+    
     
     void Start()
     {
