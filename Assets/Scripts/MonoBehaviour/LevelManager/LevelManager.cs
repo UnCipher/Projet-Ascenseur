@@ -129,6 +129,12 @@ public class LevelManager : MonoBehaviour
         InitiateOSCMessages();
     }
 
+    void FixedUpdate()
+    {
+        // Send Wall Messages
+        SendPlayersWallInfo();
+    }
+
     // Scene Functions
     // ---------------------------
 
@@ -239,12 +245,48 @@ public class LevelManager : MonoBehaviour
         osc.SetAddressHandler("/p4Active", P4Active);
     }
 
-    public void SendMessage(string address, float value)
+    public void SendOSCMessage(string name, int value)
     {
         // Set Values
         OscMessage message = new OscMessage();
 
-        message.address = "/" + address;
+        message.address = "/" + name;
+        message.values.Add(value);
+
+        // Send Message
+        osc.Send(message);
+    }
+
+    public void SendOSCMessage(string name, float value)
+    {
+        // Set Values
+        OscMessage message = new OscMessage();
+
+        message.address = "/" + name;
+        message.values.Add(value);
+
+        // Send Message
+        osc.Send(message);
+    }
+
+    public void SendOSCMessage(string name, Vector2 value)
+    {
+        // Set Values
+        OscMessage message = new OscMessage();
+
+        message.address = "/" + name;
+        message.values.Add(value);
+
+        // Send Message
+        osc.Send(message);
+    }
+
+    public void SendOSCMessage(string name, Vector3 value)
+    {
+        // Set Values
+        OscMessage message = new OscMessage();
+
+        message.address = "/" + name;
         message.values.Add(value);
 
         // Send Message
@@ -262,6 +304,33 @@ public class LevelManager : MonoBehaviour
         microphone.highpass = osc.GetFloat(3);
     }
 
+    // Players
+    // ---------------------------
+
+    void SendPlayersWallInfo()
+    {
+        // Loop through all Players
+        for(int i = 0;i<players.Count;i++)
+        {
+            // Set Values
+            int number = i + 1;
+
+            string leftAddress = "p" + number + "-lh-info";
+            string rightAddress = "p" + number + "-rh-info";
+
+            Wall.WallInfo leftWall = players[i].GetLeftWallInfo();
+            Wall.WallInfo rightWall = players[i].GetRightWallInfo();
+
+            // Send Messages
+            SendOSCMessage(leftAddress + "-x", leftWall.uv.x);
+            SendOSCMessage(leftAddress + "-y", leftWall.uv.y);
+            SendOSCMessage(leftAddress, (int)leftWall.selectedWall);
+
+            SendOSCMessage(rightAddress + "-x", rightWall.uv.x);
+            SendOSCMessage(rightAddress + "-y", rightWall.uv.y);
+            SendOSCMessage(rightAddress, (int)rightWall.selectedWall);
+        }
+    }
 
     // Player 1
     // ---------------------------
@@ -275,7 +344,7 @@ public class LevelManager : MonoBehaviour
                 players[0].ActivatePlayer();
 
             else
-                players[0].DesactivatePlayer();
+                players[0].RequestDesactivatePlayer();
         }
     }
 
@@ -315,7 +384,7 @@ public class LevelManager : MonoBehaviour
                 players[1].ActivatePlayer();
 
             else
-                players[1].DesactivatePlayer();
+                players[1].RequestDesactivatePlayer();
         }
     }
 
@@ -355,7 +424,7 @@ public class LevelManager : MonoBehaviour
                 players[2].ActivatePlayer();
 
             else
-                players[2].DesactivatePlayer();
+                players[2].RequestDesactivatePlayer();
         }
     }
 
@@ -395,7 +464,7 @@ public class LevelManager : MonoBehaviour
                 players[3].ActivatePlayer();
 
             else
-                players[3].DesactivatePlayer();
+                players[3].RequestDesactivatePlayer();
         }
     }
 
