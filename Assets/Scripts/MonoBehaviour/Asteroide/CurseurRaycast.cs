@@ -9,8 +9,6 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private GameObject pistolet;
     [SerializeField] private GameObject pistolet2;
     [SerializeField] private float distancePistolet = 10f;
-    [SerializeField] private Animator pistoletAnimator;
-    [SerializeField] private Animator pistoletAnimator2;
 
     [Header("Fracture")]
     [SerializeField] private GameObject[] fractureAsteroidPrefabs;
@@ -23,8 +21,22 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private float laserDuration = 0.1f;
 
+    [Header("Sons")]
     [SerializeField] private AudioClip laserClip;
     private AudioSource audioSource;
+
+    [Header("Animations fusil")] 
+    [SerializeField] private Animator pistoletAnimator;
+    [SerializeField] private Animator pistoletAnimator2;
+
+    private string currentCorner = "";
+
+    [Header("Lissage du mouvement des mains")]
+    [SerializeField] [Range(0.01f, 1f)] private float smoothSpeed = 0.15f;
+
+    // stockage interne de la position lissée
+    private Vector2 smoothedUV = Vector2.zero;
+
 
     // Contrôle souris (debug)
     
@@ -70,6 +82,8 @@ public class CurseurRaycast : MonoBehaviour
             Wall.WallInfo leftWallInfo = players[i].GetLeftWallInfo();
             Wall.WallInfo rightWallInfo = players[i].GetRightWallInfo();
 
+            DetectHandCorner(leftWallInfo, rightWallInfo);
+
             // Check Left
             if (leftWallInfo.selectedWall == Wall.SelectedWall.Center)
             {
@@ -101,6 +115,44 @@ public class CurseurRaycast : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void DetectHandCorner(Wall.WallInfo left, Wall.WallInfo right)
+    {
+        // moyenne des positions UV des mains
+        Vector2 avg = (left.uv + right.uv) * 0.5f;
+
+        smoothedUV = Vector2.Lerp(smoothedUV, avg, smoothSpeed);
+
+        float x = smoothedUV.x - 0.5f;
+        float y = smoothedUV.y - 0.5f;
+
+        string nextCorner = "";
+
+        if (x < 0 && y > 0) nextCorner = "Armature|UpLeft";
+        else if (x > 0 && y > 0) nextCorner = "Armature|UpRight";
+        else if (x < 0 && y < 0) nextCorner = "Armature|DownLeft";
+        else if (x > 0 && y < 0) nextCorner = "Armature|DownRight";
+
+        if (nextCorner == "" || nextCorner == currentCorner)
+            return;
+
+        // reset triggers
+        pistoletAnimator.ResetTrigger("Armature|UpLeft");
+        pistoletAnimator.ResetTrigger("Armature|UpRight");
+        pistoletAnimator.ResetTrigger("Armature|DownLeft");
+        pistoletAnimator.ResetTrigger("Armature|DownRight");
+
+        pistoletAnimator2.ResetTrigger("Armature|UpLeft");
+        pistoletAnimator2.ResetTrigger("Armature|UpRight");
+        pistoletAnimator2.ResetTrigger("Armature|DownLeft");
+        pistoletAnimator2.ResetTrigger("Armature|DownRight");
+
+        // Active nouveau coin
+        pistoletAnimator.SetTrigger(nextCorner);
+        pistoletAnimator2.SetTrigger(nextCorner);
+
+        currentCorner = nextCorner;
     }
 
     // Fonction commune d'impact (Kinect & souris)
