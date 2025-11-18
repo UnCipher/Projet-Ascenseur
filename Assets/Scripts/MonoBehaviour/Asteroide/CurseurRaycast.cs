@@ -7,6 +7,7 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private InfoCompteur so_infoCompteur;
     [SerializeField] private InfoAsteroide infoAsteroide;
     [SerializeField] private GameObject pistolet;
+    [SerializeField] private GameObject pistolet2;
     [SerializeField] private float distancePistolet = 10f;
     [SerializeField] private Animator pistoletAnimator;
     [SerializeField] private Animator pistoletAnimator2;
@@ -22,14 +23,12 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private float laserDuration = 0.1f;
 
-    [SerializeField] Transform sym;
-
     [SerializeField] private AudioClip laserClip;
     private AudioSource audioSource;
 
     // Contrôle souris (debug)
     
-    public void OnLook(InputAction.CallbackContext context)
+    /* public void OnLook(InputAction.CallbackContext context)
     {
         Vector2 mousePos = Mouse.current.position.ReadValue();
 
@@ -46,7 +45,7 @@ public class CurseurRaycast : MonoBehaviour
         {
             Debug.Log("Aucun objet touché par le raycast !");
         }
-    }
+    } */
     
     
     void Start()
@@ -94,8 +93,6 @@ public class CurseurRaycast : MonoBehaviour
                 Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
                 Debug.Log("right Lel / " + screenPos);
 
-                sym.localPosition = screenPos;
-
                 Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
@@ -112,6 +109,7 @@ public class CurseurRaycast : MonoBehaviour
         if (hit.transform.gameObject.GetComponent<MouvementAsteroide>())
         {
             TirerLaser(pistolet.transform.position, hit.point);
+            TirerLaser(pistolet2.transform.position, hit.point);
 
             Destroy(hit.transform.gameObject);
 
