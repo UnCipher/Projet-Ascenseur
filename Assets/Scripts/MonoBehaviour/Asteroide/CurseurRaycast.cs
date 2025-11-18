@@ -8,6 +8,7 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private InfoAsteroide infoAsteroide;
     [SerializeField] private GameObject pistolet;
     [SerializeField] private GameObject pistolet2;
+    [SerializeField] private float fusilRotationSpeed = 8f;
     [SerializeField] private float distancePistolet = 10f;
 
     [Header("Fracture")]
@@ -22,14 +23,13 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private float laserDuration = 0.1f;
 
     [Header("Sons")]
+    [SerializeField] SoundProfile laserProfile;
     [SerializeField] private AudioClip laserClip;
     private AudioSource audioSource;
 
     [Header("Animations fusil")] 
     [SerializeField] private Animator pistoletAnimator;
     [SerializeField] private Animator pistoletAnimator2;
-
-    private string currentCorner = "";
 
     [Header("Lissage du mouvement des mains")]
     [SerializeField] [Range(0.01f, 1f)] private float smoothSpeed = 0.15f;
@@ -67,92 +67,68 @@ public class CurseurRaycast : MonoBehaviour
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        
     }
 
     // Contrôle Kinect Azure 
-    void FixedUpdate()
+     void FixedUpdate()
     {
-        // Set Values
         Player[] players = LevelManager.GetActivePlayers();
+        if (players.Length == 0) return;
 
-        for(int i = 0;i<players.Length;i++)
+        for (int i = 0; i < players.Length; i++)
         {
-            // Set Values
-            Wall.WallInfo leftWallInfo = players[i].GetLeftWallInfo();
-            Wall.WallInfo rightWallInfo = players[i].GetRightWallInfo();
+            Wall.WallInfo leftWall = players[i].GetLeftWallInfo();
+            Wall.WallInfo rightWall = players[i].GetRightWallInfo();
 
-            DetectHandCorner(leftWallInfo, rightWallInfo);
-
-            // Check Left
-            if (leftWallInfo.selectedWall == Wall.SelectedWall.Center)
+            if (leftWall.selectedWall == Wall.SelectedWall.Center &&
+                rightWall.selectedWall == Wall.SelectedWall.Center)
             {
-                Vector2 screenPos = new Vector3(leftWallInfo.uv.x * Screen.width, leftWallInfo.uv.y * Screen.height, distancePistolet);
+                // Moyenne des mains
+                Vector2 avg = (leftWall.uv + rightWall.uv) * 0.5f;
+
+                // Lissage
+                smoothedUV = Vector2.Lerp(smoothedUV, avg, smoothSpeed);
+
+                // Conversion caméra
+                Vector3 screenPos = new Vector3(
+                    smoothedUV.x * Screen.width,
+                    smoothedUV.y * Screen.height,
+                    10f // profondeur
+                );
+
                 Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
 
+                // Déplacer les fusils vers la main
+                OrienterFusilsVers(worldPos);
+
+                // Raycast
                 Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    GérerImpact(hit);
-                    Debug.Log("do sum 1");
-                }
-
-                Debug.Log("left lele / " + screenPos);
-            }
-
-            // Check Right
-            if (rightWallInfo.selectedWall == Wall.SelectedWall.Center)
-            {
-                Vector3 screenPos = new Vector3(rightWallInfo.uv.x * Screen.width, rightWallInfo.uv.y * Screen.height, distancePistolet);
-                Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
-                Debug.Log("right Lel / " + screenPos);
-
-                Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
-                if (Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    Debug.Log("do sum 1");
-                    GérerImpact(hit);
+                    if (hit.transform.GetComponent<MouvementAsteroide>())
+                        GérerImpact(hit);
                 }
             }
         }
     }
 
-    private void DetectHandCorner(Wall.WallInfo left, Wall.WallInfo right)
+    private void OrienterFusilsVers(Vector3 target)
     {
-        // moyenne des positions UV des mains
-        Vector2 avg = (left.uv + right.uv) * 0.5f;
+        Quaternion rot1 = Quaternion.LookRotation(target - pistolet.transform.position);
+        Quaternion rot2 = Quaternion.LookRotation(target - pistolet2.transform.position);
 
-        smoothedUV = Vector2.Lerp(smoothedUV, avg, smoothSpeed);
+        pistolet.transform.rotation = Quaternion.Lerp(
+            pistolet.transform.rotation,
+            rot1,
+            Time.deltaTime * fusilRotationSpeed
+        );
 
-        float x = smoothedUV.x - 0.5f;
-        float y = smoothedUV.y - 0.5f;
-
-        string nextCorner = "";
-
-        if (x < 0 && y > 0) nextCorner = "Armature|UpLeft";
-        else if (x > 0 && y > 0) nextCorner = "Armature|UpRight";
-        else if (x < 0 && y < 0) nextCorner = "Armature|DownLeft";
-        else if (x > 0 && y < 0) nextCorner = "Armature|DownRight";
-
-        if (nextCorner == "" || nextCorner == currentCorner)
-            return;
-
-        // reset triggers
-        pistoletAnimator.ResetTrigger("Armature|UpLeft");
-        pistoletAnimator.ResetTrigger("Armature|UpRight");
-        pistoletAnimator.ResetTrigger("Armature|DownLeft");
-        pistoletAnimator.ResetTrigger("Armature|DownRight");
-
-        pistoletAnimator2.ResetTrigger("Armature|UpLeft");
-        pistoletAnimator2.ResetTrigger("Armature|UpRight");
-        pistoletAnimator2.ResetTrigger("Armature|DownLeft");
-        pistoletAnimator2.ResetTrigger("Armature|DownRight");
-
-        // Active nouveau coin
-        pistoletAnimator.SetTrigger(nextCorner);
-        pistoletAnimator2.SetTrigger(nextCorner);
-
-        currentCorner = nextCorner;
+        pistolet2.transform.rotation = Quaternion.Lerp(
+            pistolet2.transform.rotation,
+            rot2,
+            Time.deltaTime * fusilRotationSpeed
+        );
     }
 
     // Fonction commune d'impact (Kinect & souris)
@@ -201,7 +177,7 @@ public class CurseurRaycast : MonoBehaviour
 
             gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);
 
-            audioSource.PlayOneShot(laserClip);
+            SoundPlayer.CreateSoundPlayer(laserProfile);
 
             if (so_infoCompteur.compteur == 0)
                 LevelManager.instance.OnElevator();

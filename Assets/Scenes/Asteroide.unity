@@ -305,9 +305,8 @@ MonoBehaviour:
   infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
   pistolet: {fileID: 1745927729}
   pistolet2: {fileID: 377404559}
+  fusilRotationSpeed: 8
   distancePistolet: 1
-  pistoletAnimator: {fileID: 334008763}
-  pistoletAnimator2: {fileID: 777812643}
   fractureAsteroidPrefabs:
   - {fileID: 7191996476721294421, guid: 1a4146be47d5eff47af071189b075166, type: 3}
   - {fileID: 3605499684260332989, guid: 32988b539757b7c41806093291c7c600, type: 3}
@@ -323,7 +322,11 @@ MonoBehaviour:
   effetExplosionLifetime: 3
   laserPrefab: {fileID: 5374477931021953422, guid: c8c03003a88674649862e1b7e137b914, type: 3}
   laserDuration: 0.1
+  laserProfile: {fileID: 11400000, guid: 6d960295ce4878047b92cb65d44df181, type: 2}
   laserClip: {fileID: 8300000, guid: bd293b37ae547034b82bc6fde1f70723, type: 3}
+  pistoletAnimator: {fileID: 334008763}
+  pistoletAnimator2: {fileID: 777812643}
+  smoothSpeed: 0.15
 --- !u!114 &289569077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,15 +464,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.181
+      value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.105
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.454
+      value: 0.60199994
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1198,9 +1201,17 @@ PrefabInstance:
       propertyPath: m_TargetDisplay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2514764757037137659, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2748979278158256564, guid: a8b9217093b7e6448ae210353473154b, type: 3}
       propertyPath: m_Name
       value: LevelManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748979278158256564, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3833780197599343061, guid: a8b9217093b7e6448ae210353473154b, type: 3}
       propertyPath: m_TargetDisplay
@@ -1920,15 +1931,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.201
+      value: -0.712
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.105
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.454
+      value: 0.602
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalRotation.w
