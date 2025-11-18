@@ -24,6 +24,9 @@ public class CurseurRaycast : MonoBehaviour
 
     [SerializeField] Transform sym;
 
+    [SerializeField] private AudioClip laserClip;
+    private AudioSource audioSource;
+
     // Contrôle souris (debug)
     
     public void OnLook(InputAction.CallbackContext context)
@@ -49,6 +52,11 @@ public class CurseurRaycast : MonoBehaviour
     void Start()
     {
         LevelManager.instance.transform.eulerAngles = new Vector3(0, 180, 0);
+    }
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Contrôle Kinect Azure 
@@ -142,6 +150,8 @@ public class CurseurRaycast : MonoBehaviour
             Debug.Log(pistoletAnimator);
 
             gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);
+
+            audioSource.PlayOneShot(laserClip);
 
             if (so_infoCompteur.compteur == 0)
                 LevelManager.instance.OnElevator();
