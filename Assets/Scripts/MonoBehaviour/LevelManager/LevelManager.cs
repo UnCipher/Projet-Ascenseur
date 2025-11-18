@@ -322,13 +322,13 @@ public class LevelManager : MonoBehaviour
             Wall.WallInfo rightWall = players[i].GetRightWallInfo();
 
             // Send Messages
-            instance.SendOSCMessage(leftAddress + "-x", leftWall.uv.x);
-            instance.SendOSCMessage(leftAddress + "-y", leftWall.uv.y);
-            instance.SendOSCMessage(leftAddress, (int)leftWall.selectedWall);
+            SendOSCMessage(leftAddress + "-x", leftWall.uv.x);
+            SendOSCMessage(leftAddress + "-y", leftWall.uv.y);
+            SendOSCMessage(leftAddress, (int)leftWall.selectedWall);
 
-            instance.SendOSCMessage(rightAddress + "-x", rightWall.uv.x);
-            instance.SendOSCMessage(rightAddress + "-y", rightWall.uv.y);
-            instance.SendOSCMessage(rightAddress, (int)rightWall.selectedWall);
+            SendOSCMessage(rightAddress + "-x", rightWall.uv.x);
+            SendOSCMessage(rightAddress + "-y", rightWall.uv.y);
+            SendOSCMessage(rightAddress, (int)rightWall.selectedWall);
         }
     }
 
@@ -344,7 +344,7 @@ public class LevelManager : MonoBehaviour
                 players[0].ActivatePlayer();
 
             else
-                players[0].DesactivatePlayer();
+                players[0].RequestDesactivatePlayer();
         }
     }
 
@@ -384,7 +384,7 @@ public class LevelManager : MonoBehaviour
                 players[1].ActivatePlayer();
 
             else
-                players[1].DesactivatePlayer();
+                players[1].RequestDesactivatePlayer();
         }
     }
 
@@ -424,7 +424,7 @@ public class LevelManager : MonoBehaviour
                 players[2].ActivatePlayer();
 
             else
-                players[2].DesactivatePlayer();
+                players[2].RequestDesactivatePlayer();
         }
     }
 
@@ -464,7 +464,7 @@ public class LevelManager : MonoBehaviour
                 players[3].ActivatePlayer();
 
             else
-                players[3].DesactivatePlayer();
+                players[3].RequestDesactivatePlayer();
         }
     }
 

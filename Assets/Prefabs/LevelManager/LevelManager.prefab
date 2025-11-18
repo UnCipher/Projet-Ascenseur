@@ -817,15 +817,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640102669816809471}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.324421, y: -0, z: -0, w: 0.9459129}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8198711787187139599}
   - {fileID: 810347735854865314}
   m_Father: {fileID: 8343410477029566298}
-  m_LocalEulerAnglesHint: {x: 37.861, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3464865052001575850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,7 +838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d1cd3760cbfc144874c12abb7980f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 0
+  playerNumber: 2
   isActive: 0
   desactivateTime: 5
   desactivating: 0
@@ -1286,15 +1286,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2961967889766279015}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.324421, y: -0, z: -0, w: 0.9459129}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2892121491135021021}
   - {fileID: 7962860709319929738}
   m_Father: {fileID: 8343410477029566298}
-  m_LocalEulerAnglesHint: {x: 37.861, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7893956458198908826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2750,15 +2750,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7830955645850990396}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.324421, y: -0, z: -0, w: 0.9459129}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.225, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8460460531033499944}
   - {fileID: 2869717001988336647}
   m_Father: {fileID: 8343410477029566298}
-  m_LocalEulerAnglesHint: {x: 37.861, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3468299910559748363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2771,7 +2771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d1cd3760cbfc144874c12abb7980f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 0
+  playerNumber: 1
   isActive: 0
   desactivateTime: 0
   desactivating: 0

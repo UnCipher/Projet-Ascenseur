@@ -95,17 +95,15 @@ public class Player : MonoBehaviour
         StartCoroutine("DesactivatePlayer");
     }
 
-    public IEnumerator DesactivatePlayer()
+    IEnumerator DesactivatePlayer()
     {
         // Set Values
         desactivating = true;
-        Debug.Log("Desactivating Player " + playerNumber);
 
         // Wait For ?? Seconds
         yield return new WaitForSeconds(desactivateTime);
 
         // Desactivate
-        Debug.Log("Desactivated Player " + playerNumber);
         isActive = false;
     }
     
@@ -113,7 +111,6 @@ public class Player : MonoBehaviour
     {
         // Set Values
         isActive = true;
-        Debug.Log("Activated Player " + playerNumber);
 
         // Cancel Desactivation
         if(desactivating)
@@ -167,8 +164,6 @@ public class Player : MonoBehaviour
         // Set Values
         leftUVOnWall = uv;
         leftSelectedWall = selected;
-
-        //  Debug.Log("Player " + playerNumber + "'s left Hand is on the " + leftSelectedWall + " which coordinates are " + leftUVOnWall);
     }
 
     public Wall.WallInfo GetLeftWallInfo()
@@ -200,7 +195,5 @@ public class Player : MonoBehaviour
         // Set Values
         rightUVOnWall = uv;
         rightSelectedWall = selected;
-
-       // Debug.Log("Player " + playerNumber + "'s right Hand is on the " + rightSelectedWall + " which coordinates are " + rightUVOnWall);
     }
 }
