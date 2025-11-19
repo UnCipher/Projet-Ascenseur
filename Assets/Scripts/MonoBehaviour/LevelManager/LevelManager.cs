@@ -16,14 +16,9 @@ public class LevelManager : MonoBehaviour
     public MicrophoneInfo microphone = new MicrophoneInfo();
     public List<Player> players = new List<Player>();
 
-    [Header("OSC Properties")]
-    [SerializeField][Range(1, 65535)] int inPort;
-    [Space(5)]
-
-    [SerializeField] string outIp;
-    [SerializeField] [Range(1, 65535)] int outPort;
-    OSC osc;
-
+    [Space(10)]
+    public ElevatorState elevatorState;
+    [SerializeField] bool operationnal = true;
 
     [Header("Scene Manager")]
     [SerializeField] float sceneChangeStartup;
@@ -43,6 +38,7 @@ public class LevelManager : MonoBehaviour
     public Camera leftCamera;
     public Camera centerCamera;
     public Camera rightCamera;
+    OSC osc;
 
     // Classes
     // ---------------------------
@@ -79,13 +75,20 @@ public class LevelManager : MonoBehaviour
         public float medium;
         public float highpass;
     }
-    
+
     [System.Serializable]
     public class HandsOnWall
     {
         public List<PlayerHand> leftWall;
         public List<PlayerHand> centerWall;
         public List<PlayerHand> rightWall;
+    }
+
+    public enum ElevatorState
+    {
+        Fine,
+        Damaged,
+        Broken,
     }
 
     public enum MicrophoneAudioType
@@ -118,10 +121,6 @@ public class LevelManager : MonoBehaviour
         // Set Values
         osc = gameObject.AddComponent<OSC>();
 
-        osc.inPort = inPort;
-        osc.outPort = outPort;
-        osc.outIP = outIp;
-
         if (!animator)
             animator = GetComponent<Animator>();
 
@@ -140,7 +139,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator ChangeScene(SceneSettings scene)
     {
-        if (SceneManager.GetActiveScene().name != scene.name && !changingScene)
+        if (GetCurrentSceneName() != scene.name && !changingScene)
         {
             // Set Values
             currentScene = scene.name;
@@ -149,8 +148,23 @@ public class LevelManager : MonoBehaviour
             // Cancel Invoke
             CancelInvoke("OnSceneCompleted");
 
+            // Change Elevator State
+            if(scene.name == scenes.elevator.name)
+            {
+                elevatorState++;
+                // Change Elevator Appearance
+
+                Debug.Log(elevatorState);
+
+                if (elevatorState == ElevatorState.Broken)
+                    operationnal = false;
+
+                // Initiate End Game
+                InitiateEndGame();
+            }
+
             // Play Animation
-            if(SceneManager.GetActiveScene().name != scenes.elevator.name)
+            if (GetCurrentSceneName() != scenes.elevator.name)
             {
                 animator.SetTrigger(animationLeaveTrigger);
                 yield return new WaitForSeconds(sceneChangeStartup);
@@ -168,13 +182,39 @@ public class LevelManager : MonoBehaviour
                 Invoke("OnSceneCompleted", scene.duration - sceneChangeStartup);
 
             // Play Animation
-            if(scene.name != scenes.elevator.name)
+            if (scene.name != scenes.elevator.name)
             {
                 animator.SetTrigger(animationEnterTrigger);
                 yield return new WaitForSeconds(sceneChangeCooldown);
             }
+
             changingScene = false;
         }
+    }
+
+    void StartElevator()
+    {
+        if(GetCurrentSceneName() == scenes.elevator.name)
+        {
+            // Set Values
+            operationnal = true;
+            elevatorState = ElevatorState.Fine;
+
+            // Start Animation
+        }
+    }
+
+    void LeaveElevator()
+    {
+        if (GetCurrentSceneName() == scenes.elevator.name)
+        {
+            operationnal = false;
+        }
+    }
+    
+    void InitiateEndGame()
+    {
+        Debug.Log("lel start MiniGame and Cutscene");
     }
     
     public void OnSceneCompleted()
@@ -192,19 +232,35 @@ public class LevelManager : MonoBehaviour
     public void OnAsteroid()
     {
         // Call Asteroid Scene
+        if(operationnal)
         StartCoroutine(ChangeScene(scenes.asteroid));
     }
 
     public void OnCampfire()
     {
         // Call Campfire Scene
+        if(operationnal)
         StartCoroutine(ChangeScene(scenes.campfire));
     }
 
     public void OnEcholocation()
     {
         // Call Echolocation Scene
+        if(operationnal)
         StartCoroutine(ChangeScene(scenes.echolocation));
+    }
+
+    public void OnElevatorLeave()
+    {
+        if(GetCurrentSceneName() == "Elevator")
+        {
+            LeaveElevator();
+        }
+    }
+    
+    public void OnDebugRestart()
+    {
+        StartElevator();
     }
 
     public void OnDebugleave()
@@ -535,7 +591,7 @@ public class LevelManager : MonoBehaviour
 
         return hands.ToArray();
     }
-    
+
     public static Player[] GetActivePlayers()
     {
         // Set Value
@@ -548,5 +604,23 @@ public class LevelManager : MonoBehaviour
 
         // Return Active Players
         return activePlayers.ToArray();
+    }
+
+    public int GetCurrentSceneIndex()
+    {
+        // Set Values
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Return String
+        return sceneIndex;
+    }
+    
+    public string GetCurrentSceneName()
+    {
+        // Set Values
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        // Return String
+        return sceneName;
     }
 }
