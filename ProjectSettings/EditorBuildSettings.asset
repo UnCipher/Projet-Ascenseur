@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Elevator.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    guid: 575afe5e090ed374185c35bea10c25da
   - enabled: 1
     path: Assets/Scenes/CampFire/Campfire.unity
     guid: d77d6323f80a13543ab1babc23b2be81
