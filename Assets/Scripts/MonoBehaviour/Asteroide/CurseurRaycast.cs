@@ -266,20 +266,26 @@ public class CurseurRaycast : MonoBehaviour
         StartCoroutine(ActivateShader());
         Destroy(spawnAsteroids);
 
+        yield return new WaitForSeconds(1.2f);
+
         chromaticAberrationTarget = 1f;
         lensDistortionTarget = -0.7f;
         colorAdjustmentsTarget = 3f;
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
 
         warpActive = false;
+
+        StartCoroutine(ActivateParticles());
+        StartCoroutine(ActivateShader());
+
+        yield return new WaitForSeconds(2f);
 
         chromaticAberrationTarget = 0f;
         lensDistortionTarget = 0f;
         colorAdjustmentsTarget = 0f;
 
-        StartCoroutine(ActivateParticles());
-        StartCoroutine(ActivateShader());
+        
 
     }
 

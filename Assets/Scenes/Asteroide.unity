@@ -337,6 +337,8 @@ MonoBehaviour:
   globalVolume: {fileID: 1900712696}
   chromaticAberrationTarget: 0
   lensDistortionTarget: 0
+  colorAdjustmentsTarget: 0
+  smoothSpeedPostProcess: 2
 --- !u!114 &289569077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,7 +480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.277
+      value: 1.203
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2184,7 +2186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.277
+      value: 1.203
       objectReference: {fileID: 0}
     - target: {fileID: 8003820684959618517, guid: 2c40ffbd9dc62054692a46c401bbf4d5, type: 3}
       propertyPath: m_LocalPosition.z
