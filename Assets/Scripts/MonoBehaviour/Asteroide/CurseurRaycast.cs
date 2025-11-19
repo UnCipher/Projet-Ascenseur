@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
+using System.Collections;
 
 public class CurseurRaycast : MonoBehaviour
 {    
@@ -39,6 +41,11 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private Vector3 fusilDirectionOffset = new Vector3(0, 180, 0);
     [SerializeField] private Vector3 fusilPositionOffset;
 
+    public VisualEffect warpSpeedVFX;
+    private float rate = 0.02f;
+
+    private bool warpActive;
+    [SerializeField] private GameObject spawnAsteroids;
 
     // Contrôle souris (debug)
     
@@ -60,6 +67,12 @@ public class CurseurRaycast : MonoBehaviour
             Debug.Log("Aucun objet touché par le raycast !");
         }
     } */
+
+    void Start(){
+        warpActive = false;
+        warpSpeedVFX.Stop();
+        warpSpeedVFX.SetFloat("WarpAmount", 0);
+    }
 
     // Contrôle Kinect Azure 
      void FixedUpdate()
@@ -175,10 +188,52 @@ public class CurseurRaycast : MonoBehaviour
 
             SoundPlayer.CreateSoundPlayer(laserProfile);
 
-            if (so_infoCompteur.compteur == 0)
-                LevelManager.instance.OnElevator();
+            if (so_infoCompteur.compteur == 0){
+                    warpActive = true;
+                    StartCoroutine(ActivateParticles());
+                    spawnAsteroids.SetActive(false);
 
-            
+                   Invoke("DelayElevator", 10f);
+            }
+        }
+    }
+
+    private void DelayElevator(){
+        LevelManager.instance.OnElevator();
+    }
+
+    private IEnumerator ActivateParticles()
+    {
+        if(warpActive)
+        {
+            warpSpeedVFX.Play();
+
+            float amount = warpSpeedVFX.GetFloat("WarpAmount");
+            while(amount < 1 && warpActive)
+            {
+                amount += rate;
+                warpSpeedVFX.SetFloat("WarpAmount", amount);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        else
+        {
+            float amount = warpSpeedVFX.GetFloat("WarpAmount");
+            while(amount > 0 && !warpActive)
+            {
+                amount -= rate;
+                warpSpeedVFX.SetFloat("WarpAmount", amount);
+                yield return new WaitForSeconds(0.1f);
+
+                if(amount <= 0+rate)
+                {
+                    amount = 0;
+                    warpSpeedVFX.SetFloat("WarpAmount", amount);
+                    warpSpeedVFX.Stop();
+                }
+            }
+
+           
         }
     }
         
