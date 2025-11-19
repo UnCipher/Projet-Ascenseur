@@ -30,6 +30,8 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] SoundProfile laserProfile;
     [SerializeField] private AudioClip laserClip;
     private AudioSource audioSource;
+    [SerializeField] private AudioSource warpSpeed_source;
+    [SerializeField] private AudioClip warpSpeed_clip;
 
     [Header("Animations fusil")] 
     [SerializeField] private Animator pistoletAnimator;
@@ -266,7 +268,9 @@ public class CurseurRaycast : MonoBehaviour
         StartCoroutine(ActivateShader());
         Destroy(spawnAsteroids);
 
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.5f);
+
+        warpSpeed_source.PlayOneShot(warpSpeed_clip);
 
         chromaticAberrationTarget = 1f;
         lensDistortionTarget = -0.7f;
@@ -284,9 +288,6 @@ public class CurseurRaycast : MonoBehaviour
         chromaticAberrationTarget = 0f;
         lensDistortionTarget = 0f;
         colorAdjustmentsTarget = 0f;
-
-        
-
     }
 
 
