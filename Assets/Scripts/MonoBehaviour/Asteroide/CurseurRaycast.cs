@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using System.Collections;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class CurseurRaycast : MonoBehaviour
 {    
@@ -42,10 +44,26 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private Vector3 fusilPositionOffset;
 
     public VisualEffect warpSpeedVFX;
-    private float rate = 0.02f;
+    public MeshRenderer warpSpeedShader;
+    [SerializeField] private float rate = 0.02f;
+    [SerializeField ]private float delai = 2.5f;
 
     private bool warpActive;
     [SerializeField] private GameObject spawnAsteroids;
+
+    [Header("GlobalVolume")]
+    [SerializeField] private Volume globalVolume;
+    private ChromaticAberration chromaticAberration;
+    private LensDistortion lensDistortion;
+    private ColorAdjustments colorAdjustments;
+
+    [Header("Overrides Smooth")]
+    [SerializeField] private float chromaticAberrationTarget = 0f;
+    [SerializeField] private float lensDistortionTarget = 0f;
+    [SerializeField] private float colorAdjustmentsTarget = 0f;
+    [SerializeField] private float smoothSpeedPostProcess = 2f;
+
+
 
     // Contrôle souris (debug)
     
@@ -72,6 +90,43 @@ public class CurseurRaycast : MonoBehaviour
         warpActive = false;
         warpSpeedVFX.Stop();
         warpSpeedVFX.SetFloat("WarpAmount", 0);
+        warpSpeedShader.material.SetFloat("Active_", 0);
+
+    if (globalVolume.profile.TryGet<ChromaticAberration>(out var ca))
+        chromaticAberration = ca;
+
+    if (globalVolume.profile.TryGet<LensDistortion>(out var ld))
+        lensDistortion = ld;
+
+    if (globalVolume.profile.TryGet<ColorAdjustments>(out var col))
+        colorAdjustments = col;
+
+        chromaticAberration.intensity.value = 0f;
+        lensDistortion.intensity.value = 0f;
+        colorAdjustments.postExposure.value = 0f;
+    }
+
+    void Update(){
+        if (chromaticAberration != null && lensDistortion != null)
+        {
+            chromaticAberration.intensity.value = Mathf.Lerp(
+                chromaticAberration.intensity.value,
+                chromaticAberrationTarget,
+                Time.deltaTime * smoothSpeedPostProcess
+            );
+
+            lensDistortion.intensity.value = Mathf.Lerp(
+                lensDistortion.intensity.value,
+                lensDistortionTarget,
+                Time.deltaTime * smoothSpeedPostProcess
+            );
+
+            colorAdjustments.postExposure.value = Mathf.Lerp(
+                colorAdjustments.postExposure.value,
+                colorAdjustmentsTarget,
+                Time.deltaTime * smoothSpeedPostProcess
+            );
+        }
     }
 
     // Contrôle Kinect Azure 
@@ -188,19 +243,46 @@ public class CurseurRaycast : MonoBehaviour
 
             SoundPlayer.CreateSoundPlayer(laserProfile);
 
-            if (so_infoCompteur.compteur == 0){
-                    warpActive = true;
-                    StartCoroutine(ActivateParticles());
-                    spawnAsteroids.SetActive(false);
-
-                   Invoke("DelayElevator", 10f);
+            if (so_infoCompteur.compteur == 0)
+            {
+                StartCoroutine(WarpSequence());
+                Invoke("DelayElevator", 10f);
             }
+
         }
     }
 
     private void DelayElevator(){
         LevelManager.instance.OnElevator();
     }
+
+    private IEnumerator WarpSequence()
+    {
+        yield return new WaitForSeconds(2f);
+
+        warpActive = true;
+
+        StartCoroutine(ActivateParticles());
+        StartCoroutine(ActivateShader());
+        Destroy(spawnAsteroids);
+
+        chromaticAberrationTarget = 1f;
+        lensDistortionTarget = -0.7f;
+        colorAdjustmentsTarget = 3f;
+
+        yield return new WaitForSeconds(5f);
+
+        warpActive = false;
+
+        chromaticAberrationTarget = 0f;
+        lensDistortionTarget = 0f;
+        colorAdjustmentsTarget = 0f;
+
+        StartCoroutine(ActivateParticles());
+        StartCoroutine(ActivateShader());
+
+    }
+
 
     private IEnumerator ActivateParticles()
     {
@@ -230,6 +312,40 @@ public class CurseurRaycast : MonoBehaviour
                     amount = 0;
                     warpSpeedVFX.SetFloat("WarpAmount", amount);
                     warpSpeedVFX.Stop();
+                }
+            }
+
+           
+        }
+    }
+
+    private IEnumerator ActivateShader()
+    {
+        
+        if(warpActive)
+        {
+            yield return new WaitForSeconds(delai);
+            float amount = warpSpeedShader.material.GetFloat("Active_");
+            while(amount < 1 && warpActive)
+            {
+                amount += rate;
+                warpSpeedShader.material.SetFloat("Active_", amount);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        else
+        {
+            float amount = warpSpeedShader.material.GetFloat("Active_");
+            while(amount > 0 && !warpActive)
+            {
+                amount -= rate;
+                warpSpeedShader.material.SetFloat("Active_", amount);
+                yield return new WaitForSeconds(0.1f);
+
+                if(amount <= 0+rate)
+                {
+                    amount = 0;
+                    warpSpeedShader.material.SetFloat("Active_", amount);
                 }
             }
 
