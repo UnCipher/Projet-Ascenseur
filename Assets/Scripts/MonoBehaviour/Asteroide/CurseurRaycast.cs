@@ -34,8 +34,10 @@ public class CurseurRaycast : MonoBehaviour
     [Header("Lissage du mouvement des mains")]
     [SerializeField] [Range(0.01f, 1f)] private float smoothSpeed = 0.15f;
 
-    // stockage interne de la position lissée
     private Vector2 smoothedUV = Vector2.zero;
+
+    [SerializeField] private Vector3 fusilDirectionOffset = new Vector3(0, 180, 0);
+    [SerializeField] private Vector3 fusilPositionOffset;
 
 
     // Contrôle souris (debug)
@@ -58,17 +60,6 @@ public class CurseurRaycast : MonoBehaviour
             Debug.Log("Aucun objet touché par le raycast !");
         }
     } */
-    
-    
-    void Start()
-    {
-        LevelManager.instance.transform.eulerAngles = new Vector3(0, 180, 0);
-    }
-
-    void Awake()
-    {
-        
-    }
 
     // Contrôle Kinect Azure 
      void FixedUpdate()
@@ -115,8 +106,13 @@ public class CurseurRaycast : MonoBehaviour
 
     private void OrienterFusilsVers(Vector3 target)
     {
-        Quaternion rot1 = Quaternion.LookRotation(target - pistolet.transform.position);
-        Quaternion rot2 = Quaternion.LookRotation(target - pistolet2.transform.position);
+        Vector3 targetOffset = target + fusilPositionOffset;
+
+        Quaternion rot1 = Quaternion.LookRotation(targetOffset - pistolet.transform.position);
+        Quaternion rot2 = Quaternion.LookRotation(targetOffset - pistolet2.transform.position);
+
+        rot1 *= Quaternion.Euler(fusilDirectionOffset);
+        rot2 *= Quaternion.Euler(fusilDirectionOffset);
 
         pistolet.transform.rotation = Quaternion.Lerp(
             pistolet.transform.rotation,

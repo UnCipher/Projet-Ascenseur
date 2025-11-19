@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infoAsteroide: {fileID: 11400000, guid: c60686e73b64b4b43b0237ce15acfa27, type: 2}
   vitesse: 5
-  directionAsteroides: {x: 0, y: 0, z: -1}
+  directionAsteroides: {x: 0, y: 0, z: 1}
 --- !u!65 &1519149752056521279
 BoxCollider:
   m_ObjectHideFlags: 0
