@@ -73,10 +73,7 @@ public class CurseurRaycast : MonoBehaviour
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     GérerImpact(hit);
-                    Debug.Log("do sum 1");
                 }
-
-                Debug.Log("left lele / " + screenPos);
             }
 
             // Check Right
@@ -84,14 +81,12 @@ public class CurseurRaycast : MonoBehaviour
             {
                 Vector3 screenPos = new Vector3(rightWallInfo.uv.x * Screen.width, rightWallInfo.uv.y * Screen.height, distancePistolet);
                 Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
-                Debug.Log("right Lel / " + screenPos);
 
                 sym.localPosition = screenPos;
 
                 Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    Debug.Log("do sum 1");
                     GérerImpact(hit);
                 }
             }

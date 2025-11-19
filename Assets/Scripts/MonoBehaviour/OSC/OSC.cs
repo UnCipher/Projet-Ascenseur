@@ -391,7 +391,7 @@ public class UDPPacketIO
   {
 
     public int inPort  = 52764;
-    public string outIP = "127.0.0.1";
+    public string outIP = "192.29.12.17";
     public int outPort  = 14256;
 
       private UDPPacketIO OscPacketIO;

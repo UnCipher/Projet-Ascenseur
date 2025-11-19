@@ -139,7 +139,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator ChangeScene(SceneSettings scene)
     {
-        if (GetCurrentSceneName() != scene.name && !changingScene)
+        if (GetCurrentSceneName() != scene.name && !changingScene && operationnal)
         {
             // Set Values
             currentScene = scene.name;
@@ -151,16 +151,15 @@ public class LevelManager : MonoBehaviour
             // Change Elevator State
             if(scene.name == scenes.elevator.name)
             {
-                elevatorState++;
-                // Change Elevator Appearance
+                if(elevatorState == ElevatorState.Damaged)
+                {
+                    InitiateEndGame();
+                }
 
-                Debug.Log(elevatorState);
-
-                if (elevatorState == ElevatorState.Broken)
-                    operationnal = false;
-
-                // Initiate End Game
-                InitiateEndGame();
+                else
+                {
+                    elevatorState = ElevatorState.Damaged;
+                }
             }
 
             // Play Animation
@@ -214,6 +213,7 @@ public class LevelManager : MonoBehaviour
     
     void InitiateEndGame()
     {
+        operationnal = false;
         Debug.Log("lel start MiniGame and Cutscene");
     }
     
@@ -232,21 +232,21 @@ public class LevelManager : MonoBehaviour
     public void OnAsteroid()
     {
         // Call Asteroid Scene
-        if(operationnal)
+        if(GetCurrentSceneName() == scenes.elevator.name)
         StartCoroutine(ChangeScene(scenes.asteroid));
     }
 
     public void OnCampfire()
     {
         // Call Campfire Scene
-        if(operationnal)
+        if(GetCurrentSceneName() == scenes.elevator.name)
         StartCoroutine(ChangeScene(scenes.campfire));
     }
 
     public void OnEcholocation()
     {
         // Call Echolocation Scene
-        if(operationnal)
+        if(GetCurrentSceneName() == scenes.elevator.name)
         StartCoroutine(ChangeScene(scenes.echolocation));
     }
 
