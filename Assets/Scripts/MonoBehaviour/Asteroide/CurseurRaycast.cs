@@ -14,6 +14,7 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private GameObject pistolet2;
     [SerializeField] private float fusilRotationSpeed = 8f;
     [SerializeField] private float distancePistolet = 10f;
+    [SerializeField] private Transform sym;
 
     [Header("Fracture")]
     [SerializeField] private GameObject[] fractureAsteroidPrefabs;
@@ -186,9 +187,9 @@ public class CurseurRaycast : MonoBehaviour
             }
 
             // Check Right
-            if (rightWallInfo.selectedWall == Wall.SelectedWall.Center)
+            if (rightWall.selectedWall == Wall.SelectedWall.Center)
             {
-                Vector3 screenPos = new Vector3(rightWallInfo.uv.x * Screen.width, rightWallInfo.uv.y * Screen.height, distancePistolet);
+                Vector3 screenPos = new Vector3(rightWall.uv.x * Screen.width, rightWall.uv.y * Screen.height, distancePistolet);
                 Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
 
                 sym.localPosition = screenPos;
@@ -196,6 +197,7 @@ public class CurseurRaycast : MonoBehaviour
                 Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
+                    GérerImpact(hit);
                     if (hit.transform.GetComponent<MouvementAsteroide>())
                         GérerImpact(hit);
                 }
