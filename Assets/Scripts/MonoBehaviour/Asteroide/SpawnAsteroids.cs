@@ -11,10 +11,12 @@ public class SpawnAsteroids : MonoBehaviour
     [SerializeField] private float repeatTime = 0.5f;
 
     [SerializeField] private float asteroidLifetime = 10f;
+
+    public float startDelay = 15f;
     
     void Start()
     {
-        InvokeRepeating("AddGameObject", 0f, repeatTime);
+        InvokeRepeating("AddGameObject", startDelay, repeatTime);
     }
 
     private void AddGameObject()

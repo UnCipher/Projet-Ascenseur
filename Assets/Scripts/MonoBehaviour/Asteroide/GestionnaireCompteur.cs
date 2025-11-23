@@ -9,6 +9,8 @@ public class GestionnaireCompteur : MonoBehaviour
     [SerializeField]
     private TMP_Text champCompteur;
 
+    [SerializeField] private int nbAsteroides = 2;
+
     public static GestionnaireCompteur instance;
 
     void Start()
@@ -23,7 +25,7 @@ public class GestionnaireCompteur : MonoBehaviour
     }
 
     public void ResetCompteur(){
-        so_infoCompteur.compteur = 40;
+        so_infoCompteur.compteur = nbAsteroides;
     }
 
     public void AsteroideCompteur(int nombreCompteur)

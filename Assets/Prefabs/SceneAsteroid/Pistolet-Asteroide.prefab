@@ -137,6 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8003820684959618517}
   - component: {fileID: 6477681850928115384}
+  - component: {fileID: 3012624663285644238}
   m_Layer: 2
   m_Name: Pistolet-Asteroide
   m_TagString: Untagged
@@ -152,15 +153,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2555168027622756488}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.201, y: 1.105, z: -0.454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2409199723991585831}
   - {fileID: 4577224641079740302}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6477681850928115384
 Animator:
   serializedVersion: 7
@@ -183,6 +184,103 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &3012624663285644238
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555168027622756488}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9abd3a579d66de44eb143621ea20330e, type: 3}
+  m_Resource: {fileID: 8300000, guid: 9abd3a579d66de44eb143621ea20330e, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2711494083260827345
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +402,7 @@ Transform:
   m_GameObject: {fileID: 5275897714982076218}
   serializedVersion: 2
   m_LocalRotation: {x: 0.9994381, y: 0.008637227, z: 0.022803443, w: 0.022998434}
-  m_LocalPosition: {x: 0.49861288, y: -0.13265142, z: -1.449414}
+  m_LocalPosition: {x: 0.003, y: -0.064, z: -0.486}
   m_LocalScale: {x: 29.184082, y: 29.184082, z: 29.184084}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -401,7 +499,7 @@ Transform:
   m_GameObject: {fileID: 7191945757770383907}
   serializedVersion: 2
   m_LocalRotation: {x: 0.6461367, y: 0.49793914, z: 0.35193685, w: -0.45902553}
-  m_LocalPosition: {x: 0.5000507, y: -0.14526898, z: -1.5041338}
+  m_LocalPosition: {x: 0.004, y: -0.077, z: -0.541}
   m_LocalScale: {x: 0.07324325, y: 0.07324326, z: 0.07324325}
   m_ConstrainProportionsScale: 0
   m_Children: []
