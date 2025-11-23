@@ -65,6 +65,10 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private float colorAdjustmentsTarget = 0f;
     [SerializeField] private float smoothSpeedPostProcess = 2f;
 
+    [Header("Planète")]
+    [SerializeField] private GameObject planete;
+    [SerializeField] private float distancePlanete = -2000f;
+
 
 
     // Contrôle souris (debug)
@@ -109,7 +113,7 @@ public class CurseurRaycast : MonoBehaviour
     }
 
     void Update(){
-        if (chromaticAberration != null && lensDistortion != null)
+        if (chromaticAberration != null && lensDistortion != null && colorAdjustments != null)
         {
             chromaticAberration.intensity.value = Mathf.Lerp(
                 chromaticAberration.intensity.value,
@@ -128,6 +132,16 @@ public class CurseurRaycast : MonoBehaviour
                 colorAdjustmentsTarget,
                 Time.deltaTime * smoothSpeedPostProcess
             );
+
+            Vector3 pos = planete.transform.localPosition;
+
+            float newZ = Mathf.Lerp(
+                pos.z,
+                distancePlanete,
+                Time.deltaTime * smoothSpeedPostProcess
+            );
+
+            planete.transform.localPosition = new Vector3(pos.x, pos.y, newZ);
         }
     }
 
@@ -288,6 +302,7 @@ public class CurseurRaycast : MonoBehaviour
         chromaticAberrationTarget = 0f;
         lensDistortionTarget = 0f;
         colorAdjustmentsTarget = 0f;
+        distancePlanete = -300f;
     }
 
 
