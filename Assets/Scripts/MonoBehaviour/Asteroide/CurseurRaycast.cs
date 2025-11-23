@@ -14,7 +14,6 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private GameObject pistolet2;
     [SerializeField] private float fusilRotationSpeed = 8f;
     [SerializeField] private float distancePistolet = 10f;
-    [SerializeField] private Transform sym;
 
     [Header("Fracture")]
     [SerializeField] private GameObject[] fractureAsteroidPrefabs;
@@ -191,8 +190,6 @@ public class CurseurRaycast : MonoBehaviour
             {
                 Vector3 screenPos = new Vector3(rightWall.uv.x * Screen.width, rightWall.uv.y * Screen.height, distancePistolet);
                 Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
-
-                sym.localPosition = screenPos;
 
                 Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
                 if (Physics.Raycast(ray, out RaycastHit hit))
