@@ -14,6 +14,7 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private GameObject pistolet2;
     [SerializeField] private float fusilRotationSpeed = 8f;
     [SerializeField] private float distancePistolet = 10f;
+    [SerializeField] private Transform sym;
 
     [Header("Fracture")]
     [SerializeField] private GameObject[] fractureAsteroidPrefabs;
