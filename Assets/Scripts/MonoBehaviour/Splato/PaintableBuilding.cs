@@ -6,7 +6,7 @@ public class PaintableBuilding : MonoBehaviour
     [Header("Peinture")]
     public Material paintableMaterial;
     public Material paintBrushMaterial;
-    public int textureSize = 1024;
+    public int textureSize = 2048;
 
     [Header("Peinture dynamique")]
     public float defaultBrushSize = 0.05f;
@@ -15,8 +15,18 @@ public class PaintableBuilding : MonoBehaviour
     [HideInInspector]
     public RenderTexture paintMask;
 
+    private Material materialInstance; 
+    private string maskProperty = "_PaintMask";
+
     void Start()
     {
+        MeshRenderer renderer = GetComponent<MeshRenderer>();
+        if (renderer != null)
+        {
+            materialInstance = new Material(renderer.material);
+            renderer.material = materialInstance;
+        }
+
         InitializeMask();
     }
 
@@ -26,8 +36,10 @@ public class PaintableBuilding : MonoBehaviour
         paintMask.enableRandomWrite = true;
         paintMask.Create();
 
-        if (paintableMaterial != null)
-            paintableMaterial.SetTexture("_PaintMask", paintMask);
+        if (materialInstance != null)
+            materialInstance.SetTexture(maskProperty, paintMask);
+        else if (paintableMaterial != null)
+            paintableMaterial.SetTexture(maskProperty, paintMask);
 
         ClearMask();
     }
@@ -40,9 +52,6 @@ public class PaintableBuilding : MonoBehaviour
         RenderTexture.active = active;
     }
 
-    /// <summary>
-    /// Appliquer la peinture sur le masque
-    /// </summary>
     public void Paint(Vector2 uv, float brushSize = -1f, float strength = -1f)
     {
         if (paintBrushMaterial == null || paintMask == null)

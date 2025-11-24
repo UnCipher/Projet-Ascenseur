@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Asteroide.unity
     guid: c6ef7f86efec4a64a8424920134c5e9b
+  - enabled: 1
+    path: Assets/Scenes/Splato.unity
+    guid: 691ee14e819cb644ba61f51eba5aa36c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

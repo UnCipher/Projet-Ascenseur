@@ -1227,6 +1227,9 @@ MonoBehaviour:
     echolocation:
       name: Echolocation
       duration: 60
+    splato:
+      name: Splato
+      duration: 60
   animator: {fileID: 8954183997586138866}
   leftCamera: {fileID: 5706543652229499440}
   centerCamera: {fileID: 1390761128347103144}

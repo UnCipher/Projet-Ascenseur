@@ -1972,9 +1972,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paintableMaterial: {fileID: 2100000, guid: e823d5db7b67aae40ad7093bd9f3c606, type: 2}
   paintBrushMaterial: {fileID: 2100000, guid: 3e2863b9ed8b7564293c9050b9db8540, type: 2}
-  textureSize: 1024
-  defaultBrushSize: 0.05
-  defaultBrushStrength: 1
+  textureSize: 2048
+  defaultBrushSize: 5
+  defaultBrushStrength: 5
   paintMask: {fileID: 0}
 --- !u!64 &8688574309011900488
 MeshCollider:

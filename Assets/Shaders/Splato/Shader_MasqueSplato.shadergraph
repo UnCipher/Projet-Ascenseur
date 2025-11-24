@@ -501,7 +501,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
     "m_ObjectId": "2e6f5fa29127451cb7940d2d0c213792",
     "m_Id": 0,
-    "m_DisplayName": "MaskRT",
+    "m_DisplayName": "PaintMask",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -641,10 +641,10 @@
     "m_Guid": {
         "m_GuidSerialized": "5c734d6a-8087-4d0f-b4e8-4f9212462bc8"
     },
-    "m_Name": "MaskRT",
+    "m_Name": "PaintMask",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "MaskRT",
-    "m_DefaultReferenceName": "_MaskRT",
+    "m_RefNameGeneratedByDisplayName": "PaintMask",
+    "m_DefaultReferenceName": "_PaintMask",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,

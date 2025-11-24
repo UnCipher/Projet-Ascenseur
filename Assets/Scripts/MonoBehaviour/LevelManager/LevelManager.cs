@@ -56,6 +56,9 @@ public class LevelManager : MonoBehaviour
         [Space(5)]
 
         public SceneSettings echolocation;
+        [Space(5)]
+
+        public SceneSettings splato;
     }
     
     [System.Serializable]
@@ -248,6 +251,12 @@ public class LevelManager : MonoBehaviour
         // Call Echolocation Scene
         if(GetCurrentSceneName() == scenes.elevator.name)
         StartCoroutine(ChangeScene(scenes.echolocation));
+    }
+    public void OnSplato()
+    {
+        // Call Splato Scene
+        if(GetCurrentSceneName() == scenes.elevator.name)
+        StartCoroutine(ChangeScene(scenes.splato));
     }
 
     public void OnElevatorLeave()
