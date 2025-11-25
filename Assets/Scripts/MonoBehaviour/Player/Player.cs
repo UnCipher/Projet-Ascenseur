@@ -32,22 +32,8 @@ public class Player : MonoBehaviour
     [System.Serializable]
     public class PlayerHandInfo
     {
-        public bool leftHandClosed;
-        public bool leftHandClosedOnLastFrame;
-        [Space(5)]
-
         public Vector3 leftHandPos;
-        public Vector3 leftFingerPos;
-        public float leftDistanceToBeClosed;
-        [Space(10)]
-
-        public bool rightHandClosed;
-        public bool rightHandClosedOnLastFrame;
-        [Space(5)]
-
         public Vector3 rightHandPos;
-        public Vector3 rightFingerPos;
-        public float rightDistanceToBeClosed;
     }
 
     // ---------------------------
@@ -65,27 +51,8 @@ public class Player : MonoBehaviour
         if (isActive)
         {
             // Change Hands Positions
-            leftHand.transform.localPosition = handsInfo.leftHandPos;
-            rightHand.transform.localPosition = handsInfo.rightHandPos;
-
-            // Change Closed State
-            // Left
-            if (handsInfo.leftHandClosed)
-                handsInfo.leftHandClosedOnLastFrame = true;
-
-            else
-                handsInfo.leftHandClosedOnLastFrame = false;
-
-            handsInfo.leftHandClosed = Vector3.Distance(handsInfo.leftFingerPos, handsInfo.leftHandPos) <= handsInfo.leftDistanceToBeClosed;
-
-            // Right
-            if (handsInfo.rightHandClosed)
-                handsInfo.rightHandClosedOnLastFrame = true;
-
-            else
-                handsInfo.rightHandClosedOnLastFrame = false;
-
-            handsInfo.rightHandClosed = Vector3.Distance(handsInfo.rightFingerPos, handsInfo.rightHandPos) <= handsInfo.rightDistanceToBeClosed;
+            leftHand.transform.localPosition = new Vector3(-handsInfo.leftHandPos.x, handsInfo.leftHandPos.y, handsInfo.leftHandPos.z);
+            rightHand.transform.localPosition = new Vector3(-handsInfo.rightHandPos.x, handsInfo.rightHandPos.y, handsInfo.rightHandPos.z);
         }
     }
 
