@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2574b9c1086833b4dad1e45f15339a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pipes: []
   profile: {fileID: 0}
   onCompletion:
     m_PersistentCalls:

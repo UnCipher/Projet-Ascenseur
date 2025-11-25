@@ -9,7 +9,7 @@ public class PipeGameController : MonoBehaviour
     // ---------------------------
 
     bool listeningForEvents;
-    List<Pipe> pipes = new List<Pipe>();
+    [SerializeField] List<Pipe> pipes = new List<Pipe>();
 
     [Header("Game Controller")]
     [SerializeField] PipeMiniGameProfile profile;
@@ -132,6 +132,7 @@ public class PipeGameController : MonoBehaviour
             {
                 // Call Functions
                 MiniGameCompleted();
+                Debug.LogError("HOOOORAAAAYYYYY");
             }
         }
     }
