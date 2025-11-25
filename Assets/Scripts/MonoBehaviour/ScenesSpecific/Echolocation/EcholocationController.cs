@@ -46,6 +46,14 @@ public class EcholocationController : MonoBehaviour
     [SerializeField] GameObject particleScanPrefab;
     [SerializeField] Rigidbody rb;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource movementAudioSource;
+    [SerializeField] AudioSource scanAudioSource;
+    [SerializeField] AudioClip movementClip;
+    [SerializeField] AudioClip scanClip;
+
+    [SerializeField] float movementMinSpeed = 0.05f;
+
     // ---------------------------
     // Functions
     // ---------------------------
@@ -99,6 +107,26 @@ public class EcholocationController : MonoBehaviour
 
         // Move Right
         transform.Rotate(Vector3.up * Time.fixedDeltaTime * rightForce * turnSpeed);
+
+        float moveAmount = rb.linearVelocity.magnitude 
+                       + Mathf.Abs(leftForce) 
+                       + Mathf.Abs(rightForce)
+                       + Mathf.Abs(centerForce);
+
+        if (moveAmount > movementMinSpeed)
+        {
+            if (!movementAudioSource.isPlaying)
+            {
+                movementAudioSource.clip = movementClip;
+                movementAudioSource.loop = true;
+                movementAudioSource.Play();
+            }
+        }
+        else
+        {
+            if (movementAudioSource.isPlaying)
+                movementAudioSource.Stop();
+        }
     }
 
     float SetHighestVolume(LevelManager.MicrophoneAudioType type, float highestVolume)
@@ -196,6 +224,9 @@ public class EcholocationController : MonoBehaviour
 
     void InstantiateScan(Vector3 position, float size, float duration)
     {
+        if (scanAudioSource != null && scanClip != null)
+        scanAudioSource.PlayOneShot(scanClip);
+
         // Set Values
         GameObject particleObject = Instantiate(particleScanPrefab, position, Quaternion.Euler(Vector3.zero));
         ParticleSystem particle = particleObject.transform.GetChild(0).GetComponent<ParticleSystem>();
