@@ -192,11 +192,10 @@ public class CurseurRaycast : MonoBehaviour
                 Vector3 screenPos = new Vector3(rightWall.uv.x * Screen.width, rightWall.uv.y * Screen.height, distancePistolet);
                 Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
 
-                sym.localPosition = screenPos;
-
                 Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
+                    GérerImpact(hit);
                     if (hit.transform.GetComponent<MouvementAsteroide>())
                         GérerImpact(hit);
                 }
