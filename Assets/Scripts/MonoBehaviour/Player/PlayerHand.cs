@@ -11,6 +11,14 @@ public class PlayerHand : MonoBehaviour
     Wall.SelectedWall currentWall;
     Vector2 wallPoint;
 
+    [Header("Interaction")]
+    [SerializeField] float firstWaitTime;
+    [SerializeField] float waitTime;
+    float hoverTime;
+
+    HandInteractable lastHoveredInteracble;
+    bool firstTimeInteracted;
+
     [Header("References")]
     [SerializeField] Player player;
     [SerializeField] Hand hand;
@@ -58,6 +66,8 @@ public class PlayerHand : MonoBehaviour
 
         else
             player.SetRightWallInfo(wallPoint, currentWall);
+
+        LookForInteraction();
     }
 
     Wall GetCurrentWall()
@@ -84,11 +94,60 @@ public class PlayerHand : MonoBehaviour
         // Else
         return null;
     }
-    
+
     public Wall.SelectedWall GetSelectedWall()
     {
         // Return Value
         return currentWall;
+    }
+    
+    void LookForInteraction()
+    {
+        if (player.GetPlayerActive() && currentWall != Wall.SelectedWall.None)
+        {
+            // Set Values
+            Camera camera = LevelManager.instance.GetWallCamera(currentWall);
+            Ray ray = camera.ViewportPointToRay(wallPoint);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, 100))
+            {
+                if (hit.transform.GetComponent<HandInteractable>() != null)
+                {
+                    HandInteractable interactable = hit.transform.GetComponent<HandInteractable>();
+
+                    if (interactable != lastHoveredInteracble)
+                    {
+                        lastHoveredInteracble = interactable;
+                        firstTimeInteracted = false;
+                        hoverTime = 0;
+                    }
+
+                    else
+                    {
+                        float currentWaitTime = firstWaitTime;
+
+                        if (firstTimeInteracted)
+                            currentWaitTime = waitTime;
+
+                        if(hoverTime >= currentWaitTime)
+                        {
+                            interactable.OnHandHover();
+                            hoverTime -= currentWaitTime;
+                            firstTimeInteracted = true;
+                        }
+                    }
+
+                    hoverTime += Time.fixedDeltaTime;
+                    return;
+                }
+            }
+        }
+
+        // Else
+        // Reset Values
+        lastHoveredInteracble = null;
+        firstTimeInteracted = false;
+        hoverTime = 0;
     }
 
     // Collision Detections

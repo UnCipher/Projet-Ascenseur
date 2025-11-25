@@ -27,9 +27,9 @@ public class Wall : MonoBehaviour
     public enum SelectedWall
     {
         None,
-        Right,
-        Center,
         Left,
+        Center,
+        Right,
     }
 
     [System.Serializable]
@@ -95,7 +95,7 @@ public class Wall : MonoBehaviour
 
         // Reverse if Necessary
         if (reverseAxis)
-            point.x = -point.x;
+            point.x = -point.x + 1;
 
         return point;
     }

@@ -23,17 +23,29 @@ public class LevelManager : MonoBehaviour
     [Header("Scene Manager")]
     [SerializeField] float sceneChangeStartup;
     [SerializeField] float sceneChangeCooldown;
-    [Space(5)]
 
+    [Header("Scene Transition Animations")]
     [SerializeField] string animationEnterTrigger;
     [SerializeField] string animationLeaveTrigger;
+    [Space(5)]
+
+    [SerializeField] string animationEnterElevatorTrigger;
+    [SerializeField] string animationLeaveElevatorTrigger;
+    [Space(5)]
+
+    [SerializeField] string animationEnterMiniGameFirstTrigger;
+    [SerializeField] string animationEnterMiniGameSecondTrigger;
+    [Space(5)]
+
+    [SerializeField] string animationErrorLight;
+    [SerializeField] GameObject redLights;
 
     public GameScenes scenes;
-    string currentScene;
     bool changingScene;
 
     [Header("References")]
     [SerializeField] Animator animator;
+    [SerializeField] PipeGameController pipeGameController;
 
     public Camera leftCamera;
     public Camera centerCamera;
@@ -124,6 +136,9 @@ public class LevelManager : MonoBehaviour
         if (!animator)
             animator = GetComponent<Animator>();
 
+        // Play Start Animation
+        animator.SetTrigger(animationEnterElevatorTrigger);
+
         // Call Functions
         InitiateOSCMessages();
     }
@@ -142,36 +157,40 @@ public class LevelManager : MonoBehaviour
         if (GetCurrentSceneName() != scene.name && !changingScene && operationnal)
         {
             // Set Values
-            currentScene = scene.name;
             changingScene = true;
+            string enterAnimation = animationEnterTrigger;
+            string exitAnimation = animationLeaveTrigger;
+
+            if (scene.name == scenes.elevator.name)
+            {
+                enterAnimation = animationEnterElevatorTrigger;
+                exitAnimation = animationLeaveElevatorTrigger;
+            }
 
             // Cancel Invoke
             CancelInvoke("OnSceneCompleted");
 
             // Change Elevator State
-            if(scene.name == scenes.elevator.name)
+            if (scene.name == scenes.elevator.name)
             {
-                if(elevatorState == ElevatorState.Damaged)
+                if (elevatorState == ElevatorState.Damaged)
                 {
-                    InitiateEndGame();
+                    operationnal = false;
+                    Invoke("InitiateEndGame", 10f);
                 }
 
                 else
-                {
                     elevatorState = ElevatorState.Damaged;
-                }
             }
 
-            // Play Animation
-            if (GetCurrentSceneName() != scenes.elevator.name)
-            {
-                animator.SetTrigger(animationLeaveTrigger);
-                yield return new WaitForSeconds(sceneChangeStartup);
-            }
+            animator.SetTrigger(exitAnimation);
+            yield return new WaitForSeconds(sceneChangeStartup);
 
             // Clear Parent
             transform.SetParent(null, false);
             transform.eulerAngles = Vector3.zero;
+
+            DontDestroyOnLoad(this);
 
             // Load Scene
             SceneManager.LoadScene(scene.name);
@@ -181,14 +200,14 @@ public class LevelManager : MonoBehaviour
                 Invoke("OnSceneCompleted", scene.duration - sceneChangeStartup);
 
             // Play Animation
-            if (scene.name != scenes.elevator.name)
-            {
-                animator.SetTrigger(animationEnterTrigger);
-                yield return new WaitForSeconds(sceneChangeCooldown);
-            }
+            animator.SetTrigger(enterAnimation);
+            yield return new WaitForSeconds(sceneChangeCooldown);
 
             changingScene = false;
         }
+        
+        else if(GetCurrentSceneName() == scenes.elevator.name && !changingScene && !operationnal)
+            InitiateEndGame();
     }
 
     void StartElevator()
@@ -209,12 +228,6 @@ public class LevelManager : MonoBehaviour
         {
             operationnal = false;
         }
-    }
-    
-    void InitiateEndGame()
-    {
-        operationnal = false;
-        Debug.Log("lel start MiniGame and Cutscene");
     }
     
     public void OnSceneCompleted()
@@ -268,6 +281,59 @@ public class LevelManager : MonoBehaviour
         Application.Quit();
     }
 
+    // Mini Game Functions
+    // ---------------------------
+
+    void InitiateEndGame()
+    {
+        // Cancel Invoke Just in Case
+        CancelInvoke("InitiateEndGame");
+
+        StartCoroutine("PipeMiniGameInitiation");
+    }
+
+    IEnumerator PipeMiniGameInitiation()
+    {
+        // Transition
+        animator.SetTrigger(animationLeaveTrigger);
+        yield return new WaitForSeconds(3);
+
+        animator.SetTrigger(animationEnterElevatorTrigger);
+        animator.SetTrigger(animationErrorLight);
+        redLights.SetActive(true);
+        yield return new WaitForSeconds(2);
+
+        // Animation
+        animator.SetTrigger(animationEnterMiniGameFirstTrigger);
+        yield return new WaitForSeconds(2);
+
+        // Call Functions
+        pipeGameController.StartMiniGame();
+        animator.SetTrigger(animationEnterMiniGameSecondTrigger);
+    }
+
+    public void MiniGameWon()
+    {
+        animator.SetTrigger(animationLeaveTrigger);
+        Invoke("ReloadElevatorScene", 4f);
+    }
+
+    public void MiniGameFailed()
+    {
+        animator.SetTrigger(animationLeaveTrigger);
+        Invoke("ReloadElevatorScene", 4f);
+    }
+    
+    void ReloadElevatorScene()
+    {
+        // Reset Value
+        GameObject sum = new GameObject();
+        transform.SetParent(sum.transform, false);
+        instance = null;
+
+        SceneManager.LoadScene(scenes.elevator.name);
+    }
+    
     // OSC Functions
     // ---------------------------
 
@@ -409,10 +475,7 @@ public class LevelManager : MonoBehaviour
         if (players[0])
         {
             Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
-            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
-
             players[0].handsInfo.leftHandPos = handPos;
-            players[0].handsInfo.leftHandPos = fingerPos;
         }
     }
     
@@ -421,10 +484,7 @@ public class LevelManager : MonoBehaviour
         if(players[0])
         {
             Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
-            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
-
             players[0].handsInfo.rightHandPos = handPos;
-            players[0].handsInfo.rightHandPos = fingerPos;
         }
     }
     
@@ -449,10 +509,7 @@ public class LevelManager : MonoBehaviour
         if (players[1])
         {
             Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
-            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
-
             players[1].handsInfo.leftHandPos = handPos;
-            players[1].handsInfo.leftHandPos = fingerPos;
         }
     }
     
@@ -461,10 +518,7 @@ public class LevelManager : MonoBehaviour
         if(players[1])
         {
             Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
-            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
-
             players[1].handsInfo.rightHandPos = handPos;
-            players[1].handsInfo.rightHandPos = fingerPos;
         }
     }
     
@@ -489,10 +543,7 @@ public class LevelManager : MonoBehaviour
         if (players[2])
         {
             Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
-            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
-
             players[2].handsInfo.leftHandPos = handPos;
-            players[2].handsInfo.leftHandPos = fingerPos;
         }
     }
     
@@ -501,10 +552,7 @@ public class LevelManager : MonoBehaviour
         if(players[2])
         {
             Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
-            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
-
             players[2].handsInfo.rightHandPos = handPos;
-            players[2].handsInfo.rightHandPos = fingerPos;
         }
     }
     
@@ -529,10 +577,7 @@ public class LevelManager : MonoBehaviour
         if (players[3])
         {
             Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
-            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
-
             players[3].handsInfo.leftHandPos = handPos;
-            players[3].handsInfo.leftHandPos = fingerPos;
         }
     }
     
@@ -541,10 +586,7 @@ public class LevelManager : MonoBehaviour
         if(players[3])
         {
             Vector3 handPos = new Vector3(osc.GetFloat(0), osc.GetFloat(1), osc.GetFloat(2));
-            Vector3 fingerPos = new Vector3(osc.GetFloat(3), osc.GetFloat(4), osc.GetFloat(5));
-
             players[3].handsInfo.rightHandPos = handPos;
-            players[3].handsInfo.rightHandPos = fingerPos;
         }
     }
 
@@ -558,6 +600,24 @@ public class LevelManager : MonoBehaviour
 
         // Return Value
         return microphoneInfo;
+    }
+
+    public Camera GetWallCamera(Wall.SelectedWall wall)
+    {
+        // Set Values
+        // Left
+        Camera returnedCamera = leftCamera;
+
+        // Center
+        if (wall == Wall.SelectedWall.Center)
+            returnedCamera = centerCamera;
+
+        // Right
+        if (wall == Wall.SelectedWall.Right)
+            returnedCamera = rightCamera;
+        
+        // Return Value
+        return returnedCamera;
     }
 
     public static int GetActivePlayersNumber()
