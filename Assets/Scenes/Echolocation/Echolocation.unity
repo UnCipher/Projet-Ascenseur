@@ -274,7 +274,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.89411765, g: 0.7206094, b: 0.6039216, a: 1}
-  m_Intensity: 0.35
+  m_Intensity: 0.25
   m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -894,7 +894,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!65 &499421162
 BoxCollider:

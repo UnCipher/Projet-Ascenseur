@@ -13,6 +13,13 @@ public class CampfireScene : MonoBehaviour
     [SerializeField] int currentTick;
     [Space(5)]
 
+    [SerializeField] int randomMinTick;
+    [SerializeField] int randomMaxTick;
+    [SerializeField] int selectedRandomTick;
+    [SerializeField] int randomCurrentTick;
+    [SerializeField] UnityEvent randomEvent;
+    [Space(5)]
+
     [SerializeField] int currentEventIndex;
     [SerializeField] CampfireMicEvents[] campfireEvents;
     [SerializeField] bool canBeActivated = true;
@@ -37,11 +44,12 @@ public class CampfireScene : MonoBehaviour
 
     void Start()
     {
-        // IDK just got here
+        SetRandomTick();
     }
 
     void FixedUpdate()
     {
+        // Scene Events
         if (currentEventIndex < campfireEvents.Length && canBeActivated)
         {
             // Call Functions
@@ -53,9 +61,31 @@ public class CampfireScene : MonoBehaviour
             else
                 currentTick++;
         }
-        
+
+        // Random Events
+        if (randomCurrentTick >= selectedRandomTick)
+            CallRandomEvents();
+
+        randomCurrentTick++;
+
         // Temporary
         Debug.Log("Ticks : " + currentTick + "/" + tickBetweenCheck + ", CurrentEvent : " + currentEventIndex);
+    }
+
+    void SetRandomTick()
+    {
+        // Set Values
+        selectedRandomTick = Random.Range(randomMinTick, randomMaxTick);
+        randomCurrentTick = 0;
+    }
+    
+    void CallRandomEvents()
+    {
+        // Call Functions
+        SetRandomTick();
+
+        if (canBeActivated)
+            randomEvent?.Invoke();
     }
 
     void SetHighestVolume(LevelManager.MicrophoneAudioType type)
@@ -105,8 +135,14 @@ public class CampfireScene : MonoBehaviour
     void ReactivateEvent()
     {
         // Set Values
-        canBeActivated = true;
-        Debug.Log("Interaction Reactivated for Event #" + currentEventIndex);
+        if (currentEventIndex >= campfireEvents.Length)
+            LevelManager.instance.OnElevator();
+
+        else
+        {
+            canBeActivated = true;
+            Debug.Log("Interaction Reactivated for Event #" + currentEventIndex);
+        }
     }
 
     // Get Functions

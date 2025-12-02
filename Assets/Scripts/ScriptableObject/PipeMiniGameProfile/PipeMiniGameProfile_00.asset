@@ -12,54 +12,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c628b41c4c4bb4bb9984d0a2adda8b, type: 3}
   m_Name: PipeMiniGameProfile_00
   m_EditorClassIdentifier: 
-  gameDuration: 20
+  gameDuration: 70
   pipes:
   - pipeType: 0
-    wall: 0
+    wall: 1
     tilePosition: {x: 0, y: 0}
     visualTilePosition: {x: 0, y: 0}
     pipeRotation: 1
     isAlwaysActive: 1
     required: 0
   - pipeType: 1
-    wall: 0
+    wall: 1
     tilePosition: {x: 1, y: 0}
     visualTilePosition: {x: 1, y: 0}
     pipeRotation: 0
     isAlwaysActive: 0
     required: 0
   - pipeType: 3
-    wall: 0
+    wall: 1
     tilePosition: {x: 1, y: -1}
     visualTilePosition: {x: 1, y: -1}
     pipeRotation: 0
     isAlwaysActive: 0
     required: 0
   - pipeType: 2
-    wall: 0
+    wall: 1
     tilePosition: {x: 2, y: 0}
     visualTilePosition: {x: 2, y: 0}
     pipeRotation: 2
     isAlwaysActive: 0
     required: 0
   - pipeType: 3
-    wall: 0
+    wall: 1
     tilePosition: {x: 2, y: -1}
     visualTilePosition: {x: 2, y: -1}
     pipeRotation: 1
     isAlwaysActive: 0
     required: 0
   - pipeType: 2
-    wall: 0
+    wall: 1
     tilePosition: {x: 3, y: -1}
     visualTilePosition: {x: 3, y: -1}
-    pipeRotation: 0
+    pipeRotation: 2
     isAlwaysActive: 0
     required: 0
   - pipeType: 0
-    wall: 0
+    wall: 1
     tilePosition: {x: 3, y: -2}
     visualTilePosition: {x: 3, y: -2}
     pipeRotation: 0
     isAlwaysActive: 0
     required: 1
+  - pipeType: 1
+    wall: 0
+    tilePosition: {x: 1, y: 2}
+    visualTilePosition: {x: 1, y: -1}
+    pipeRotation: 0
+    isAlwaysActive: 0
+    required: 0
+  - pipeType: 0
+    wall: 0
+    tilePosition: {x: 0, y: 2}
+    visualTilePosition: {x: 0, y: -1}
+    pipeRotation: 1
+    isAlwaysActive: 1
+    required: 0
+  - pipeType: 0
+    wall: 0
+    tilePosition: {x: 3, y: 2}
+    visualTilePosition: {x: 3, y: -1}
+    pipeRotation: 3
+    isAlwaysActive: 0
+    required: 1
+  - pipeType: 3
+    wall: 0
+    tilePosition: {x: 2, y: 2}
+    visualTilePosition: {x: 2, y: -1}
+    pipeRotation: 3
+    isAlwaysActive: 0
+    required: 0

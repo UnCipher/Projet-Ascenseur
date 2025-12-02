@@ -613,8 +613,12 @@ public class LevelManager : MonoBehaviour
             returnedCamera = centerCamera;
 
         // Right
-        if (wall == Wall.SelectedWall.Right)
+        else if (wall == Wall.SelectedWall.Right)
             returnedCamera = rightCamera;
+
+        // Back
+        else if (wall == Wall.SelectedWall.Back)
+            returnedCamera = null;
         
         // Return Value
         return returnedCamera;

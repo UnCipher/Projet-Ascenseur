@@ -103,7 +103,7 @@ public class PlayerHand : MonoBehaviour
     
     void LookForInteraction()
     {
-        if (player.GetPlayerActive() && currentWall != Wall.SelectedWall.None)
+        if (player.GetPlayerActive() && currentWall != Wall.SelectedWall.None && currentWall != Wall.SelectedWall.Back)
         {
             // Set Values
             Camera camera = LevelManager.instance.GetWallCamera(currentWall);
