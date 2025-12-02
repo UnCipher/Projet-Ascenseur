@@ -30,6 +30,7 @@ public class Wall : MonoBehaviour
         Left,
         Center,
         Right,
+        Back,
     }
 
     [System.Serializable]

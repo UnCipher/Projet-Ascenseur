@@ -574,6 +574,7 @@ Transform:
   m_Children:
   - {fileID: 6258463467132687335}
   - {fileID: 5495960102931948789}
+  - {fileID: 6426649217659720505}
   - {fileID: 5097143694165411711}
   m_Father: {fileID: 7614724473167366709}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1422,7 +1423,7 @@ MonoBehaviour:
       duration: 0
     campfire:
       name: Campfire
-      duration: 20
+      duration: 70
     asteroid:
       name: Asteroide
       duration: 60
@@ -1824,7 +1825,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: a30f0ee04e1548f48a83cc2579daa480, type: 2}
   selectedWall: 1
   vector2Axis: 1
-  reverseAxis: 1
+  reverseAxis: 0
   wallCoordinates:
     minPoint: {x: 1.225, y: 0, z: 1.225}
     maxPoint: {x: 1.225, y: 2.45, z: -1.225}
@@ -2897,7 +2898,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 4, z: 1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5073007514407856257
 MonoBehaviour:
@@ -3511,6 +3512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2574b9c1086833b4dad1e45f15339a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pipes: []
   profile: {fileID: 11400000, guid: c6cf1edcf7315764097d30aec2dbe8cb, type: 2}
   onCompletion:
     m_PersistentCalls:
@@ -3550,6 +3552,79 @@ MonoBehaviour:
   twoWayCorner: {fileID: 8088414981538880445, guid: 5cc2784aad69e1540a13b15fc16d06ec, type: 3}
   threeWay: {fileID: 8408889877926677073, guid: 1af880f94f9779f4e9c64580c249823d, type: 3}
   fourWay: {fileID: 4750497170704643087, guid: a79cf1e57f8fb684a916e39775cbcf40, type: 3}
+--- !u!1 &8707272725192014172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6426649217659720505}
+  - component: {fileID: 3001702197069542094}
+  - component: {fileID: 4676084268706526560}
+  m_Layer: 2
+  m_Name: Back
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6426649217659720505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8707272725192014172}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.4999993, y: -0.49999928, z: -0.5000007, w: 0.5000008}
+  m_LocalPosition: {x: 0, y: 0, z: 1.225}
+  m_LocalScale: {x: 2.45, y: 1, z: 2.45}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7030702870837302530}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
+--- !u!65 &3001702197069542094
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8707272725192014172}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4676084268706526560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8707272725192014172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66218ba41cc7b524fad7ce6ec103ec3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: a30f0ee04e1548f48a83cc2579daa480, type: 2}
+  selectedWall: 4
+  vector2Axis: 0
+  reverseAxis: 0
+  wallCoordinates:
+    minPoint: {x: -1.225, y: 0, z: -1.225}
+    maxPoint: {x: 1.225, y: 2.45, z: -1.225}
 --- !u!1 &8719721817954724919
 GameObject:
   m_ObjectHideFlags: 0

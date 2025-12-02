@@ -95,12 +95,16 @@ public class EcholocationController : MonoBehaviour
         // Set Values
         float leftForce = (float)LevelManager.GetAllHandOnWall(Wall.SelectedWall.Left).Length / ((float)LevelManager.GetActivePlayersNumber() * 2);
         float centerForce = (float)LevelManager.GetAllHandOnWall(Wall.SelectedWall.Center).Length / ((float)LevelManager.GetActivePlayersNumber() * 2);
+        float backForce = (float)LevelManager.GetAllHandOnWall(Wall.SelectedWall.Back).Length / ((float)LevelManager.GetActivePlayersNumber() * 2);
         float rightForce = (float)LevelManager.GetAllHandOnWall(Wall.SelectedWall.Right).Length / ((float)LevelManager.GetActivePlayersNumber() * 2);
 
         Debug.Log(leftForce + " / " + centerForce + " / " + rightForce);
 
         // Move Left
         transform.Rotate(Vector3.up * Time.fixedDeltaTime * leftForce * -turnSpeed);
+
+        // Move Backward
+        rb.AddForce(transform.forward * moveSpeed * backForce);
 
         // Move Forward
         rb.AddForce(-transform.forward * moveSpeed * centerForce);

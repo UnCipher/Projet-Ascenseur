@@ -66,6 +66,7 @@ public class Pipe : MonoBehaviour
     {
         // Set Values
         controller = pipeController;
+        controller.AddToPipeList(this);
         
         tilePosition = profile.tilePosition;
         visualTilePosition = profile.visualTilePosition;
