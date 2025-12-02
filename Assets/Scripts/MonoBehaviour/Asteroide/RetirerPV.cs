@@ -58,6 +58,11 @@ public class RetirerPV : MonoBehaviour
     {
         if (other.CompareTag("Asteroide"))
         {
+            if (ShieldController.IsProtected)
+            {
+                return;
+            }
+            
             so_infoCompteur.nbVie -= 1;
             champPV.text = "Points de vie : " + so_infoCompteur.nbVie;
 
