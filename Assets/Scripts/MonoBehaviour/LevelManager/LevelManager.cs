@@ -204,7 +204,8 @@ public class LevelManager : MonoBehaviour
             else if(!changingScene && operationnal && currentSceneIndex >= scenes.Length)
             {
                 operationnal = false;
-                Debug.Log("awd");
+                Debug.Log("yg");
+                Invoke("InitiateEndGame", 3);
             }
 
             /*
@@ -334,14 +335,10 @@ public class LevelManager : MonoBehaviour
 
     void InitiateEndGame()
     {
-        if(operationnal)
-        {
-            operationnal = false;
-            // Cancel Invoke Just in Case
-            
+        // Cancel Invoke Just in Case
+        CancelInvoke("InitiateEndGame");
 
-            StartCoroutine("PipeMiniGameInitiation");
-        }
+        StartCoroutine("PipeMiniGameInitiation");
     }
 
     IEnumerator PipeMiniGameInitiation()

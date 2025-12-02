@@ -26,8 +26,16 @@ public class Pipe : MonoBehaviour
 
     [SerializeField] Connectable connectable;
 
+    [Header("Animations")]
+    [SerializeField] string activationAnimation;
+    [SerializeField] string deactivationAnimation;
+
     [Header("References")]
     [SerializeField] Transform visual;
+    [SerializeField] Animator animator;
+    [Space(50)]
+
+    [SerializeField] bool test;
 
     // Classes
     // ---------------------------
@@ -61,6 +69,15 @@ public class Pipe : MonoBehaviour
     // ---------------------------
     // Functions
     // ---------------------------
+
+    void FixedUpdate()
+    {
+        if(test)
+        {
+            test = false;
+            RotatePipe();
+        }
+    }
 
     public void SetValueOnPipe(PipeMiniGameProfile.PipeProperties profile, PipeGameController pipeController)
     {
@@ -173,7 +190,7 @@ public class Pipe : MonoBehaviour
         if(!isActive)
         {
             isActive = true;
-            Debug.Log("Activated Pipe");
+            animator.SetTrigger(activationAnimation);
         }
     }
     
@@ -182,7 +199,7 @@ public class Pipe : MonoBehaviour
         if(isActive)
         {
             isActive = false;
-            Debug.Log("Desactivated Pipe");
+            animator.SetTrigger(deactivationAnimation);
         }
     }
 
@@ -193,11 +210,18 @@ public class Pipe : MonoBehaviour
             // Set Values
             pipeRotation = GetRotationWithOffset(pipeRotation, 1);
 
-            // Play Animation
+            // Set Rotation
+            Transition.AngleTransition transitionParam = new Transition.AngleTransition()
+            {
+                newValue = new Vector3(0, 0, (int)pipeRotation * -90),
+                curve = AnimationCurve.EaseInOut(0,0,1,1),
+                duration = .25f,
+            }; 
+
+            Transition.StartRotationTransition(visual, transitionParam, true);
 
             // Call For Update
             UpdateConnectivity();
-            SetTransform();
             controller.UpdatePipes();
         }
     }

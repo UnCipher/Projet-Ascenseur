@@ -1407,8 +1407,10 @@ MonoBehaviour:
   - {fileID: 7893956458198908826}
   elevatorState: 0
   operationnal: 1
+  gameStartDuration: 3
   sceneChangeStartup: 2
   sceneChangeCooldown: 4
+  animationStartTrigger: Start
   animationEnterTrigger: Open
   animationLeaveTrigger: Close
   animationEnterElevatorTrigger: OpenElevator
@@ -1418,18 +1420,10 @@ MonoBehaviour:
   animationErrorLight: ErrorLight
   redLights: {fileID: 8719721817954724919}
   scenes:
-    elevator:
-      name: Elevator
-      duration: 0
-    campfire:
-      name: Campfire
-      duration: 70
-    asteroid:
-      name: Asteroide
-      duration: 60
-    echolocation:
-      name: Echolocation
-      duration: 60
+  - name: Campfire
+    duration: 70
+  - name: Asteroide
+    duration: 60
   animator: {fileID: 8954183997586138866}
   pipeGameController: {fileID: 7964707792164319606}
   leftCamera: {fileID: 5706543652229499440}

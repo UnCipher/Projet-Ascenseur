@@ -98,7 +98,7 @@ public class Transition : MonoBehaviour
     {
         // Set Values
         float lerpFraction = currentTime / endTime;
-        toChange.rotation = Quaternion.Lerp(startAngle, newAngle, curve.Evaluate(lerpFraction));
+        toChange.localRotation = Quaternion.Lerp(startAngle, newAngle, curve.Evaluate(lerpFraction));
     }
 
     void ChangeSize()
@@ -177,7 +177,7 @@ public class Transition : MonoBehaviour
         newTransition.toChange = toChange;
         newTransition.currentTime = 0;
 
-        newTransition.startAngle = toChange.rotation;
+        newTransition.startAngle = toChange.localRotation;
         newTransition.newAngle = Quaternion.Euler(transitionParam.newValue + transitionParam.valueOffset);
     }
     
