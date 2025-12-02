@@ -191,6 +191,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: gameStartDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: scenes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: animationStartTrigger
+      value: Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: scenes.Array.data[0].name
+      value: Campfire
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: scenes.Array.data[1].name
+      value: Asteroide
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: scenes.Array.data[2].name
+      value: Echolocation
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: scenes.Array.data[0].duration
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: scenes.Array.data[1].duration
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 7614724473167366709, guid: a8b9217093b7e6448ae210353473154b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

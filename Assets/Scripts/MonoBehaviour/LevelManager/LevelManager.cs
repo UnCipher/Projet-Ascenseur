@@ -21,10 +21,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField] bool operationnal = true;
 
     [Header("Scene Manager")]
+    [SerializeField] float gameStartDuration;
     [SerializeField] float sceneChangeStartup;
     [SerializeField] float sceneChangeCooldown;
 
     [Header("Scene Transition Animations")]
+    [SerializeField] string animationStartTrigger;
+    [Space(5)]
+
     [SerializeField] string animationEnterTrigger;
     [SerializeField] string animationLeaveTrigger;
     [Space(5)]
@@ -40,8 +44,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] string animationErrorLight;
     [SerializeField] GameObject redLights;
 
-    public GameScenes scenes;
+    public SceneSettings[] scenes;
+    int currentSceneIndex;
+    
     bool changingScene;
+    bool started;
 
     [Header("References")]
     [SerializeField] Animator animator;
@@ -54,21 +61,6 @@ public class LevelManager : MonoBehaviour
 
     // Classes
     // ---------------------------
-
-    [System.Serializable]
-    public class GameScenes
-    {
-        public SceneSettings elevator;
-        [Space(5)]
-
-        public SceneSettings campfire;
-        [Space(5)]
-
-        public SceneSettings asteroid;
-        [Space(5)]
-
-        public SceneSettings echolocation;
-    }
     
     [System.Serializable]
     public class SceneSettings
@@ -152,67 +144,144 @@ public class LevelManager : MonoBehaviour
     // Scene Functions
     // ---------------------------
 
-    IEnumerator ChangeScene(SceneSettings scene)
+    IEnumerator ChangeScene()
     {
-        if (GetCurrentSceneName() != scene.name && !changingScene && operationnal)
+        if (started && !changingScene)
         {
-            // Set Values
-            changingScene = true;
-            string enterAnimation = animationEnterTrigger;
-            string exitAnimation = animationLeaveTrigger;
-
-            if (scene.name == scenes.elevator.name)
+            if (!changingScene && operationnal && scenes.Length > currentSceneIndex)
             {
-                enterAnimation = animationEnterElevatorTrigger;
-                exitAnimation = animationLeaveElevatorTrigger;
-            }
+                // Set Values
+                changingScene = true;
 
-            // Cancel Invoke
-            CancelInvoke("OnSceneCompleted");
+                bool toElevator = false;
+                string enterAnimation = animationEnterTrigger;
+                string exitAnimation = animationLeaveTrigger;
 
-            // Change Elevator State
-            if (scene.name == scenes.elevator.name)
-            {
-                if (elevatorState == ElevatorState.Damaged)
+                if (GetCurrentSceneIndex() != 0)
                 {
-                    operationnal = false;
-                    Invoke("InitiateEndGame", 10f);
+                    toElevator = true;
+                    enterAnimation = animationEnterElevatorTrigger;
+                    exitAnimation = animationLeaveElevatorTrigger;
+                }
+
+                // Cancel Invoke
+                CancelInvoke("OnSceneCompleted");
+
+
+                animator.SetTrigger(exitAnimation);
+                yield return new WaitForSeconds(sceneChangeStartup);
+
+                // Clear Parent
+                transform.SetParent(null, false);
+                transform.eulerAngles = Vector3.zero;
+
+                DontDestroyOnLoad(this);
+
+                if (toElevator)
+                {
+                    elevatorState++;
+                    SceneManager.LoadScene(0);
+                    currentSceneIndex++;
                 }
 
                 else
-                    elevatorState = ElevatorState.Damaged;
+                {
+                    SceneManager.LoadScene(scenes[currentSceneIndex].name);
+
+                    // Start CountDown to Elevator
+                    if (scenes[currentSceneIndex].duration > sceneChangeStartup)
+                        Invoke("OnSceneCompleted", scenes[currentSceneIndex].duration - sceneChangeStartup);
+                }
+
+                // Play Animation
+                animator.SetTrigger(enterAnimation);
+                yield return new WaitForSeconds(sceneChangeCooldown);
+
+                // Set Values
+                changingScene = false;
+            }
+            
+            else if(!changingScene && operationnal && currentSceneIndex >= scenes.Length)
+            {
+                operationnal = false;
+                Debug.Log("awd");
             }
 
-            animator.SetTrigger(exitAnimation);
-            yield return new WaitForSeconds(sceneChangeStartup);
+            /*
+            if (GetCurrentSceneName() != scene.name && !changingScene && operationnal)
+            {
+                // Set Values
+                changingScene = true;
+                string enterAnimation = animationEnterTrigger;
+                string exitAnimation = animationLeaveTrigger;
 
-            // Clear Parent
-            transform.SetParent(null, false);
-            transform.eulerAngles = Vector3.zero;
+                if (scene.name == scenes.elevator.name)
+                {
+                    enterAnimation = animationEnterElevatorTrigger;
+                    exitAnimation = animationLeaveElevatorTrigger;
+                }
 
-            DontDestroyOnLoad(this);
+                // Cancel Invoke
+                CancelInvoke("OnSceneCompleted");
 
-            // Load Scene
-            SceneManager.LoadScene(scene.name);
+                // Change Elevator State
+                if (scene.name == scenes.elevator.name)
+                {
+                    if (elevatorState == ElevatorState.Damaged)
+                    {
+                        operationnal = false;
+                        Invoke("InitiateEndGame", 10f);
+                    }
 
-            // Start CountDown to Elevator
-            if (scene.duration > sceneChangeStartup)
-                Invoke("OnSceneCompleted", scene.duration - sceneChangeStartup);
+                    else
+                        elevatorState = ElevatorState.Damaged;
+                }
+
+                animator.SetTrigger(exitAnimation);
+                yield return new WaitForSeconds(sceneChangeStartup);
+
+                // Clear Parent
+                transform.SetParent(null, false);
+                transform.eulerAngles = Vector3.zero;
+
+                DontDestroyOnLoad(this);
+
+                // Load Scene
+                SceneManager.LoadScene(scene.name);
+
+                // Start CountDown to Elevator
+                if (scene.duration > sceneChangeStartup)
+                    Invoke("OnSceneCompleted", scene.duration - sceneChangeStartup);
+
+                // Play Animation
+                animator.SetTrigger(enterAnimation);
+                yield return new WaitForSeconds(sceneChangeCooldown);
+
+                changingScene = false;
+            }*/
+        }
+
+        else if(!changingScene)
+        {
+            // Set Values
+            changingScene = true;
 
             // Play Animation
-            animator.SetTrigger(enterAnimation);
-            yield return new WaitForSeconds(sceneChangeCooldown);
+            animator.SetTrigger(animationStartTrigger);
 
+            Debug.Log("lele");
+
+            yield return new WaitForSeconds(gameStartDuration);
+
+            // Set Values
             changingScene = false;
+            started = true;
         }
-        
-        else if(GetCurrentSceneName() == scenes.elevator.name && !changingScene && !operationnal)
-            InitiateEndGame();
     }
 
     void StartElevator()
     {
-        if(GetCurrentSceneName() == scenes.elevator.name)
+        if(GetCurrentSceneIndex() == 0)
         {
             // Set Values
             operationnal = true;
@@ -224,7 +293,7 @@ public class LevelManager : MonoBehaviour
 
     void LeaveElevator()
     {
-        if (GetCurrentSceneName() == scenes.elevator.name)
+        if (GetCurrentSceneIndex() == 0)
         {
             operationnal = false;
         }
@@ -233,34 +302,13 @@ public class LevelManager : MonoBehaviour
     public void OnSceneCompleted()
     {
         // Call Elevator Scene
-        StartCoroutine(ChangeScene(scenes.elevator));
+        StartCoroutine(ChangeScene());
     }
 
-    public void OnElevator()
+    public void OnContinue()
     {
         // Call Elevator Scene
-        StartCoroutine(ChangeScene(scenes.elevator));
-    }
-
-    public void OnAsteroid()
-    {
-        // Call Asteroid Scene
-        if(GetCurrentSceneName() == scenes.elevator.name)
-        StartCoroutine(ChangeScene(scenes.asteroid));
-    }
-
-    public void OnCampfire()
-    {
-        // Call Campfire Scene
-        if(GetCurrentSceneName() == scenes.elevator.name)
-        StartCoroutine(ChangeScene(scenes.campfire));
-    }
-
-    public void OnEcholocation()
-    {
-        // Call Echolocation Scene
-        if(GetCurrentSceneName() == scenes.elevator.name)
-        StartCoroutine(ChangeScene(scenes.echolocation));
+        StartCoroutine(ChangeScene());
     }
 
     public void OnElevatorLeave()
@@ -286,15 +334,20 @@ public class LevelManager : MonoBehaviour
 
     void InitiateEndGame()
     {
-        // Cancel Invoke Just in Case
-        CancelInvoke("InitiateEndGame");
+        if(operationnal)
+        {
+            operationnal = false;
+            // Cancel Invoke Just in Case
+            
 
-        StartCoroutine("PipeMiniGameInitiation");
+            StartCoroutine("PipeMiniGameInitiation");
+        }
     }
 
     IEnumerator PipeMiniGameInitiation()
     {
         // Transition
+        yield return new WaitForSeconds(3);
         animator.SetTrigger(animationLeaveTrigger);
         yield return new WaitForSeconds(3);
 
@@ -331,7 +384,7 @@ public class LevelManager : MonoBehaviour
         transform.SetParent(sum.transform, false);
         instance = null;
 
-        SceneManager.LoadScene(scenes.elevator.name);
+        SceneManager.LoadScene(0);
     }
     
     // OSC Functions

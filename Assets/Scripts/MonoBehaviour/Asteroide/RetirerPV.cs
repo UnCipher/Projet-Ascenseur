@@ -89,6 +89,6 @@ public class RetirerPV : MonoBehaviour
     }
 
     private void DelayElevator(){
-        LevelManager.instance.OnElevator();
+        LevelManager.instance.OnContinue();
     }
 }
