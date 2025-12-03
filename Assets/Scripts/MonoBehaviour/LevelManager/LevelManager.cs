@@ -128,9 +128,6 @@ public class LevelManager : MonoBehaviour
         if (!animator)
             animator = GetComponent<Animator>();
 
-        // Play Start Animation
-        animator.SetTrigger(animationEnterElevatorTrigger);
-
         // Call Functions
         InitiateOSCMessages();
     }
@@ -204,7 +201,6 @@ public class LevelManager : MonoBehaviour
             else if(!changingScene && operationnal && currentSceneIndex >= scenes.Length)
             {
                 operationnal = false;
-                Debug.Log("yg");
                 Invoke("InitiateEndGame", 3);
             }
 
@@ -267,10 +263,8 @@ public class LevelManager : MonoBehaviour
             // Set Values
             changingScene = true;
 
-            // Play Animation
-            animator.SetTrigger(animationStartTrigger);
-
-            Debug.Log("lele");
+            // Play Start Animation
+            animator.SetTrigger(animationEnterElevatorTrigger);
 
             yield return new WaitForSeconds(gameStartDuration);
 
