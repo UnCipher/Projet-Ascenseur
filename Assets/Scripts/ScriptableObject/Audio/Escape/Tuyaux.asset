@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ce9d7d71218e74d9107a905aa5e9ce, type: 3}
+  m_Name: Tuyaux
+  m_EditorClassIdentifier: 
+  sounds:
+  - clip: {fileID: 8300000, guid: cd2220f23c3ed2740b64866986771ee7, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: a8758017cc47450448165a72f14c1a6d, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 1f19408f51962a0439f614b17dac59a4, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 7278eecc5830f974aa7c01b0e2f9a725, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: bb9e9aa4bf19c7947bff71f244068555, type: 3}
+    volume: 1
