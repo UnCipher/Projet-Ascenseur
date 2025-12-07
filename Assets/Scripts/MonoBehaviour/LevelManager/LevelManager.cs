@@ -54,6 +54,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] PipeGameController pipeGameController;
 
+    [Header("Audio Profiles")]
+    [SerializeField] SoundProfile powerOnProfile;
+    [SerializeField] SoundProfile explosionProfile;
+
+    [Header("Render Cameras")]
     public Camera leftCamera;
     public Camera centerCamera;
     public Camera rightCamera;
@@ -359,12 +364,14 @@ public class LevelManager : MonoBehaviour
     public void MiniGameWon()
     {
         animator.SetTrigger(animationLeaveTrigger);
+        SoundPlayer.CreateSoundPlayer(powerOnProfile);
         Invoke("ReloadElevatorScene", 4f);
     }
 
     public void MiniGameFailed()
     {
         animator.SetTrigger(animationLeaveTrigger);
+        SoundPlayer.CreateSoundPlayer(explosionProfile);
         Invoke("ReloadElevatorScene", 4f);
     }
     

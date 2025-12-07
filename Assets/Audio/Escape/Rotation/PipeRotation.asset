@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ce9d7d71218e74d9107a905aa5e9ce, type: 3}
   m_Name: PipeRotation
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - clip: {fileID: 8300000, guid: 6079b9ee4a31d08489cd1b4985c7b884, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 69f588619ee4de84ea21e43ded19faec, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 870f448b27c2b31409432345ded2258d, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: a37beb7d0b29ef44bb049149ab3cac52, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 3bd266eb7d4f52f48bb3216ee86b7c31, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: d95ac6f45edcec049b0c9a11bae64e38, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: 41130464da6dff04eafe181927f5f6f6, type: 3}
+    volume: 1

@@ -10,14 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47ce9d7d71218e74d9107a905aa5e9ce, type: 3}
-  m_Name: PipeDeactivation
+  m_Name: Explosion
   m_EditorClassIdentifier: 
   sounds:
-  - clip: {fileID: 8300000, guid: e734338e53e1e204d998e6250ebce496, type: 3}
-    volume: 1
-  - clip: {fileID: 8300000, guid: 422d8030d8f66ee41bb11dcd4b9581ac, type: 3}
-    volume: 1
-  - clip: {fileID: 8300000, guid: 343af279ca5bc7441a6e78e8387bb9af, type: 3}
-    volume: 1
-  - clip: {fileID: 8300000, guid: aae7282ac8142644da4d7b7f2e421448, type: 3}
+  - clip: {fileID: 8300000, guid: f943497b0418bae47be80dead8a8fe20, type: 3}
     volume: 1

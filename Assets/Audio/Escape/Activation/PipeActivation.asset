@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ce9d7d71218e74d9107a905aa5e9ce, type: 3}
   m_Name: PipeActivation
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - clip: {fileID: 8300000, guid: 2507a7e545e79a545b8f6b8c14e7297d, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: e16f03316023e9a41b6ee6149811d6c9, type: 3}
+    volume: 1
+  - clip: {fileID: 8300000, guid: aace27ccb27c2e24089485c930f8ef6f, type: 3}
+    volume: 1
