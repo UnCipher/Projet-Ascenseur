@@ -284,7 +284,7 @@ public class CurseurRaycast : MonoBehaviour
     }
 
     private void DelayElevator(){
-        LevelManager.instance.OnElevator();
+        LevelManager.instance.OnContinue();
     }
 
     private IEnumerator WarpSequence()

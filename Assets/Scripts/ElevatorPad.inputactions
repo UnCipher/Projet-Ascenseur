@@ -7,45 +7,9 @@
             "id": "9b04393c-e3c8-47c1-b9f7-88c63065be0c",
             "actions": [
                 {
-                    "name": "Campfire",
+                    "name": "Continue",
                     "type": "Button",
                     "id": "b1e27e5c-fc0c-4af3-bd59-42b26ad2d3dd",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Elevator",
-                    "type": "Button",
-                    "id": "e8fa2e08-00fb-4391-9043-6cd0f721ed4f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DebugLeave",
-                    "type": "Button",
-                    "id": "8484f6c4-0ff7-498f-8cfa-0e6d49f559f8",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Echolocation",
-                    "type": "Button",
-                    "id": "4708965b-5cf4-405f-9c6d-261e387cd21a",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Asteroid",
-                    "type": "Button",
-                    "id": "99566bd7-331b-49b2-90dd-f4d0b724334b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -78,18 +42,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Campfire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2c9e3593-c960-4102-92a8-76b5930a5492",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Campfire",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -100,7 +53,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Elevator",
+                    "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c9e3593-c960-4102-92a8-76b5930a5492",
+                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -111,7 +75,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Elevator",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -122,18 +86,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DebugLeave",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "18d6640c-08e0-416c-9ece-b105bbe2cfe8",
-                    "path": "<Keyboard>/minus",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Echolocation",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -144,7 +97,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Echolocation",
+                    "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18d6640c-08e0-416c-9ece-b105bbe2cfe8",
+                    "path": "<Keyboard>/minus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -155,7 +119,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Asteroid",
+                    "action": "Continue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

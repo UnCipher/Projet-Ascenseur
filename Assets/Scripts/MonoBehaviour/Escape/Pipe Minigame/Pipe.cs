@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Pipe : MonoBehaviour
@@ -18,6 +19,9 @@ public class Pipe : MonoBehaviour
     [SerializeField] PipeRotation pipeRotation;
     [Space(5)]
 
+    [SerializeField] float turnDuration = .125f;
+    [SerializeField] float turnAnimation = .175f;
+
     [SerializeField] bool isActive;
     [SerializeField] bool isAlwaysActive;
     [SerializeField] bool cantChange;
@@ -26,8 +30,21 @@ public class Pipe : MonoBehaviour
 
     [SerializeField] Connectable connectable;
 
+    [Header("Audio Profiles")]
+    [SerializeField] SoundProfile onRotate;
+    [SerializeField] SoundProfile onActivation;
+    [SerializeField] SoundProfile onDeactivation;
+
     [Header("References")]
     [SerializeField] Transform visual;
+    [Space(5)]
+
+    [SerializeField] GameObject offModel;
+    [SerializeField] GameObject onModel;
+    [Space(50)]
+
+    [SerializeField] bool test;
+    bool turning;
 
     // Classes
     // ---------------------------
@@ -62,6 +79,15 @@ public class Pipe : MonoBehaviour
     // Functions
     // ---------------------------
 
+    void FixedUpdate()
+    {
+        if(test)
+        {
+            test = false;
+            RotatePipe();
+        }
+    }
+
     public void SetValueOnPipe(PipeMiniGameProfile.PipeProperties profile, PipeGameController pipeController)
     {
         // Set Values
@@ -81,6 +107,10 @@ public class Pipe : MonoBehaviour
 
         if (isAlwaysActive)
             isActive = true;
+
+        // Change Visual
+        offModel.SetActive(!isActive);
+        onModel.SetActive(isActive);
 
         // Call Functions
         UpdateConnectivity();
@@ -172,8 +202,15 @@ public class Pipe : MonoBehaviour
     {
         if(!isActive)
         {
+            // Set Value
             isActive = true;
-            Debug.Log("Activated Pipe");
+
+            // Create Sound
+            SoundPlayer.CreateSoundPlayer(onActivation, transform);
+
+            // Change Visual
+            offModel.SetActive(!isActive);
+            onModel.SetActive(isActive);
         }
     }
     
@@ -181,25 +218,50 @@ public class Pipe : MonoBehaviour
     {
         if(isActive)
         {
+            // Set Value
             isActive = false;
-            Debug.Log("Desactivated Pipe");
+
+            // Create Sound
+            SoundPlayer.CreateSoundPlayer(onDeactivation, transform);
+
+            // Change Visual
+            offModel.SetActive(!isActive);
+            onModel.SetActive(isActive);
         }
     }
 
     public void RotatePipe()
     {
-        if(!cantChange && controller.GetIsActive())
+        if (!cantChange && controller.GetIsActive())
         {
-            // Set Values
-            pipeRotation = GetRotationWithOffset(pipeRotation, 1);
-
-            // Play Animation
-
-            // Call For Update
-            UpdateConnectivity();
-            SetTransform();
-            controller.UpdatePipes();
+            StopAllCoroutines();
+            StartCoroutine("Rotation");
         }
+    }
+    
+    IEnumerator Rotation()
+    {
+        // Set Values
+        pipeRotation = GetRotationWithOffset(pipeRotation, 1);
+
+        // Set Rotation
+        Transition.AngleTransition transitionParam = new Transition.AngleTransition()
+        {
+            newValue = new Vector3(0, 0, (int)pipeRotation * -90),
+            curve = AnimationCurve.EaseInOut(0,0,1,1),
+            duration = turnAnimation,
+        };
+
+        Transition.StartRotationTransition(visual, transitionParam, true);
+
+        yield return new WaitForSeconds(turnDuration);
+
+        // Create Sound
+        SoundPlayer.CreateSoundPlayer(onRotate, transform);
+
+        // Call For Update
+        UpdateConnectivity();
+        controller.UpdatePipes();
     }
 
     void UpdateConnectivity()

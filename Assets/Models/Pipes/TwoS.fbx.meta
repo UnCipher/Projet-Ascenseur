@@ -3,7 +3,32 @@ guid: 248d7aeb48447dd4abddd1bdd38df94a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Emit_Light
+    second: {fileID: 2100000, guid: 77123d2f9a1d571409abb38b90fbc057, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: InterieurTube
+    second: {fileID: 2100000, guid: 736aefb50568da64ab72ab956d80db52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalTube
+    second: {fileID: 2100000, guid: c399087bac341564da87ad8f96cb404e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wire
+    second: {fileID: 2100000, guid: e750676b2e05c5749bce446e7b27d994, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WireBig
+    second: {fileID: 2100000, guid: 528066742a3bb5243b3e908064887c74, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

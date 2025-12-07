@@ -136,7 +136,7 @@ public class CampfireScene : MonoBehaviour
     {
         // Set Values
         if (currentEventIndex >= campfireEvents.Length)
-            LevelManager.instance.OnElevator();
+            LevelManager.instance.OnContinue();
 
         else
         {

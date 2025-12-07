@@ -16,6 +16,6 @@ public class SoundProfile : ScriptableObject
     public class Sound
     {
         public AudioClip clip;
-        [Range(0, 1)] public float volume;
+        [Range(0, 1)] public float volume = 1;
     }
 }

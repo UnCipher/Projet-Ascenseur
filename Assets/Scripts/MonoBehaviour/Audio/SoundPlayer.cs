@@ -53,7 +53,7 @@ public class SoundPlayer : MonoBehaviour
         }
 
         else
-        Debug.Log("No Sound Inside Sound Profile");
+        Debug.Log("No Sound Inside (" + profile.name + ") Sound Profile");
     }
 
     public static void CreateSoundPlayer(SoundProfile profile, Vector3 position)
@@ -73,7 +73,7 @@ public class SoundPlayer : MonoBehaviour
         }
 
         else
-        Debug.Log("No Sound Inside Sound Profile");
+        Debug.Log("No Sound Inside (" + profile.name + ") Sound Profile");
     }
 
     public static void CreateSoundPlayer(SoundProfile profile, Transform parent)
@@ -93,6 +93,6 @@ public class SoundPlayer : MonoBehaviour
         }
 
         else
-        Debug.Log("No Sound Inside Sound Profile");
+        Debug.Log("No Sound Inside (" + profile.name + ") Sound Profile");
     }
 }
