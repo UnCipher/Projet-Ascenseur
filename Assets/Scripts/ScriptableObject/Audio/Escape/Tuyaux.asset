@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47ce9d7d71218e74d9107a905aa5e9ce, type: 3}
-  m_Name: Tuyaux
+  m_Name: 
   m_EditorClassIdentifier: 
   sounds:
   - clip: {fileID: 8300000, guid: cd2220f23c3ed2740b64866986771ee7, type: 3}

@@ -55,8 +55,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] PipeGameController pipeGameController;
 
     [Header("Audio Profiles")]
-    [SerializeField] SoundProfile powerOnProfile;
-    [SerializeField] SoundProfile explosionProfile;
+    [SerializeField] SoundProfile initPipeProfile;
+    [SerializeField] SoundProfile powerDownProfile;
+    [SerializeField] AudioSource alarmSound;
+    [SerializeField] AudioSource ambienceSound;
 
     [Header("Render Cameras")]
     public Camera leftCamera;
@@ -350,10 +352,14 @@ public class LevelManager : MonoBehaviour
         animator.SetTrigger(animationEnterElevatorTrigger);
         animator.SetTrigger(animationErrorLight);
         redLights.SetActive(true);
+        alarmSound.Play();
+        ambienceSound.Play();
+        SoundPlayer.CreateSoundPlayer(powerDownProfile);
         yield return new WaitForSeconds(2);
 
         // Animation
         animator.SetTrigger(animationEnterMiniGameFirstTrigger);
+        SoundPlayer.CreateSoundPlayer(initPipeProfile);
         yield return new WaitForSeconds(2);
 
         // Call Functions
@@ -364,14 +370,12 @@ public class LevelManager : MonoBehaviour
     public void MiniGameWon()
     {
         animator.SetTrigger(animationLeaveTrigger);
-        SoundPlayer.CreateSoundPlayer(powerOnProfile);
         Invoke("ReloadElevatorScene", 4f);
     }
 
     public void MiniGameFailed()
     {
         animator.SetTrigger(animationLeaveTrigger);
-        SoundPlayer.CreateSoundPlayer(explosionProfile);
         Invoke("ReloadElevatorScene", 4f);
     }
     

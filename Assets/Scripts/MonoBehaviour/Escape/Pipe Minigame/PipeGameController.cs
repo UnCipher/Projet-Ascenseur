@@ -30,6 +30,10 @@ public class PipeGameController : MonoBehaviour
     [SerializeField] GameObject threeWay;
     [SerializeField] GameObject fourWay;
 
+    [Header("Audio Profiles")]
+    [SerializeField] SoundProfile powerOnProfile;
+    [SerializeField] SoundProfile explosionProfile;
+
     // ---------------------------
     // Functions
     // ---------------------------
@@ -88,6 +92,7 @@ public class PipeGameController : MonoBehaviour
     {
         // Set Values
         listeningForEvents = false;
+        SoundPlayer.CreateSoundPlayer(powerOnProfile);
 
         CancelInvoke("MiniGameFailed");
 
@@ -99,6 +104,7 @@ public class PipeGameController : MonoBehaviour
     {
         // Set Values
         listeningForEvents = false;
+        SoundPlayer.CreateSoundPlayer(explosionProfile);
 
         // Invoke On Completion
         onFail?.Invoke();
