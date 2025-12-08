@@ -11,7 +11,6 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private InfoCompteur so_infoCompteur;
     [SerializeField] private InfoAsteroide infoAsteroide;
     [SerializeField] private GameObject pistolet;
-    [SerializeField] private GameObject pistolet2;
     [SerializeField] private float fusilRotationSpeed = 8f;
     [SerializeField] private float distancePistolet = 10f;
     [SerializeField] private Transform sym;
@@ -36,7 +35,6 @@ public class CurseurRaycast : MonoBehaviour
 
     [Header("Animations fusil")] 
     [SerializeField] private Animator pistoletAnimator;
-    [SerializeField] private Animator pistoletAnimator2;
 
     [Header("Lissage du mouvement des mains")]
     [SerializeField] [Range(0.01f, 1f)] private float smoothSpeed = 0.15f;
@@ -208,20 +206,12 @@ public class CurseurRaycast : MonoBehaviour
         Vector3 targetOffset = target + fusilPositionOffset;
 
         Quaternion rot1 = Quaternion.LookRotation(targetOffset - pistolet.transform.position);
-        Quaternion rot2 = Quaternion.LookRotation(targetOffset - pistolet2.transform.position);
 
         rot1 *= Quaternion.Euler(fusilDirectionOffset);
-        rot2 *= Quaternion.Euler(fusilDirectionOffset);
 
         pistolet.transform.rotation = Quaternion.Lerp(
             pistolet.transform.rotation,
             rot1,
-            Time.deltaTime * fusilRotationSpeed
-        );
-
-        pistolet2.transform.rotation = Quaternion.Lerp(
-            pistolet2.transform.rotation,
-            rot2,
             Time.deltaTime * fusilRotationSpeed
         );
     }
@@ -232,7 +222,6 @@ public class CurseurRaycast : MonoBehaviour
         if (hit.transform.gameObject.GetComponent<MouvementAsteroide>())
         {
             TirerLaser(pistolet.transform.position, hit.point);
-            TirerLaser(pistolet2.transform.position, hit.point);
 
             Destroy(hit.transform.gameObject);
 
@@ -267,7 +256,6 @@ public class CurseurRaycast : MonoBehaviour
             }
 
             pistoletAnimator.SetTrigger("Fire");
-            pistoletAnimator2.SetTrigger("Fire");
             Debug.Log(pistoletAnimator);
 
             gestionnaireCompteur.AsteroideCompteur(infoAsteroide.nbAsteroide);
