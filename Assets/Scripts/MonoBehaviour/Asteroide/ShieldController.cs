@@ -1,15 +1,22 @@
 using UnityEngine;
+using System.Collections;
 
 public class ShieldController : MonoBehaviour
 {
     [Header("Micro Activation Settings")]
-    [Range(0,1f)]
+    [Range(0, 1f)]
     [SerializeField] float volumeThreshold = 0.4f;
     [SerializeField] float cooldown = 2f;
     [SerializeField] float shieldDuration = 1.5f;
 
     [Header("References")]
     [SerializeField] GameObject shieldVisual;
+
+    [Header("Shield Animation")]
+    [SerializeField] private float activationScaleTime = 0.25f;
+    [SerializeField] private float deactivationScaleTime = 0.20f;
+
+    private Vector3 finalScale;
 
     bool shieldActive = false;
     bool canActivate = true;
@@ -19,7 +26,12 @@ public class ShieldController : MonoBehaviour
     void Start()
     {
         if (shieldVisual != null)
+        {
+            finalScale = shieldVisual.transform.localScale;
+
+            shieldVisual.transform.localScale = Vector3.zero;
             shieldVisual.SetActive(false);
+        }
 
         IsProtected = false;
     }
@@ -40,8 +52,7 @@ public class ShieldController : MonoBehaviour
         shieldActive = true;
         IsProtected = true;
 
-        if (shieldVisual != null)
-            shieldVisual.SetActive(true);
+        StartCoroutine(ScaleUpShield());
 
         Invoke(nameof(DeactivateShield), shieldDuration);
 
@@ -53,8 +64,47 @@ public class ShieldController : MonoBehaviour
         shieldActive = false;
         IsProtected = false;
 
-        if (shieldVisual != null)
-            shieldVisual.SetActive(false);
+        StartCoroutine(ScaleDownShield());
+    }
+
+    IEnumerator ScaleUpShield()
+    {
+        if (shieldVisual == null)
+            yield break;
+
+        shieldVisual.SetActive(true);
+        shieldVisual.transform.localScale = Vector3.zero;
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / activationScaleTime;
+            shieldVisual.transform.localScale =
+                Vector3.Lerp(Vector3.zero, finalScale, t);
+            yield return null;
+        }
+
+        shieldVisual.transform.localScale = finalScale;
+    }
+
+    IEnumerator ScaleDownShield()
+    {
+        if (shieldVisual == null)
+            yield break;
+
+        float t = 0f;
+        Vector3 startScale = shieldVisual.transform.localScale;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / deactivationScaleTime;
+            shieldVisual.transform.localScale =
+                Vector3.Lerp(startScale, Vector3.zero, t);
+            yield return null;
+        }
+
+        shieldVisual.transform.localScale = Vector3.zero;
+        shieldVisual.SetActive(false);
     }
 
     void ResetActivation()
