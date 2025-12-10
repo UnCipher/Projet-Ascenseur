@@ -164,6 +164,8 @@ MonoBehaviour:
   twoWayCorner: {fileID: 0}
   threeWay: {fileID: 0}
   fourWay: {fileID: 0}
+  powerOnProfile: {fileID: 0}
+  explosionProfile: {fileID: 0}
 --- !u!4 &924500132
 Transform:
   m_ObjectHideFlags: 0
@@ -190,6 +192,10 @@ PrefabInstance:
     - target: {fileID: 2748979278158256564, guid: a8b9217093b7e6448ae210353473154b, type: 3}
       propertyPath: m_Name
       value: LevelManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
+      propertyPath: elevatorState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
       propertyPath: scenes.Array.size

@@ -11,6 +11,7 @@ public class RetirerPV : MonoBehaviour
     [SerializeField] private GameObject vitreBrise2;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip vitreBrise3_son;
+    [SerializeField] private CurseurRaycast curseurRaycast;
 
     [Header("GlobalVolume")]
     [SerializeField] private Volume globalVolume;

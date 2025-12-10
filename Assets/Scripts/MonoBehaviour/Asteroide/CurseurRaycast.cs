@@ -13,7 +13,6 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] private GameObject pistolet;
     [SerializeField] private float fusilRotationSpeed = 8f;
     [SerializeField] private float distancePistolet = 10f;
-    [SerializeField] private Transform sym;
 
     [Header("Fracture")]
     [SerializeField] private GameObject[] fractureAsteroidPrefabs;
@@ -40,8 +39,6 @@ public class CurseurRaycast : MonoBehaviour
     [SerializeField] [Range(0.01f, 1f)] private float smoothSpeed = 0.15f;
 
     private Vector2 smoothedUV = Vector2.zero;
-
-    [SerializeField] private Vector3 fusilDirectionOffset = new Vector3(0, 180, 0);
     [SerializeField] private Vector3 fusilPositionOffset;
 
     public VisualEffect warpSpeedVFX;
@@ -67,6 +64,13 @@ public class CurseurRaycast : MonoBehaviour
     [Header("Planète")]
     [SerializeField] private GameObject planete;
     [SerializeField] private float distancePlanete = -2000f;
+
+    public float rayLength = 10f;
+    public Color rayColor = Color.red;
+
+    [Header("Offsets")]
+    [SerializeField] private Vector3 fusilDirectionOffset = new Vector3(0, 180, 0);
+    [SerializeField] private Vector3 raycastDirectionOffset = Vector3.zero;
 
 
 
@@ -145,79 +149,76 @@ public class CurseurRaycast : MonoBehaviour
     }
 
     // Contrôle Kinect Azure 
-     void FixedUpdate()
+    void FixedUpdate()
     {
         Player[] players = LevelManager.GetActivePlayers();
         if (players.Length == 0) return;
 
-        for (int i = 0; i < players.Length; i++)
+        Player player = players[0];
+
+        Wall.WallInfo leftWall = player.GetLeftWallInfo();
+        Wall.WallInfo rightWall = player.GetRightWallInfo();
+
+        if (leftWall.selectedWall == Wall.SelectedWall.Center &&
+            rightWall.selectedWall == Wall.SelectedWall.Center)
         {
-            Wall.WallInfo leftWall = players[i].GetLeftWallInfo();
-            Wall.WallInfo rightWall = players[i].GetRightWallInfo();
+            Vector2 avg = (leftWall.uv + rightWall.uv) * 0.5f;
+            smoothedUV = Vector2.Lerp(smoothedUV, avg, smoothSpeed);
 
-            if (leftWall.selectedWall == Wall.SelectedWall.Center &&
-                rightWall.selectedWall == Wall.SelectedWall.Center)
+            Vector3 screenPos = new Vector3(
+                smoothedUV.x * Screen.width,
+                smoothedUV.y * Screen.height,
+                10f
+            );
+            Vector3 targetWorldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
+
+            Vector3 baseRayDirection = (targetWorldPos - pistolet.transform.position).normalized;
+            Vector3 rayDirection = Quaternion.Euler(raycastDirectionOffset) * baseRayDirection;
+            Ray ray = new Ray(pistolet.transform.position, rayDirection);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, rayLength))
             {
-                // Moyenne des mains
-                Vector2 avg = (leftWall.uv + rightWall.uv) * 0.5f;
-
-                // Lissage
-                smoothedUV = Vector2.Lerp(smoothedUV, avg, smoothSpeed);
-
-                // Conversion caméra
-                Vector3 screenPos = new Vector3(
-                    smoothedUV.x * Screen.width,
-                    smoothedUV.y * Screen.height,
-                    10f // profondeur
-                );
-
-                Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
-
-                // Déplacer les fusils vers la main
-                OrienterFusilsVers(worldPos);
-
-                // Raycast
-                Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
-                if (Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    GérerImpact(hit);
-                }
+                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
+                GererImpact(hit);
+            }
+            else
+            {
+                Debug.DrawRay(ray.origin, ray.direction * rayLength, rayColor);
             }
 
-            // Check Right
-            if (rightWall.selectedWall == Wall.SelectedWall.Center)
-            {
-                Vector3 screenPos = new Vector3(rightWall.uv.x * Screen.width, rightWall.uv.y * Screen.height, distancePistolet);
-                Vector3 worldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
-
-                Ray ray = LevelManager.instance.centerCamera.ScreenPointToRay(screenPos);
-                if (Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    GérerImpact(hit);
-                    if (hit.transform.GetComponent<MouvementAsteroide>())
-                        GérerImpact(hit);
-                }
-            }
+            Vector3 fusilDirection = Quaternion.Euler(fusilDirectionOffset) * baseRayDirection;
+            OrienterFusilsVers(fusilDirection);
         }
     }
 
+
     private void OrienterFusilsVers(Vector3 target)
     {
+
+         // Appliquer l'offset de position
         Vector3 targetOffset = target + fusilPositionOffset;
 
-        Quaternion rot1 = Quaternion.LookRotation(targetOffset - pistolet.transform.position);
+        // Calculer la direction vers le target
+        Vector3 direction = (targetOffset - pistolet.transform.position).normalized;
 
-        rot1 *= Quaternion.Euler(fusilDirectionOffset);
+        // Inverser la direction si le fusil pointe à l'envers
+        direction = -direction;
+        // Créer la rotation à partir de la direction déjà ajustée par offset
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
 
+        // Appliquer l'offset de rotation (ex: 180° sur Y)
+        targetRotation *= Quaternion.Euler(fusilDirectionOffset);
+
+        // Lerp pour un mouvement lisse
         pistolet.transform.rotation = Quaternion.Lerp(
             pistolet.transform.rotation,
-            rot1,
+            targetRotation,
             Time.deltaTime * fusilRotationSpeed
         );
-    }
+}
 
     // Fonction commune d'impact (Kinect & souris)
-    private void GérerImpact(RaycastHit hit)
+    private void GererImpact(RaycastHit hit)
     {
         if (hit.transform.gameObject.GetComponent<MouvementAsteroide>())
         {
@@ -387,6 +388,39 @@ public class CurseurRaycast : MonoBehaviour
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
 
-        Destroy(laser, laserDuration);
+        // Lancer la coroutine pour fade out et agrandissement
+        StartCoroutine(AnimateLaserMaterial(lr, 1.0f)); // durée en secondes
+    }
+
+    private IEnumerator AnimateLaserMaterial(LineRenderer lr, float duration)
+    {
+        float elapsed = 0f;
+
+        // Largeur initiale et finale
+        float startWidth = 0.05f;
+        float endWidth = 0.3f;
+
+        // Récupérer le material instancié pour pouvoir modifier sa couleur
+        Material mat = lr.material;
+        Color startColor = mat.color; // couleur initiale
+        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f); // couleur finale (transparent)
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+
+            // Agrandir le laser
+            float width = Mathf.Lerp(startWidth, endWidth, t);
+            lr.startWidth = width;
+            lr.endWidth = width;
+
+            // Fade out en modifiant directement la couleur du material
+            mat.color = Color.Lerp(startColor, endColor, t);
+
+            yield return null;
+        }
+
+        Destroy(lr.gameObject);
     }
 }
