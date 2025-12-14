@@ -100,7 +100,7 @@ public class PlayerHand : MonoBehaviour
         // Return Value
         return currentWall;
     }
-    
+
     void LookForInteraction()
     {
         if (player.GetPlayerActive() && currentWall != Wall.SelectedWall.None && currentWall != Wall.SelectedWall.Back)
@@ -129,7 +129,7 @@ public class PlayerHand : MonoBehaviour
                         if (firstTimeInteracted)
                             currentWaitTime = waitTime;
 
-                        if(hoverTime >= currentWaitTime)
+                        if (hoverTime >= currentWaitTime)
                         {
                             interactable.OnHandHover();
                             hoverTime -= currentWaitTime;
@@ -148,6 +148,15 @@ public class PlayerHand : MonoBehaviour
         lastHoveredInteracble = null;
         firstTimeInteracted = false;
         hoverTime = 0;
+    }
+
+    // Get Functions
+    // ---------------------------
+
+    public Vector2 GetWallPoint()
+    {
+        // Return Value
+        return wallPoint;
     }
 
     // Collision Detections

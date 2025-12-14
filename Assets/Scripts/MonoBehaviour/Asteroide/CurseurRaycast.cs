@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 using System.Collections;
 using UnityEngine.Rendering;
@@ -151,43 +150,63 @@ public class CurseurRaycast : MonoBehaviour
     // Contrôle Kinect Azure 
     void FixedUpdate()
     {
+        // Set Values
         Player[] players = LevelManager.GetActivePlayers();
-        if (players.Length == 0) return;
 
-        Player player = players[0];
-
-        Wall.WallInfo leftWall = player.GetLeftWallInfo();
-        Wall.WallInfo rightWall = player.GetRightWallInfo();
-
-        if (leftWall.selectedWall == Wall.SelectedWall.Center &&
-            rightWall.selectedWall == Wall.SelectedWall.Center)
+        // Loop Through all Players
+        for(int i = 0;i<players.Length;i++)
         {
-            Vector2 avg = (leftWall.uv + rightWall.uv) * 0.5f;
-            smoothedUV = Vector2.Lerp(smoothedUV, avg, smoothSpeed);
+            PlayerHand[] hands = players[i].GetHandOnWall(Wall.SelectedWall.Center);
 
-            Vector3 screenPos = new Vector3(
-                smoothedUV.x * Screen.width,
-                smoothedUV.y * Screen.height,
-                10f
-            );
-            Vector3 targetWorldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
-
-            Vector3 baseRayDirection = (targetWorldPos - pistolet.transform.position).normalized;
-            Vector3 rayDirection = Quaternion.Euler(raycastDirectionOffset) * baseRayDirection;
-            Ray ray = new Ray(pistolet.transform.position, rayDirection);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, rayLength))
+            if (hands.Length > 0)
             {
-                Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
-                GererImpact(hit);
-            }
-            else
-            {
-                Debug.DrawRay(ray.origin, ray.direction * rayLength, rayColor);
-            }
+                // Get Projected UV
+                Vector2 averageUv = Vector2.zero;
 
-            Vector3 fusilDirection = Quaternion.Euler(fusilDirectionOffset) * baseRayDirection;
-            OrienterFusilsVers(fusilDirection);
+                for (int iH = 0; iH < hands.Length; iH++)
+                    averageUv += hands[iH].GetWallPoint();
+
+                averageUv /= hands.Length;
+
+                // Raycast From Camera
+                Camera camera = LevelManager.instance.GetWallCamera(Wall.SelectedWall.Center);
+                Ray ray = camera.ViewportPointToRay(averageUv);
+
+                if (Physics.Raycast(ray, out RaycastHit hit, rayLength))
+                    GererImpact(hit);
+            }
+/*
+            if (leftWall.selectedWall == Wall.SelectedWall.Center &&
+                rightWall.selectedWall == Wall.SelectedWall.Center)
+            {
+                Vector2 avg = (leftWall.uv + rightWall.uv) * 0.5f;
+                smoothedUV = Vector2.Lerp(smoothedUV, avg, smoothSpeed);
+
+                Vector3 screenPos = new Vector3(
+                    smoothedUV.x * Screen.width,
+                    smoothedUV.y * Screen.height,
+                    10f
+                );
+                Vector3 targetWorldPos = LevelManager.instance.centerCamera.ScreenToWorldPoint(screenPos);
+
+                Vector3 baseRayDirection = (targetWorldPos - pistolet.transform.position).normalized;
+                Vector3 rayDirection = Quaternion.Euler(raycastDirectionOffset) * baseRayDirection;
+                Ray ray = new Ray(pistolet.transform.position, rayDirection);
+
+                if (Physics.Raycast(ray, out RaycastHit hit, rayLength))
+                {
+                    Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
+                    GererImpact(hit);
+                }
+                else
+                {
+                    Debug.DrawRay(ray.origin, ray.direction * rayLength, rayColor);
+                }
+
+                Vector3 fusilDirection = Quaternion.Euler(fusilDirectionOffset) * baseRayDirection;
+                OrienterFusilsVers(fusilDirection);
+            }
+            */
         }
     }
 

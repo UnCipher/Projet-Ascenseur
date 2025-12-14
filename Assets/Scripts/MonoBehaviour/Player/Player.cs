@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
@@ -73,14 +74,14 @@ public class Player : MonoBehaviour
         // Desactivate
         isActive = false;
     }
-    
+
     public void ActivatePlayer()
     {
         // Set Values
         isActive = true;
 
         // Cancel Desactivation
-        if(desactivating)
+        if (desactivating)
         {
             StopAllCoroutines();
             desactivating = false;
@@ -89,6 +90,21 @@ public class Player : MonoBehaviour
 
     // Player Informations Functions
     // ---------------------------
+    
+    public PlayerHand[] GetHandOnWall(Wall.SelectedWall wall)
+    {
+        // Set Values
+        List<PlayerHand> hands = new List<PlayerHand>();
+
+        // Check Hands
+        if (leftHand.GetSelectedWall() == wall)
+            hands.Add(leftHand);
+
+        if (rightHand.GetSelectedWall() == wall)
+            hands.Add(rightHand);
+        
+        return hands.ToArray();
+    }
 
     public void SetPlayerNumber(int value)
     {
