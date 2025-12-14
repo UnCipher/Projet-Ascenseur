@@ -14,12 +14,16 @@ public class SpawnFireballs : MonoBehaviour
     [SerializeField] private float startDelay = 5f;
     [SerializeField] private float repeatTime = 0.5f;
 
+    [Header("Dragon Animator")]
+    [SerializeField] private Animator dragonAnimator;
+
     private Transform playerTarget;
 
     void Start()
     {
         playerTarget = LevelManager.instance.centerCamera.transform;
 
+        dragonAnimator.SetTrigger("Fireball");
         InvokeRepeating(nameof(SpawnFireball), startDelay, repeatTime);
     }
 

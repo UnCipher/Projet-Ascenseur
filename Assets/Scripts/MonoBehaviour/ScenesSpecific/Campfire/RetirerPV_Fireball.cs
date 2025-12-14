@@ -62,7 +62,7 @@ public class RetirerPV_Fireball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Asteroide"))
+        if (other.CompareTag("Fireball"))
         {
             if (ShieldController.IsProtected)
                 return;
