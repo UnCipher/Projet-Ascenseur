@@ -57,18 +57,18 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   center:
-    m_OverrideState: 0
-    m_Value: {x: 0.5, y: 0.5}
+    m_OverrideState: 1
+    m_Value: {x: 0.5, y: 0.6}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.122
   smoothness:
-    m_OverrideState: 0
-    m_Value: 0.2
+    m_OverrideState: 1
+    m_Value: 1
   rounded:
     m_OverrideState: 0
     m_Value: 0
---- !u!114 &-2783170336210371446
+--- !u!114 &-205237494287503130
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,43 +77,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
-  m_Name: DepthOfField
+  m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
+  m_Name: MotionBlur
   m_EditorClassIdentifier: 
   active: 1
   mode:
-    m_OverrideState: 0
-    m_Value: 0
-  gaussianStart:
-    m_OverrideState: 0
-    m_Value: 10
-  gaussianEnd:
-    m_OverrideState: 0
-    m_Value: 30
-  gaussianMaxRadius:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
-  highQualitySampling:
+  quality:
     m_OverrideState: 0
     m_Value: 0
-  focusDistance:
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.2
+  clamp:
     m_OverrideState: 0
-    m_Value: 10
-  aperture:
-    m_OverrideState: 0
-    m_Value: 5.6
-  focalLength:
-    m_OverrideState: 0
-    m_Value: 50
-  bladeCount:
-    m_OverrideState: 0
-    m_Value: 5
-  bladeCurvature:
-    m_OverrideState: 0
-    m_Value: 1
-  bladeRotation:
-    m_OverrideState: 0
-    m_Value: 0
+    m_Value: 0.05
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,9 +108,8 @@ MonoBehaviour:
   components:
   - {fileID: 6609499509908448095}
   - {fileID: -3803651165181625564}
-  - {fileID: 8700294668351772281}
   - {fileID: -7986762934244244406}
-  - {fileID: -2783170336210371446}
+  - {fileID: -205237494287503130}
 --- !u!114 &6609499509908448095
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -153,7 +131,7 @@ MonoBehaviour:
     m_Value: 0.9
   intensity:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 4
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
@@ -179,19 +157,3 @@ MonoBehaviour:
   dirtIntensity:
     m_OverrideState: 0
     m_Value: 0
---- !u!114 &8700294668351772281
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
-  m_Name: ChromaticAberration
-  m_EditorClassIdentifier: 
-  active: 1
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.05

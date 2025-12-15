@@ -3,7 +3,132 @@ guid: d7e6bb98cf2f25d439f1c378affac0d3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BACK_MTN.003
+    second: {fileID: 2100000, guid: 87ce12acd9c47594490cdc0475906614, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BACK_MTN.005
+    second: {fileID: 2100000, guid: 4cfb4d797c2cc0c439101063dc339d38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BACK_MTN.006
+    second: {fileID: 2100000, guid: da63dac3f49107b4a997181ef5c287cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BACK_MTN.007
+    second: {fileID: 2100000, guid: fcaa06ad8b071ae41ba7913c40008e72, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CLOUD.003
+    second: {fileID: 2100000, guid: 0dd5624ea8f0f9f42ac0ca886f2d0788, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CLOUD.004
+    second: {fileID: 2100000, guid: 735ebe7d6ad4af64980b817379958cf6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CLOUD.005
+    second: {fileID: 2100000, guid: 8605f86e59fe08044bf30597e05ef21a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CLOUD.006
+    second: {fileID: 2100000, guid: e71dec8cad3c07e489ff5a74d26972c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CLOUD.007
+    second: {fileID: 2100000, guid: e03e3549af1a5b045baf38037be3e014, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FRNT_MTN.003
+    second: {fileID: 2100000, guid: d8f28a42ed67e2346adf7322dee45acd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FRNT_MTN.005
+    second: {fileID: 2100000, guid: 7a4d9e78879e8984886a3545b005af6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FRNT_MTN.006
+    second: {fileID: 2100000, guid: b12252ba2f3290e448ee649ed96dd38b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FRNT_MTN.007
+    second: {fileID: 2100000, guid: b99dab1f70c61164fa65d569d434d798, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ROCK.003
+    second: {fileID: 2100000, guid: cc33318108583cd48a1f7f6a25700420, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ROCK.005
+    second: {fileID: 2100000, guid: 4ed81364f7f7fa3458ac1b383f13e68b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ROCK.006
+    second: {fileID: 2100000, guid: 0e102c2d41dbd794c9ed8b89ea01acc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ROCK.007
+    second: {fileID: 2100000, guid: 1cdf82e44f01fed4e85e69b059f17fbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TREE.003
+    second: {fileID: 2100000, guid: f18eeac0ce8a9c5449f95db5c601a59b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TREE.011
+    second: {fileID: 2100000, guid: a00699bd647e9fb48b4053425c6604a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TREE.012
+    second: {fileID: 2100000, guid: d61f8fc3c934d8d4f8f06fb8f9af4ffb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TREE.013
+    second: {fileID: 2100000, guid: 11a8a5a70dd608a44a0a28e68b7864b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TRUNK.003
+    second: {fileID: 2100000, guid: 91702a9ffc85d344f996321f0077f31b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TRUNK.011
+    second: {fileID: 2100000, guid: 591359478e11adf4982fccd8330a94a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TRUNK.012
+    second: {fileID: 2100000, guid: bd1a4319412fef44c938c4ba22874ac3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TRUNK.013
+    second: {fileID: 2100000, guid: 165fbfee3e024314099b77a890615789, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
