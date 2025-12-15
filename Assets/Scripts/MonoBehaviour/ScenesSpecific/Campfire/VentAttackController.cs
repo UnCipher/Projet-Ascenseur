@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class VentAttackController : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class VentAttackController : MonoBehaviour
     [Header("Visual Effect")]
     [SerializeField] private GameObject ventVFX;
 
+    [Header("TMPro")]
+    [SerializeField] private TMP_Text champPVDragon;
+
     private bool canAttack = true;
     private bool isVentActive = false;
 
@@ -24,6 +28,7 @@ public class VentAttackController : MonoBehaviour
             ventVFX.SetActive(false);
 
         infoDragon.nbVie = 3;
+        champPVDragon.text = "PV Dragon : " + infoDragon.nbVie;
     }
 
     void FixedUpdate()
@@ -36,7 +41,7 @@ public class VentAttackController : MonoBehaviour
         }
     }
 
-    void TriggerVentAttack()
+    private void TriggerVentAttack()
     {
         canAttack = false;
         isVentActive = true;
@@ -46,6 +51,7 @@ public class VentAttackController : MonoBehaviour
 
         infoDragon.nbVie -= 1;
         Debug.Log("PV Dragon : " + infoDragon.nbVie);
+        champPVDragon.text = "PV Dragon : " + infoDragon.nbVie;
 
         if (infoDragon.nbVie <= 0)
         {
