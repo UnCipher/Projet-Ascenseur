@@ -59,6 +59,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] SoundProfile powerDownProfile;
     [SerializeField] AudioSource alarmSound;
     [SerializeField] AudioSource ambienceSound;
+    [SerializeField] AudioSource elevatorMusic;
+    [SerializeField] SoundProfile elevatorDingProfile;
 
     [Header("Render Cameras")]
     public Camera leftCamera;
@@ -173,6 +175,8 @@ public class LevelManager : MonoBehaviour
 
 
                 animator.SetTrigger(exitAnimation);
+                elevatorMusic.Stop();
+                SoundPlayer.CreateSoundPlayer(elevatorDingProfile);
                 yield return new WaitForSeconds(sceneChangeStartup);
 
                 // Clear Parent
@@ -354,6 +358,7 @@ public class LevelManager : MonoBehaviour
         redLights.SetActive(true);
         alarmSound.Play();
         ambienceSound.Play();
+        elevatorMusic.Stop();
         SoundPlayer.CreateSoundPlayer(powerDownProfile);
         yield return new WaitForSeconds(2);
 
