@@ -36388,7 +36388,7 @@ MonoBehaviour:
   zoneSize: {x: 10, y: 10, z: 0}
   startDelay: 5
   repeatTime: 3
-  dragonAnimator: {fileID: 0}
+  dragonAnimator: {fileID: 1787689618}
 --- !u!1001 &497568534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133773,8 +133773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8f663a2118fb24b922bce8044a51cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  dragonModel: {fileID: 0}
+  animator: {fileID: 1787689618}
+  dragonModel: {fileID: 1787689616}
   spawnFireball: {fileID: 496046957}
 --- !u!4 &1788253796 stripped
 Transform:
