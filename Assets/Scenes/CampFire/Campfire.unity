@@ -4939,7 +4939,7 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 5.5
             m_StringArgument: Second
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
         - m_Target: {fileID: 1451151312}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -4951,7 +4951,7 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 5.5
             m_StringArgument: Second
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
         - m_Target: {fileID: 1787689618}
           m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
@@ -5047,6 +5047,30 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
           m_MethodName: PlayDelayed
           m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: First
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1171427605}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: First
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1451151312}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -33568,8 +33592,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5a373ecbd49c61d49b425f132706f643, type: 3}
-  m_Resource: {fileID: 8300000, guid: 5a373ecbd49c61d49b425f132706f643, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 86a11e908b2ca5e4d8d49e59cc9ca333, type: 3}
+  m_Resource: {fileID: 8300000, guid: 86a11e908b2ca5e4d8d49e59cc9ca333, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -36389,6 +36413,7 @@ MonoBehaviour:
   startDelay: 5
   repeatTime: 3
   dragonAnimator: {fileID: 1787689618}
+  dragonFireballsProfile: {fileID: 11400000, guid: a9597cc232027864ca280703ca110d99, type: 2}
 --- !u!1001 &497568534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66156,8 +66181,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b26c4deccd0cc0749bf95cb758cee863, type: 3}
-  m_Resource: {fileID: 8300000, guid: b26c4deccd0cc0749bf95cb758cee863, type: 3}
+  m_audioClip: {fileID: 8300000, guid: eb0def6c4f3e3254ba04043c03c998e6, type: 3}
+  m_Resource: {fileID: 8300000, guid: eb0def6c4f3e3254ba04043c03c998e6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -86078,7 +86103,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6810471105834413002, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6810471105834413002, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       propertyPath: lengthInSec
@@ -86093,8 +86118,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8029142899459995171, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029142899459995171, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029142899459995171, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029142899459995171, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.458
+      value: -1.19
       objectReference: {fileID: 0}
     - target: {fileID: 8029142899459995171, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       propertyPath: m_LocalPosition.y
@@ -86131,6 +86168,10 @@ PrefabInstance:
     - target: {fileID: 8029142899459995171, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029142899459995171, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -97915,6 +97956,7 @@ GameObject:
   - component: {fileID: 1315223773}
   - component: {fileID: 1315223772}
   - component: {fileID: 1315223776}
+  - component: {fileID: 1315223777}
   m_Layer: 0
   m_Name: RetirerPV_Fireball
   m_TagString: Untagged
@@ -98027,12 +98069,40 @@ MonoBehaviour:
   champPV: {fileID: 264751613}
   degatsVisuel1: {fileID: 2121161914}
   degatsVisuel2: {fileID: 895379111}
+  degatsVisuel3: {fileID: 455126584}
   audioSource: {fileID: 455126586}
   sonDegatsCritiques: {fileID: 8300000, guid: 5a373ecbd49c61d49b425f132706f643, type: 3}
   globalVolume: {fileID: 832575518}
   focalTarget: 0
   vignetteTarget: 0
   smoothSpeed: 2
+--- !u!54 &1315223777
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315223771}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &1316206169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4616940889578787489, guid: 16e3b28cecae7104dbfa160912098b32, type: 3}
@@ -106948,11 +107018,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4678103677468820507, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4678103677468820507, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
       propertyPath: lengthInSec
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8144037599045065202, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8144037599045065202, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8144037599045065202, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8144037599045065202, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
       propertyPath: m_LocalPosition.x
@@ -106993,6 +107075,10 @@ PrefabInstance:
     - target: {fileID: 8144037599045065202, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8144037599045065202, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
       propertyPath: m_Name
@@ -157008,8 +157094,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9ac98ec8fe2d90545969a609b98ff3ee, type: 3}
-  m_Resource: {fileID: 8300000, guid: 9ac98ec8fe2d90545969a609b98ff3ee, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 467f34ad7ebc3ce42aeba9e2cd92250d, type: 3}
+  m_Resource: {fileID: 8300000, guid: 467f34ad7ebc3ce42aeba9e2cd92250d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

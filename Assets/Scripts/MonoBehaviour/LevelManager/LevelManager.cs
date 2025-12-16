@@ -176,7 +176,7 @@ public class LevelManager : MonoBehaviour
 
                 animator.SetTrigger(exitAnimation);
                 elevatorMusic.Stop();
-                SoundPlayer.CreateSoundPlayer(elevatorDingProfile);
+                
                 yield return new WaitForSeconds(sceneChangeStartup);
 
                 // Clear Parent
@@ -195,6 +195,7 @@ public class LevelManager : MonoBehaviour
                 else
                 {
                     SceneManager.LoadScene(scenes[currentSceneIndex].name);
+                    SoundPlayer.CreateSoundPlayer(elevatorDingProfile);
 
                     // Start CountDown to Elevator
                     if (scenes[currentSceneIndex].duration > sceneChangeStartup)
@@ -351,6 +352,7 @@ public class LevelManager : MonoBehaviour
         // Transition
         yield return new WaitForSeconds(3);
         animator.SetTrigger(animationLeaveTrigger);
+        SoundPlayer.CreateSoundPlayer(powerDownProfile);
         yield return new WaitForSeconds(3);
 
         animator.SetTrigger(animationEnterElevatorTrigger);
@@ -359,7 +361,6 @@ public class LevelManager : MonoBehaviour
         alarmSound.Play();
         ambienceSound.Play();
         elevatorMusic.Stop();
-        SoundPlayer.CreateSoundPlayer(powerDownProfile);
         yield return new WaitForSeconds(2);
 
         // Animation

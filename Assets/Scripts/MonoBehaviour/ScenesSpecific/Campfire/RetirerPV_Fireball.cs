@@ -11,6 +11,7 @@ public class RetirerPV_Fireball : MonoBehaviour
     [Header("Visuels de dégâts")]
     [SerializeField] private GameObject degatsVisuel1;
     [SerializeField] private GameObject degatsVisuel2;
+    [SerializeField] private GameObject degatsVisuel3;
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
@@ -83,6 +84,7 @@ public class RetirerPV_Fireball : MonoBehaviour
         {
             degatsVisuel1.SetActive(false);
             degatsVisuel2.SetActive(false);
+            degatsVisuel3.SetActive(true);
 
             focalTarget = 300f;
             vignetteTarget = 1f;

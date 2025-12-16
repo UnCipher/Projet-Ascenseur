@@ -17,13 +17,15 @@ public class SpawnFireballs : MonoBehaviour
     [Header("Dragon Animator")]
     [SerializeField] private Animator dragonAnimator;
 
+    [Header("Sons")]
+    [SerializeField] private SoundProfile dragonFireballsProfile;
+
     private Transform playerTarget;
 
     void Start()
     {
         playerTarget = LevelManager.instance.centerCamera.transform;
 
-        dragonAnimator.SetTrigger("Fireball");
         InvokeRepeating(nameof(SpawnFireball), startDelay, repeatTime);
     }
 
@@ -48,6 +50,10 @@ public class SpawnFireballs : MonoBehaviour
             Vector3 lookDir = (playerTarget.position - fireball.transform.position).normalized;
             fireball.transform.rotation = Quaternion.LookRotation(lookDir);
         }
+        
+        dragonAnimator.SetTrigger("Fireball");
+        SoundPlayer.CreateSoundPlayer(dragonFireballsProfile);
+
 
         Destroy(fireball, fireballLifetime);
     }
