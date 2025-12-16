@@ -164,6 +164,10 @@ MonoBehaviour:
   twoWayCorner: {fileID: 0}
   threeWay: {fileID: 0}
   fourWay: {fileID: 0}
+  powerOnProfile: {fileID: 0}
+  explosionProfile: {fileID: 0}
+  animator: {fileID: 0}
+  fireTrigger: 
 --- !u!4 &924500132
 Transform:
   m_ObjectHideFlags: 0
@@ -244,5 +248,5 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 8640892161464107503}
   - {fileID: 924500132}
+  - {fileID: 8640892161464107503}

@@ -34,6 +34,10 @@ public class PipeGameController : MonoBehaviour
     [SerializeField] SoundProfile powerOnProfile;
     [SerializeField] SoundProfile explosionProfile;
 
+    [Header("Animation")]
+    [SerializeField] Animator animator;
+    [SerializeField] string fireTrigger;
+
     // ---------------------------
     // Functions
     // ---------------------------
@@ -42,6 +46,9 @@ public class PipeGameController : MonoBehaviour
     {
         // Set Value
         pipes = new List<Pipe>();
+
+        // Play Animation
+        animator.SetTrigger(fireTrigger);
 
         leftWall.gameObject.SetActive(true);
         centerWall.gameObject.SetActive(true);
