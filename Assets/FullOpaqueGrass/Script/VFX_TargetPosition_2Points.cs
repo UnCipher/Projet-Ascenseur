@@ -34,14 +34,6 @@ namespace VFX
 #endif
         }
 
-        void FixedUpdate()
-        {
-            if (Application.isPlaying)
-            {
-                UpdateShader((float)EditorApplication.timeSinceStartup);
-            }
-        }
-
 #if UNITY_EDITOR
         void UpdateInEditor()
         {

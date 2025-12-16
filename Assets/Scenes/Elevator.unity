@@ -195,10 +195,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
-    - target: {fileID: 3818820158685447419, guid: a8b9217093b7e6448ae210353473154b, type: 3}
-      propertyPath: scenes.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7614724473167366709, guid: a8b9217093b7e6448ae210353473154b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
