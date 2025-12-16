@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586ac58573a587d4a8e6ef6a825556cf, type: 3}
   m_Name: InfoCompteur
   m_EditorClassIdentifier: 
-  compteur: 2
+  compteur: 7
   nbVie: -1

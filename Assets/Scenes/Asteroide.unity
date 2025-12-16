@@ -1253,7 +1253,7 @@ MonoBehaviour:
   - {fileID: 7942706056846435281, guid: c32379ce0c8778746a7157f3714d75c2, type: 3}
   - {fileID: 2029526235598654422, guid: 229fe157ff17d584e8906d8350ab4565, type: 3}
   zoneSize: {x: 1, y: 1, z: 0}
-  repeatTime: 4
+  repeatTime: 2
   asteroidLifetime: 10
   startDelay: 5
 --- !u!1 &1117766748
