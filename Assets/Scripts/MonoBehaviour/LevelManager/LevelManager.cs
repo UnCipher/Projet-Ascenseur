@@ -39,9 +39,14 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] string animationEnterMiniGameFirstTrigger;
     [SerializeField] string animationEnterMiniGameSecondTrigger;
+
+    [Space(5)]
+    [SerializeField] string animationEnterEscapeFirstTrigger;
+    [SerializeField] string animationEnterEscapeSecondTrigger;
     [Space(5)]
 
     [SerializeField] string animationErrorLight;
+    [SerializeField] string animationBadState;
     [SerializeField] GameObject redLights;
 
     public SceneSettings[] scenes;
@@ -170,6 +175,15 @@ public class LevelManager : MonoBehaviour
                     exitAnimation = animationLeaveElevatorTrigger;
                 }
 
+                if(!toElevator)
+                {
+                    if (elevatorState == ElevatorState.Fine)
+                        enterAnimation = animationEnterMiniGameFirstTrigger;
+                    
+                    else
+                        enterAnimation = animationEnterMiniGameSecondTrigger;
+                }
+
                 // Cancel Invoke
                 CancelInvoke("OnSceneCompleted");
 
@@ -188,6 +202,8 @@ public class LevelManager : MonoBehaviour
                 if (toElevator)
                 {
                     elevatorState++;
+                    animator.SetTrigger(animationBadState);
+
                     SceneManager.LoadScene(0);
                     currentSceneIndex++;
                 }
@@ -350,7 +366,6 @@ public class LevelManager : MonoBehaviour
     IEnumerator PipeMiniGameInitiation()
     {
         // Transition
-        yield return new WaitForSeconds(3);
         animator.SetTrigger(animationLeaveTrigger);
         SoundPlayer.CreateSoundPlayer(powerDownProfile);
         yield return new WaitForSeconds(3);
@@ -364,13 +379,13 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         // Animation
-        animator.SetTrigger(animationEnterMiniGameFirstTrigger);
+        animator.SetTrigger(animationEnterEscapeFirstTrigger);
         SoundPlayer.CreateSoundPlayer(initPipeProfile);
         yield return new WaitForSeconds(2);
 
         // Call Functions
         pipeGameController.StartMiniGame();
-        animator.SetTrigger(animationEnterMiniGameSecondTrigger);
+        animator.SetTrigger(animationEnterEscapeSecondTrigger);
     }
 
     public void MiniGameWon()
